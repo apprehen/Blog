@@ -1,0 +1,118 @@
+# Theme Github link: https://github.com/argvchs/hexo-theme-particlex
+# Developer: argvchs
+
+# avatar image url
+head_img:
+
+# home page head info block
+head_block_enable: true
+
+# home page head background style
+home_background:
+
+# WARNING! vf_fonts (variable fonts) feature is EXPERIMENTAL
+# MDN: https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide
+vf_fonts_enable: false
+
+# ParticleX theme icon is adopts the font awesome 6
+# Link: https://fontawesome.com/search/
+
+# main menu navigation
+menu:
+    home:
+        name: house
+        theme: solid
+        src: /
+    about:
+        name: id-card
+        theme: solid
+        src: /about
+    archives:
+        name: box-archive
+        theme: solid
+        src: /archives
+    categories:
+        name: bookmark
+        theme: solid
+        src: /categories
+    tags:
+        name: tags
+        theme: solid
+        src: /tags
+    # Example:
+    # <name>:
+    #     name: <icon-name>
+    #     theme: <icon-theme>
+    #     src: <link-url>
+
+# side info card
+card:
+    enable: true
+    description: ["Description..."] # You can add more
+    icon_links:
+        []
+        # Example:
+        # <name>:
+        #    name: <icon-name>
+        #    theme: <icon-theme>
+        #    link: <link-url>
+    friend_links:
+        []
+        # Example:
+        # <name>: <link-url>
+
+# footer info
+footer:
+    since: 20xx
+    # Customize the server domain name ICP
+    ICP:
+        enable: false
+        code:
+        link:
+
+# Gitalk
+# https://github.com/gitalk/gitalk
+gitalk:
+    enable: false
+    clientID: # Default ClientID
+    clientSecret: # Default ClientSecret
+    repo: # The name of repository of store comments
+    owner: # GitHub repo owner
+    admin: # GitHub repo owner and collaborators, only these guys can initialize github issues
+    language: zh-CN # en, zh-CN, zh-TW, es-ES, fr, ru, de, pl and ko are currently available.
+    proxy: # CORS proxy
+    sites: # Sites
+        []
+        # Example:
+        # <www.example.com>:
+        #    clientID: <client-id>
+        #    clientSecret: <client-secret>
+
+# Waline
+# https://github.com/walinejs/waline
+waline:
+    enable: false
+    serverURL: # Waline server address url, you should set this to your own link
+    locale: # Locale: https://waline.js.org/guide/client/i18n.html#locale-option
+        {}
+        # Example:
+        # placeholder: Leave a comment
+    commentCount: true # If false, comment count will only be displayed in post page, not in home page
+    pageview: false # Pageviews count, Note: You should not enable both `waline.pageview` and `leancloud_visitors`
+    emoji: # Custom emoji
+        - https://unpkg.com/@waline/emojis@1.0.1/weibo
+        - https://unpkg.com/@waline/emojis@1.0.1/alus
+        - https://unpkg.com/@waline/emojis@1.0.1/bilibili
+        - https://unpkg.com/@waline/emojis@1.0.1/qq
+        - https://unpkg.com/@waline/emojis@1.0.1/tieba
+        - https://unpkg.com/@waline/emojis@1.0.1/tw-emoji
+    meta: # Comment information, valid meta are nick, mail and link
+        - nick
+        - mail
+        - link
+    requiredMeta: # Set required meta field, e.g.: [nick] | [nick, mail]
+        - nick
+    lang: zh-CN # Language, available values: en-US, zh-CN, zh-TW, pt-BR, ru-RU, jp-JP
+    wordLimit: 0 # Word limit, no limit when setting to 0
+    login: enable # Whether enable login, can choose from 'enable', 'disable' and 'force'
+    pageSize: 10 # Comment per page
