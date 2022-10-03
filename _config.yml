@@ -3,18 +3,18 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
-keywords:
-author: John Doe
-language: en
+title: 月晕
+subtitle: '生命是有光的'
+description: '博客,月晕,一个有趣的博客'
+keywords: '博客,月晕,一个有趣的博客,有一吗,云边小卖部,Javascript,'
+author: 月晕
+language: zh-CN
 timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: http://example.com
-permalink: :year/:month/:day/:title/
+permalink: posts/:abbrlink.html
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
@@ -102,4 +102,107 @@ theme: butterfly
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  - type: git
+    repository: https://github.com/apprehen/Blog.git
+    branch: main
+  - type: baidu_url_submitter #新加的百度推送
+
+# abbrlink config
+abbrlink:
+  alg: crc32 #support crc16(default) and crca32
+  rep: hex #support dec(default) and hex
+
+search:
+  path: search.xml
+  field: all
+  content: true
+
+# Live2D
+## https://github.com/EYHN/hexo-helper-live2d
+live2d:
+  enable: true #开关插件版看板娘
+  scriptFrom: local # 默认
+  # scriptFrom: https://cdn.cbd.int/live2d-widget@3.x/lib/L2Dwidget.min.js # 你的自定义 url
+  tagMode: false # 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中
+  debug: false # 调试, 是否在控制台输出日志
+  model:
+    use: live2d-widget-model-koharu # npm-module package name
+    # use: https://unpkg.com/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json # 你的自定义 url
+  display:
+    position: left #控制看板娘位置
+    width: 150 #控制看板娘大小
+    height: 300 #控制看板娘大小
+  mobile:
+    show: false # 手机中是否展示
+
+# https://github.com/hexojs/hexo-generator-sitemap
+sitemap:
+  path: sitemap.xml
+  rel: false
+  tags: true
+  categories: true
+
+# https://github.com/coneycode/hexo-generator-baidu-sitemap
+baidusitemap:
+    path: baidusitemap.xml
+
+# https://github.com/hexojs/hexo-generator-feed
+#Feed Atom
+feed:
+    type: atom
+    path: atom.xml
+    limit: 20
+rss: /atom.xml
+
+# Extensions
+plugins:
+    - hexo-generator-feed
+    - hexo-generator-baidu-sitemap
+    - hexo-generator-sitemap
+
+# 追番插件
+# https://github.com/HCLonely/hexo-bilibili-bangumi
+bangumi: # 追番设置
+  enable: true
+  path:
+  vmid: 372204786
+  title: '追番列表'
+  quote: '生命不息，追番不止！'
+  show: 1
+  lazyload: false
+  loading:
+  metaColor:
+  color:
+  webp:
+  progress:
+  extra_options:
+    key: value
+cinema: # 追剧设置
+  enable: false
+  path:
+  vmid: 372204786
+  title: '追剧列表'
+  quote: '生命不息，追剧不止！'
+  show: 1
+  lazyload: true
+  loading:
+  metaColor:
+  color:
+  webp:
+  progress:
+  extra_options:
+    key: value
+
+# 百度主动推送
+# https://github.com/huiwang/hexo-baidu-url-submit
+baidu_url_submit:
+  count: 1        # 提交最新的多少个链接
+  host: blog.apprehen.space  # 在百度站长平台中添加的域名
+  token: Rgem9kAECSLflQq6   # 秘钥
+  path: baidu_urls.txt   # 文本文档的地址， 新链接会保存在此文本文档里
+
+# APlayer
+# https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md
+aplayer:
+  meting: true
+  asset_inject: false
