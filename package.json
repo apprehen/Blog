@@ -16,7 +16,7 @@
   "dependencies": {
     "gulp": "^4.0.2",
     "gulp-htmlmin": "^5.0.1",
-    "hexo": "^6.2.0",
+    "hexo": "^6.3.0",
     "hexo-abbrlink": "^2.2.1",
     "hexo-bilibili-bangumi-anzhiyu": "^1.8.2",
     "hexo-butterfly-clock-anzhiyu": "^1.1.8",
