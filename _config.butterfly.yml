@@ -140,10 +140,10 @@ error_404:
 
 post_meta:
   page: # Home Page
-    date_type: created # created or updated or both 主頁文章日期是創建日或者更新日或都顯示
+    date_type: both # created or updated or both 主頁文章日期是創建日或者更新日或都顯示
     date_format: date # date/relative 顯示日期還是相對日期
     categories: true # true or false 主頁是否顯示分類
-    tags: false # true or false 主頁是否顯示標籤
+    tags: true # true or false 主頁是否顯示標籤
     label: true # true or false 顯示描述性文字
   post:
     date_type: both # created or updated or both 文章頁日期是創建日或者更新日或都顯示
@@ -797,7 +797,7 @@ note:
 # It may contain bugs and unstable, give feedback when you find the bugs.
 # https://github.com/MoOx/pjax
 pjax:
-  enable: false
+  enable: true
   exclude:
     # - xxxx
     # - xxxx
@@ -1034,6 +1034,41 @@ gitcalendar:
   gitcalendar_css: https://cdn.cbd.int/hexo-filter-gitcalendar/lib/gitcalendar.css
   gitcalendar_js: https://cdn.cbd.int/hexo-filter-gitcalendar/lib/gitcalendar.js
 
+swiper:
+  enable: true # 开关
+  randomenable: true # 人潮汹涌开关
+  priority: 5 #过滤器优先权
+  enable_page: / # 应用页面
+  timemode: date #date/updated
+  layout: # 挂载容器类型
+    type: id
+    name: recent-posts
+    index: 1
+  category:
+    - name: 前端
+      path: /categories/前端/
+      shadow: var(--anzhiyu-shadow-blue)
+      class: blue
+      icon: fas fa-dove
+    - name: 大学
+      path: /categories/大学/
+      shadow: var(--anzhiyu-shadow-red)
+      class: red
+      icon: fas fa-burn
+    - name: 生活
+      path: /categories/生活/
+      shadow: var(--anzhiyu-shadow-green)
+      class: green
+      icon: fas fa-book
+  default_descr: 再怎么看我也不知道怎么描述它的啦！
+  swiper_css: https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu-pro/lib/swiper.min.css #swiper css依赖
+  swiper_js: https://npm.elemecdn.com/anzhiyu-blog@1.1.6/js/swiper.min.js #swiper js依赖 #swiper js依赖
+  custom_css: https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu-pro/lib/swiperstyle.css # 适配主题样式补丁
+  custom_js: https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu-pro/lib/swiper_init.js # swiper初始化方法
+  gsap_js: https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/gsap/3.9.1/gsap.min.js
+  people_js: https://npm.elemecdn.com/hexo-butterfly-swiper-anzhiyu-pro/lib/people.min.js
+  categorygroup_css: https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu-pro/lib/categoryGroup.css
+
 # Inject
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
@@ -1043,6 +1078,7 @@ inject:
     # 自定义CSS
     - <link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'">
   bottom:
+    # - <div id="home_top"></div>
     # aplayer 音乐
 
 # CDN

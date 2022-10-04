@@ -379,3 +379,20 @@ button:not(:disabled) {
 #article-container figure.highlight {
   border-radius: 10px;
 }
+
+#recent-posts {
+  margin: 0 6px;
+}
+#git_container{
+  margin-bottom: 10px;
+}
+.swiper_container_card{
+  margin-top: 10px;
+}
+#bannerGroup{
+  padding: 0px;
+  width: 60% !important;
+}
+.topGroup .top-group-list-item {
+  box-shadow:  0 8px 16px -4px #2c2d300c !important;
+}

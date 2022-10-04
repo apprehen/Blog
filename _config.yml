@@ -5,7 +5,7 @@
 # Site
 title: 月晕
 subtitle: '生命是有光的'
-description: '博客,月晕,一个有趣的博客'
+description: '一个有趣的博客'
 keywords: '博客,月晕,一个有趣的博客,有一吗,云边小卖部,Javascript,'
 author: 月晕
 language: zh-CN
@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://blog.apprehen.space
 permalink: posts/:abbrlink.html
 permalink_defaults:
 pretty_urls:
