@@ -10,13 +10,13 @@
     "netlify": "npm run clean && npm run build"
   },
   "hexo": {
-    "version": "6.3.0"
+    "version": "6.2.0"
   },
   "type": "module",
   "dependencies": {
     "gulp": "^4.0.2",
     "gulp-htmlmin": "^5.0.1",
-    "hexo": "^6.3.0",
+    "hexo": "^6.2.0",
     "hexo-abbrlink": "^2.2.1",
     "hexo-bilibili-bangumi-anzhiyu": "^1.8.2",
     "hexo-generator-archive": "^1.0.0",
