@@ -516,10 +516,10 @@ tag_ui: # 留空或 index
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background: url("https://cdn.staticaly.com/gh/apprehen/pciture@master/20221004/swift6.1i8czfc0qfa8.webp")
+background: url(https://cdn.staticaly.com/gh/apprehen/pciture@master/20221004/swift6.1i8czfc0qfa8.webp)
 
 # Footer Background
-footer_bg: false
+footer_bg: false  
 
 # the position of bottom right button/default unit: px (右下角按鈕距離底部的距離/默認單位為px)
 rightside-bottom:
@@ -660,7 +660,7 @@ aside:
       enable: true
       icon: fab fa-github
       text: Follow Me
-      link: https://github.com/xxxxxx
+      link: https://github.com/apprehen
   card_announcement:
     enable: true
     content: This is my Blog
