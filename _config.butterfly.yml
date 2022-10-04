@@ -5,6 +5,7 @@
 menu:
   Home: / || fas fa-home
   追番: /bangumis/index.html || fas fa-home
+  留言板: /comments/ || fas fa-envelope
   # Archives: /archives/ || fas fa-archive
   # Tags: /tags/ || fas fa-tags
   # Categories: /categories/ || fas fa-folder-open
@@ -515,7 +516,7 @@ tag_ui: # 留空或 index
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background:
+background: url(" https://i.imgtg.com/2022/10/04/muEvP.jpg ")
 
 # Footer Background
 footer_bg: false
@@ -853,14 +854,113 @@ Open_Graph_meta: true
 # Add the vendor prefixes to ensure compatibility
 css_prefix: true
 
+# tag-plugins-plus
+# see https://akilar.top/posts/615e2dec/
+tag_plugins:
+  enable: true # 开关
+  priority: 5 #过滤器优先权
+  issues: false #issues标签开关
+  link:
+    placeholder: /img/siteicon/64.png #link_card标签默认的图标图片
+  CDN:
+    anima: https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css #动画标签anima的依赖
+    jquery: https://cdn.cbd.int/jquery@latest/dist/jquery.min.js #issues标签依赖
+    issues: https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/issues.js #issues标签依赖
+    iconfont: /js/ali_font.js #参看https://akilar.top/posts/d2ebecef/
+    carousel: https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js
+    tag_plugins_css: https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css
+
+# wowjs
+# see https://www.npmjs.com/package/hexo-butterfly-wowjs
+wowjs:
+  enable: true #控制动画开关。true是打开，false是关闭
+  priority: 10 #过滤器优先级
+  mobile: true #移动端是否启用，默认移动端禁用
+  animateitem:
+    - class: recent-post-item #必填项，需要添加动画的元素的class
+      style: animate__zoomIn #必填项，需要添加的动画
+      duration: 1.5s #选填项，动画持续时间，单位可以是ms也可以是s。例如3s，700ms。
+      delay: 200ms #选填项，动画开始的延迟时间，单位可以是ms也可以是s。例如3s，700ms。
+      offset: 30 #选填项，开始动画的距离（相对浏览器底部）
+      iteration: 1 #选填项，动画重复的次数
+    - class: card-widget
+      style: animate__zoomIn
+      delay: 200ms
+    # - class: flink-list-card
+    #   style: wowpanels
+    - class: flink-list-card
+      style: animate__flipInY
+      duration: 3s
+    - class: flink-list-card
+      style: animate__animated
+      duration: 3s
+    - class: article-sort-item
+      style: animate__slideInRight
+      duration: 1.5s
+    - class: site-card
+      style: animate__flipInY
+      duration: 3s
+    - class: site-card
+      style: animate__animated
+      duration: 3s
+  animate_css: https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css
+  wow_js: https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js
+  wow_init_js: https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js
+
+# envelope_comment
+# see https://akilar.top/posts/e2d3c450/
+# envelope_comment
+# see https://akilar.top/posts/e2d3c450/
+envelope_comment:
+  enable: true #控制开关
+  custom_pic:
+    cover: https://cdn.cbd.int//hexo-butterfly-envelope/lib/violet.jpg #信笺头部图片
+    line: https://cdn.cbd.int/hexo-butterfly-envelope/lib/line.png #信笺底部图片
+    beforeimg: https://cdn.cbd.int/hexo-butterfly-envelope/lib/before.png # 信封前半部分
+    afterimg: https://cdn.cbd.int/hexo-butterfly-envelope/lib/after.png # 信封后半部分
+  message: #信笺正文，多行文本，写法如下
+    - 有什么想问的？
+    - 有什么想说的？
+    - 有什么想吐槽的？
+    - 哪怕是有什么想吃的，都可以告诉我哦~
+  bottom: 自动书记人偶竭诚为您服务！ #仅支持单行文本
+  height: #1050px，信封划出的高度
+  path: #【可选】comments 的路径名称。默认为 comments，生成的页面为 comments/index.html
+  front_matter: #【可选】comments页面的 front_matter 配置
+    title: 留言板
+    comments: true
+
+# electric_clock
+# see https://anzhiy.cn/posts/fc18.html
+electric_clock:
+  enable: true # 开关
+  priority: 5 #过滤器优先权
+  enable_page: all # 应用页面
+  exclude:
+    # - /posts/
+    # - /about/
+  layout: # 挂载容器类型
+    type: class
+    name: sticky_layout
+    index: 0
+  loading: https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/loading.gif #加载动画自定义
+  clock_css: https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.css
+  clock_js: https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.js
+  ip_api: https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0
+  qweather_key: 6bfc376aab714262b990bcae4695d4fa # 和风天气key
+  gaud_map_key: 6ae999ba483ae80f090d8761c983dce8 # 高得地图web服务key
+  default_rectangle: true # 开启后将一直显示rectangle位置的天气，否则将获取访问者的地理位置与天气
+  rectangle: 112.6534116,27.96920845 # 获取访问者位置失败时会显示该位置的天气，同时该位置为开启default_rectangle后的位置
+
 # Inject
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-    # - <link rel="stylesheet" href="/xxx.css">
+    # 自定义CSS
+    - <link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'">
   bottom:
-    # - <script src="xxxx"></script>
+    # aplayer 音乐
 
 # CDN
 # Don't modify the following settings unless you know how they work

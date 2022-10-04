@@ -1,21 +1,9 @@
-/*
-* @Description: gulp
-* @Author: 安知鱼
-* @Email: 2268025923@qq.com
-* @Date: 2022-02-22 11:22:57
-* @LastEditTime: 2022-08-18 12:24:11
-* @LastEditors: 安知鱼
-*/
 import gulp from 'gulp';
 import cleanCSS from 'gulp-clean-css';
 import htmlmin from 'gulp-htmlmin';
 import htmlclean from 'gulp-htmlclean';
 import workbox from 'workbox-build';
 import fontmin from 'gulp-fontmin';
-
-// 若使用babel压缩js，则取消下方注释，并注释terser的代码
-// var uglify = require('gulp-uglify');
-// var babel = require('gulp-babel');
 
 // 若使用terser压缩js
 import terser from 'gulp-terser';
@@ -27,9 +15,6 @@ gulp.task('generate-service-worker', () => {
     swDest: './public/sw.js',
     globDirectory: './public',
     globPatterns: [
-      // 缓存所有以下类型的文件，极端不推荐
-      // "**/*.{html,css,js,json,woff2,xml}"
-      // 推荐只缓存404，主页和主要样式和脚本。
       '404.html',
       'index.html',
       'js/main.js',
@@ -41,21 +26,6 @@ gulp.task('generate-service-worker', () => {
   });
 });
 
-//minify js babel
-// 若使用babel压缩js，则取消下方注释，并注释terser的代码
-// gulp.task('compress', () =>
-//   gulp.src(['./public/**/*.js', '!./public/**/*.min.js'])
-// 		.pipe(babel({
-// 			presets: ['@babel/preset-env']
-// 		}))
-//     .pipe(uglify().on('error', function(e){
-//       console.log(e);
-//     }))
-// 		.pipe(gulp.dest('./public'))
-// );
-
-// minify js - gulp-tester
-// 若使用terser压缩js
 gulp.task('compress', () =>
   gulp
     .src([
