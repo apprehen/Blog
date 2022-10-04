@@ -840,12 +840,12 @@ lazyload:
 # ---------------
 pwa:
   enable: true
-  manifest: /manifest.json
+  manifest: /source/manifest.json
   theme_color: '#425aef'
-  apple_touch_icon: /img/siteicon/128.png
-  favicon_32_32: /img/siteicon/32.png
-  favicon_16_16: /img/siteicon/16.png
-  mask_icon: /img/siteicon/128.png
+  apple_touch_icon: /source/img/siteicon/128.png
+  favicon_32_32: /source/img/siteicon/32.png
+  favicon_16_16: /source/img/siteicon/16.png
+  mask_icon: /source/img/siteicon/128.png
 
 # Open graph meta tags
 # https://developers.facebook.com/docs/sharing/webmasters/
