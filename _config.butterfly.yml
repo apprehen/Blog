@@ -37,7 +37,7 @@ copy:
 # formal:
 #   icon: link || the description
 social:
-  fab fa-github: https://github.com/xxxxx || Github
+  fab fa-github: https://github.com/apprehen || Github
   fas fa-envelope: 3514392356@qq.com || Email
 
 # search (搜索)
