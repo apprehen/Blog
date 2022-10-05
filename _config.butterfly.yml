@@ -18,7 +18,7 @@ menu:
 # Code Blocks (代碼相關)
 # --------------------------------------
 
-highlight_theme: light #  darker / pale night / light / ocean / mac / mac light / false
+highlight_theme: mac light #  darker / pale night / light / ocean / mac / mac light / false
 highlight_copy: true # copy button
 highlight_lang: true # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
@@ -92,7 +92,7 @@ disable_top_img: false
 index_img:
 
 # If the banner of page not setting, it will show the top_img
-default_top_img:
+default_top_img: 
 
 # The banner image of archive page
 archive_img:
@@ -1075,10 +1075,14 @@ swiper:
 inject:
   head:
     - <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    # - <script src="/js/video.js" defer></script>
     # 自定义CSS
     - <link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'">
+    - <link rel="stylesheet" href="/css/video.css" media="defer" onload="this.media='all'">
+    - <link rel="stylesheet" href="/css/Right.css" media="defer" onload="this.media='all'">
   bottom:
-    # - <div id="home_top"></div>
+    - <div id='bg'><video src='/login.mp4' id='Myvideo' autoplay loop muted></video></div>
+    
     # aplayer 音乐
 
 # CDN

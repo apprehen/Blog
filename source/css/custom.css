@@ -385,6 +385,7 @@ button:not(:disabled) {
 }
 #git_container{
   margin-bottom: 10px;
+  margin-top: 20px;
 }
 .swiper_container_card{
   margin-top: 10px;

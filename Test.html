@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #Myvideo{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%;
+      min-height: 100%;
+      z-index: 999;
+      vertical-align: baseline;
+}
+  </style>
+</head>
+<body>
+  <ul class="Mylist"></ul>
+  <video src="./source/video/video.mp4" id="Myvideo" autoplay loop muted></video>
+  <script>
+    const list = document.querySelector(".Mylist")
+    const body = document.querySelector("body")
+    list.addEventListener("click",()=>{
+      body.style.backgroundColor="red"
+    })
+    body.insertAdjacentHTML("afterbegin","<vide autoplay loop muted id='Myvideo'><source src='./source/video/video.mp4' type='video/mp4'></source> </video>")
+  </script>
+</body>
+</html>
