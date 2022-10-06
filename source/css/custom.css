@@ -241,7 +241,7 @@ div#category {
 }
 
 /* 鼠标图标 */
-body {
+/* body {
   cursor: url('/img/x1.cur'), auto;
 }
 a,
@@ -250,7 +250,7 @@ a,
 [type='submit']:not(:disabled),
 button:not(:disabled) {
   cursor: url('/img/x2.cur'), auto !important;
-}
+} */
 /* md网站下划线 */
 #article-container a:hover {
   text-decoration: none !important;
