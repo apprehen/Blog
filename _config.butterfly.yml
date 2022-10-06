@@ -1078,11 +1078,8 @@ inject:
     # - <script src="/js/video.js" defer></script>
     # 自定义CSS
     - <link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'">
-    - <link rel="stylesheet" href="/css/video.css" media="defer" onload="this.media='all'">
     - <link rel="stylesheet" href="/css/Right.css" media="defer" onload="this.media='all'">
   bottom:
-    - <div id='bg'><video src='/login.mp4' id='Myvideo' autoplay loop muted></video></div>
-    - <script src="./js/video.js" defer></script>
     # aplayer 音乐
 
 # CDN
