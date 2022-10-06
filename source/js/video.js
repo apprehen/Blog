@@ -1,20 +1,32 @@
-const bg = document.getElementById("bg")
+let bg = document.getElementById("bg")
 function panduan () {
   let wid = window.innerWidth || window.screen.width || document.body.clientWidth
-  if(location.href !== 'http://localhost:4000/' && location.href !== 'https://blog.apprehen.space/') {
+  if(location.href != 'http://localhost:4000/' || location.href != 'https://blog.apprehen.space/') {
   bg.style.display = 'none'
   }
-  if (location.href === 'http://localhost:4000/' && location.href === 'https://blog.apprehen.space/'){
+  if (location.href == 'http://localhost:4000/' || location.href == 'https://blog.apprehen.space/'){
     bg.style.display = 'block'
   }
   if (wid < 750){
     bg.style.display="none"
   }
-  if (wid > 750) {
+  if (wid >= 750) {
     bg.style.display = "block"
   }
 }
+
+window.addEventListener('popstate', function(event) {
+  panduan()
+})
+window.onhashchange=function(event){
+  panduan()
+}
+window.onload = function () {
+  panduan()
+}
 window.onbeforeunload = function () {
   panduan()
-  console.log("111")
 }
+document.addEventListener('click',()=>{
+  panduan()
+})
