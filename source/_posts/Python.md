@@ -110,3 +110,121 @@ print(a,b)
 ​		---- and 为与运算 所有都为真时 运算结果才是True
 ​		---- or 为或运算 只要其中一个为真，结果就为True (注意穿透)
 ​		---- not 为单目运算符 取反就对了！
+
+​	5.Python 为动态语言 = 是赋值语句，可以把任意数据类型赋值给变量，同一个变量可以反复赋值，且可以是不同的变量
+
+```python
+a =  123 # a为整数
+print(a)
+a = 'ABCD' # a为字符串
+print(a)
+```
+
+不同于静态语言的(java,C)这个更加灵活，理解下面一行代码
+
+```python
+a = 'yueyun'
+```
+
+1.定义一个a的变量    2.将a这个变量指向储存着'yueyun'字符串的地址
+常量
+		--所谓常量就是不能变化的量，数学中的Π就是一个常量，Python中常量一般用全部大写表示,当然你要让他变化也可以，这只是习惯上的用法
+
+```python
+PI = 3.14159265359
+```
+
+​	在Python中除法也是精确的，在Python中有两种除法，一种是/(得到浮点数) 另外一种是// (地板除)得到的任然是整数捏
+
+```python
+>>> 10/3
+3.3333333333333
+>>> 9/3
+3.0
+>>> 10//3
+3
+```
+
+###### 4.Python中的字符串和编码方式
+
+​	在python3版本中，字符串是以Unicode编码的，Python的字符串支持多种语言
+
+```python
+>>> print("有一吗？？")
+有一吗？？
+```
+
+​	对于单个的字符编码，Python提供了ord()函数获取字符的整数表示，chr()函数把编码转换为对应的字符串
+
+```python
+>>> ord('A')
+65
+>>> ord("中")
+20013
+>>> chr(66)
+'B'
+>>> chr(25991)
+'文'
+>>> '\u4e2d\u6587' #知道对应的字符编码
+'中文'
+```
+
+​	Python中的字符串类型是str，在内存中以unicode表示，一个字符对应若干个字节，如果要在网络上传输，或者保存在磁盘里面需要把str类型变成以字节为单位的**bytes**
+​	Python对bytes类型的数据用带b前缀的单引号或双引号表示 (str 与 bytes 就只是存储方式不同捏)|
+
+```python
+x = b'ABC'  #bytes类型
+print(x)
+```
+
+​	将str---->bytes   通过encode() 方法可以编码为指定的bytes
+
+```python
+>>> 'ABC'.encode('utf-8')
+b'ABC'
+>>> '中文'.encode('utf-8')  # 注意编码方式一般都是utf-8
+b'\xe4\xb8\xad\xe6\x96\x87'
+```
+
+​	将bytes---->str 通过decode() 方法可以编码为指定的str
+
+```python
+>>> b'ABC'.decode('ascii')
+'ABC'
+>>> b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')
+'中文'
+```
+
+​	如果bytes 有一小部分无效字节（即为无法解码的字符）可以传入errors = 'ignore' 忽略错误字节
+
+```python
+>>> b'\xe4\xb8\xad\xff'.decode('utf-8', errors='ignore')
+'中'
+```
+
+​	len () 函数 计算的str的字符数，换成bytes就计算所占的字节数:
+
+```python
+>>> len(b'ABC')
+3
+>>> len(b'\xe4\xb8\xad\xe6\x96\x87')
+6
+>>> len('中文'.encode('utf-8'))
+6
+```
+
+​	格式化，跟C语言中的格式化一样
+
+```python
+>>> 'Hello, %s' % 'world'
+'Hello, world'
+>>> 'Hi, %s, you have $%d.' % ('Michael', 1000000)
+'Hi, Michael, you have $1000000.'
+```
+
+​	占位符：%d--->整数 %f---->浮点数  %s----> 字符串 %x -----> 十六进制整数
+
+```python
+print('%02d-%02d' % (3, 1))
+```
+
