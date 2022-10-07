@@ -228,3 +228,197 @@ b'\xe4\xb8\xad\xe6\x96\x87'
 print('%02d-%02d' % (3, 1))
 ```
 
+###### 5.Python中的list和tuple
+
+​	list：	
+​		Python内置的一种数据类型是列表: list。list 是一种有序的集合，可以随时添加和删除其中的元素(类似于数组辣)
+​		如下面班级里的同学就可以用list表示
+
+```python
+classmates = ['meigumi','toka','kurumi']
+```
+
+​		classmates 就是一个list，用len可以获取长度
+
+```python
+>>> len(classmates)
+3
+```
+
+​		用索引来访问list中的每一个位置的元素，索引是从0开始的:
+
+```python
+>>> classmates[0]
+'meigumi'
+>>> classmates[1]
+'toka'
+>>> classmates[2]
+'kurumi'
+>>> classmates[3]
+'error'  # 确保数不能越界噢
+### 当然负数也能作为指引
+>>> classmates[-1]
+'kurumi' #等等等的操作
+```
+
+​		当然list是可变数组，可以往组数中添加和删除一些元素
+​		1.追加到末尾的元素 --- **append**
+
+```python
+>>> classmates.append('nagesa')
+>>> classmates
+['meigumi','toka','kurumi','nagesa']
+```
+
+​		2.把元素插入到指定的位置 --- insert
+
+```python
+>>> classmates.insert(1,'funiya')
+>>> classmates
+['meigumi','funiya','toka','kurumi','nagesa']
+```
+
+​		3.要删除list末尾的元素 --- pop() 方法
+
+```python
+>>> classmates.pop()
+'nagesa'
+>>> classmates
+['meigumi','funiya','toka','kurumi']
+```
+
+​		4.要删除指定位置的元素 --- pop(i)
+
+```python
+>>> classmates.pop(i) ## i 表示索引位置
+'funiya'
+>>> classmates
+['meigumi','toka','kurumi']
+```
+
+​		list中的元素类型不确定，list里面也能再包含list list替换直接令值替换就行
+
+```python
+>>> MyList = ['yueyun',1,True,1.234]
+>>> p = ['HTML','CSS','Javascript',['Vue','Reacte'],'C']
+```
+
+tuple:
+	另外一种有序列表：tuple。 tuple与list非常类似，但是tuple一旦初始化之后就不能再修改，没有append，pop等方法
+
+```python
+>>> Mylist = ('meigumi','funiya','toka','kurumi','nagesa')
+'meigumi','funiya','toka','kurumi','nagesa'
+## 使用小括号定义tuple tuple不能被改变所以更加的安全
+```
+
+###### 6.Python的条件判断
+
+​	注意python的缩进规则
+
+```python
+age = 20
+if age > 18:
+  print("you age is",age)
+  print("adult")
+else:
+  print("your age is",age)
+  print('teenager')
+```
+
+​	根据python的缩进规则,,if语句判断的是**True**，就把缩进的两行print语句都执行了
+​	也可以给if语句添加**elif** 和 **else**
+
+```python
+age = 3
+if age >= 18:
+    print('adult')
+elif age >= 6:
+    print('teenager')
+else:
+    print('kid')
+    
+>>> kid
+```
+
+ 	if 语句执行有个特点，它是从上往下判断，如果找到True就执行，否则就是else
+	 if也可以写简写
+
+```python
+if x:
+	print("True")
+  ### X 是非零数组，非空字符串，非空list 即判断为True
+```
+
+###### 7.循环
+
+​	Python的循环有两种 : for in 可以依次将list 或 tuple 的每个元素迭代出来
+
+```python
+names = ['meigumi','kurumi','toka']
+for name in names:
+  print(name)
+```
+
+​	range() 函数，生成一个整数数列，左闭右开，在通过list()函数可以转换为list。
+
+```python
+>>> list(range(5))
+[0,1,2,3,4]
+```
+
+​	计算 0~100的合
+
+```python
+sum = 0
+for x in range(101):
+  sum = sum + x
+print(sum)
+```
+
+​	第二种 while 循环，计算100以内的奇数和 (不再满足while条件时退出)
+
+```python
+sum = 0
+n = 0
+while n<=100:
+  sum = sum + n
+  n = n + 2
+print(sum)
+```
+
+​	break
+​	在循环种，break 语句可以提前退出循环，例如打印1~100的数字
+
+```python
+n = 1
+while n<=100:
+  print(n)
+  n = n + 1
+print("END")
+```
+
+​	如果让想让代码提交结束可以使用 break 语句
+
+```python
+n = 1
+while n<=100:
+  if n>10: # n=11时，条件满足，执行break语句
+    break # break语句会结束当前循环
+  print(n)
+  n = n + 1
+print("END")
+>>> 0 1 2 3 4 5 6 7 8 9 10 
+```
+
+​		continue
+​		在循环过程中，也可以通过 contimie 语句 跳过当前循环 直接开始下一次循环
+
+```
+n = 0
+while n < 10:
+    n = n + 1
+    if n % 2 == 0: # 如果n是偶数，执行continue语句
+        continue # continue语句会直接继续下一轮循环，后续的print()语句不会执行
+    print(n)
+```
