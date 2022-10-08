@@ -1045,8 +1045,8 @@ swiper:
     name: recent-posts
     index: 1
   category:
-    - name: 前端
-      path: /categories/前端/
+    - name: 技术
+      path: /categories/技术/
       shadow: var(--anzhiyu-shadow-blue)
       class: blue
       icon: fas fa-dove

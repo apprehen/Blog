@@ -5,7 +5,8 @@ cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/20221006/yuzhi.7ew8d6bi3fs0.webp
 swiper_index: 1
 top_group_index: 1
-tags: 技术
+categories: 技术
+tags: Python
 abbrlink: b90ddedd
 ---
 # Python

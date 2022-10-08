@@ -1,9 +1,10 @@
 ---
 title: Java基础语法
 description: 纪录学习Java的日记捏
-tags: 技术
+tags: Java
 swiper_index: 2
-top_group_index: -1
+categories: 技术
+top_group_index: 2
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/20221008/QQ图片20221008102211.3y1xw14ujoo0.webp
 abbrlink: ea538f2a
