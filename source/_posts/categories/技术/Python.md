@@ -344,7 +344,7 @@ else:
 ```
 
  	if 语句执行有个特点，它是从上往下判断，如果找到True就执行，否则就是else
-	 if也可以写简写
+ 	 if也可以写简写
 
 ```python
 if x:
@@ -424,3 +424,207 @@ while n < 10:
         continue # continue语句会直接继续下一轮循环，后续的print()语句不会执行
     print(n)
 ```
+
+8.`dict` 和 `set`
+
+​	dict：
+​		Python中内置字典，类似于其他语言的map 使用键--值 (key-value) 存储，具有很快的查找速度
+​		例子如下
+
+```python
+name = ['meigumi','toka','kurumi']
+scores = [95,75,85]
+```
+
+​		如果使用list按顺序查找，则list越长，时间越慢
+​		如果我们用`dict` 字典去查找
+
+```python
+>>> d = {'meigumi':95,'toka':75,'kurumi':85}
+d['meigumi']
+```
+
+​		key - value存储方式，在放进去的时候，必须根据key算出value的存放位置，这样取的时候才能根据key 直接拿到value
+​		把数据让入dict的方法，除了初始化时指定外，还可以通过key放入：
+
+```python
+d['meigumi'] = 67
+```
+
+​		一个key只能对应一个 value 所以，多次对一个key放入value 后面的值会把前面的题替换掉
+
+```python
+>>> d['meigumi'] = 90
+>>> d['meigumi']
+90
+>>> d['meigumi'] = 88
+>>> d['meigumi']
+88
+```
+
+​		**注意：`dict` 的 `key` 必须是不可变对象**
+​		要避免 `key` 不存在的错误，有两种办法
+​			1.通过 in 判断
+
+```python
+>>> 'yueyun' in d
+False
+```
+
+​			2.通过dict 提供的get() 方法，如果key不存在，则会返回None,
+
+```python
+>>> d.get('yueyun')  ##不存在则返回None
+None
+>>> d.get('yueyun',-1) ##返回 -1
+-1
+```
+
+​		2.set:
+
+​			set 和 dict 类似，也是一组key的集合，但是不能存储value，由于key不能重复，在set中，没有重复的key
+
+```python
+>>> s = set([1,2,3])
+>>> s
+{1,2,3}
+```
+
+​			重复元素在set中自动被过滤：
+
+```python
+s =set([1,1,2,3,2,3,3])
+>>> s
+{1,2,3}
+```
+
+​			通过 `add(key)` 方法可以添加到 `set` 中，可以重复添加，但不会有效果:
+
+```python
+>>> s.add(4)
+>>> s
+[1,2,3,4]
+>>> s.add(4)
+>>> s
+[1,2,3,4]
+```
+
+ 		通过 `remove(key)` 方法可以删除元素：
+
+```python
+>>> s.remove(4)
+>>> s
+{1, 2, 3}
+```
+
+​		set 可以看成是集合具有 交并 集的方法
+
+```python
+>>> s1 = set([1, 2, 3])
+>>> s2 = set([2, 3, 4])
+>>> s1 & s2
+{2, 3}
+>>> s1 | s2
+{1, 2, 3, 4}
+```
+
+###### 8.函数
+
+​	1.函数的调用：
+​		调用 `abs` 函数
+
+```python
+>>> abs(100)
+100
+>>> abs(-20)
+20
+```
+
+​		调用函数的时候，如果传入的参数数量不对，参数的类型不对会报错
+​		调用 `max` 函数将max( ) 可以接收任意多个参数，并返回最大的那个
+
+```python
+>>> max(1,2)
+2
+>>> max(2,3,1,-5)
+3
+```
+
+​		 **函数名其实就是指向一个函数对象的引用，完全可以把函数名赋给一个变量，相当于给这个函数起了一个“别名”**
+
+```python
+>>> Myabs = abs #变量Myabs指向abs函数
+>>> Myabs(-100)
+100
+```
+
+​		2.定义函数
+​			在python中，定义一个函数要使用 `def` 语句，依次写出函数名，域名，括号中的参数和冒号`:` ,然后在缩进的代码块中编写函数体，返回值使用`return`语句
+​			如下的自定义函数
+
+```python
+def my_abs(x):
+  if x>=0:
+    return x
+  else:
+    return -x
+print(my_abs(-99))
+```
+
+​			如果函数没有return语句，函数执行完毕后也会返回结果，只是结果是`None` 
+return None 可以简写为 `return`
+
+​		3.空函数：
+​			如果想定义一个什么事情也不做的函数，可以用 `pass` 占位符
+
+```python
+def nop():
+  pass
+```
+
+​			`pass` 是没想好要写什么可以让代码运行起来
+​		我们可以修改一下my_abs的定义，对参数做一下校验
+
+```python
+def my_abs(x):
+  if not isinsance(x,(int,float)):
+    raise TypeError('bad operand type')
+  if x>=0:
+    return x
+  else:
+    return -x
+```
+
+​		 函数值同样可以返回多个值
+
+```python
+import math
+def move(x,y,step,angle=0):
+  nx = x + step * math.cos(angle)
+  ny = x + step * math.sin(angle)
+  return nx,ny
+x,y = move(100,100,60,math.pi/6)
+print(x,y)
+```
+
+​			其实python的返回值依然是单一值，只是返回值成为了元组(tuple)而已
+
+​		4.函数的参数
+​			先写一个计算x^2的函数
+
+```python
+def power(x):
+  return x * x
+```
+
+​			对于`power(x)`函数,参数`x` 就是一个位置参数
+​			当我们调用`power` 函数时，必须传入有且仅有的一个参数`x`:
+
+```python
+>>> power(5)
+25
+>>> power(15)
+225
+```
+
+​	
