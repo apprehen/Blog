@@ -639,7 +639,7 @@ def power(x,n):
 ```
 
  			对于这个修改后的power(x,n)函数可以计算任意次方
-			*** 由于我们经常计算x^2,所以可以把第二个参数n的默认值设定为2: ***
+ 			*** 由于我们经常计算x^2,所以可以把第二个参数n的默认值设定为2: ***
 
 ```python
 def power(x, n=2):
@@ -681,7 +681,7 @@ def add_end(L=None):
   return L
 ```
 
-​	可变参数：
+​	**可变参数**：
 ​		可变参数就是传入的参数个数是可变的,
 ​		例如要求完成a^2+b^2+c^2 + ... 。
 
@@ -714,3 +714,211 @@ def calc(*numbers):
 ```
 
 ​		当然如果我们已经有了`list`或`tuple`  我们也可以用`*nums` 表示 `nums`将list或tuple中的参数都传进入
+
+```python
+num = [1,2,3,4]
+>>>print(def calc(*num))
+30
+```
+
+​		**关键字参数**：
+​		可变参数允许传入0或者任意多个参数，这些可变参数在调用时组装成tuple，关键字参数运行传入0或者任意个含参数名的参数，会自动在参数内部组装成dict，如下
+
+```python
+def person(name,age,**kw):
+  print('name:',name,'age:',age,'other:',kw)
+>>> person('meigumi','18')
+name: meigumi age: 18 other: {}
+```
+
+​			我们可以在调用参数的时候可以传入任意个数的关键字参数:
+
+```python
+>>> person('meigumi',18,city="二次元",tag="人妻")
+name: meigumi age: 18 other: {'city': '二次元', 'tag': '人妻'}
+```
+
+​	很显然，关键参数可以用来扩展函数的功能捏
+​	当然我们也可以先存在一个dict，然后作为关键字传入进去
+
+```python
+extra = {'city': 'yisijie', 'job': '...'}
+person('kurumi', 18, city=extra['city'], job=extra['job'])
+```
+
+​	当然上面的复杂调用可以换成下面简单的**
+
+```python
+extra = {'city': 'yisijie', 'job': '...'}
+person('kurumi', 18, **extra)
+## 有点类似JS中es6 的展开运算符??
+```
+
+​	**命名关键字参数**：
+​		如果我们想限制关键字参数的名字，就可以用命名关键字参数，例如，只接受 `city` 和 `job` 作为关键字参数，这种定义方式的函数如下：
+
+```python
+def person(name,age,*,city,job):
+  print(name,age,city,job)
+>>> person('Jack', 24, city='Beijing', job='Chaoyang')
+Jack 24 Beijing Chaoyang
+```
+
+​	命名关键参数需要一个特殊的分隔符 * ,`*` 后面的参数被视为命名关键字参数。
+​	如果函数定义中已经有了一个可变参数，后面跟着的命名关键字参数就不在需要`*` 了：
+
+```python
+def person(name,age,*args,city,job):
+  print(name,age,args,city,job)
+  ##注意指定对应的名称噢
+def person(name, age, *, city='Beijing', job):
+  print(name, age, city, job)
+  ##给取默认值也是可行的
+```
+
+###### 9.列表List高级
+
+​	取一个 `list` 或 `tuple` 的部分元素是很常见的操作
+
+```python
+L = ['Michael','Sarah','Tracy','Bob','Jack']
+##取前三个元素
+r = []
+for i in range(3):
+	r.append(L[i])
+print(r)
+```
+
+​	**切片(Slice)**
+
+```python
+>>>L[0:3]
+['Michael', 'Sarah', 'Tracy']
+```
+
+​	`L[0:3]` 表示，从索引 `0` 开始取，直到索引 `3` 为止，取不到`3` 
+​	如果第一个索引是 `0` 可以省略:
+
+```python
+L[:3]
+['Michael', 'Sarah', 'Tracy']
+```
+
+​	 当然我们也是可以取到负数的：
+
+```python
+>>> L = list(range(100))
+[0,1,2,3,4 ...,98,99]
+# 取出前十个数
+>>> L[:10]
+[0,1,2,3,4,5,6,7,8,9]
+# 取出后十个数
+>>> L[-10:]
+[90,91,92,93,94,95,96,97,98,99]
+# 前11~20个数
+>>> L[10:20]
+[10,11,12,13,14,15,16,17,18,19]
+# step:可以决定每次取多少
+>>> L[:10:2]
+[0,2,4,6,8]
+>>> L[::5]
+[0,5,10...100]
+## 甚至可以什么都不写复制一个一样的list (浅拷贝)
+>>> L[:]
+[0,1,2,3,4 ...,98,99]
+## 当然tuple也可以进行切片操作，只是得到的还是tuple，值不可变
+>>> (0,1,2,3,4,5)[:3]
+(0,1,2)
+## 字符串 `xxx` 也可以看成一种list 每一个元素就是一个字符，字符串也可以进行切片## 操作，操作的结果任然是字符串
+>>> 'ABCDEFG'[:3]
+'ABC'
+>>> 'ABCDEFG'[::2]
+'ACEG'
+```
+
+**迭代**
+	如果给定一个l `list` 通过`for`循环遍历这个`list` 这种遍历我们称为迭代(Iteration)
+
+```python
+for i in range(100):
+  print(i)
+```
+
+ 	Python 也可以去作用在其他可迭代对象 (比如对象，dict 等)
+
+```python
+d = {'a':1,'b':2,'c':3}
+for key in d:
+	print(key)
+a
+b
+c
+# dict的存储不是按照list的方式排序，所以迭代的顺序可能不一样
+for value in d.values():
+	print(value)
+for k,v in d.items():
+	print(k,v)
+# 字符串也是可迭代的对象，也可以作用于 for 循环:
+for ch in 'ABC':
+  print(ch)
+```
+
+​		我们判断是否为可迭代对象？可以通过 `collections.abc` 模块的 `Iterable` 类型
+
+```python
+from collections.abc import Iterable
+>>> isinstance('abc',Iterable)
+True
+>>> isinstance([1,2,3],Iterable)
+True
+>>> isinstance(123,Iterable)
+False
+```
+
+​		如果要对 `list` 实现类似的下标 Python 内置的`enumerate` 函数可以把一个`list` 变成索引-元素对
+
+```python
+for i,value in enumerate(['A','B','C']):
+	print(i,value)
+0 A
+1 B
+2 C
+```
+
+​		同时引用两个变量，在Python中可以同时迭代
+
+```python
+for x, y in [(1, 1), (2, 4), (3, 9)]:
+  print(x, y)
+1 1
+2 4
+3 9
+```
+
+​	**列表生成式**
+
+```python
+>>> list(range(1,11))
+[1,2,3,4,5,6,7,8,9,10]
+## 如果要生成[1x1,2x2,3x3,...,10x10]
+# 可以跟上for循环创建出list
+>>> [x*x for x in range(1,11)]
+[1,4,9,16,25,36,49,64,81,100]
+# for循环后面当然可以跟上
+>>> [x*x for x in range(1,11) if x%2==0]
+[4,16,36,64,100]
+## 还可以使用两层循环，可以生成全排列
+>>> [m + n for m in 'ABC' for n in 'XYZ']
+['AX', 'AY', 'AZ', 'BX', 'BY', 'BZ', 'CX', 'CY', 'CZ']
+## 列表生成式也可以使用两个变量来生成list:
+d = ['x':'A','y':'B','z':'C']
+>>> [k+'='+v for k,v in d.items()]
+['x=A', 'y=B', 'z=C']
+>>> L = ['Hello','World','IBM','Apple']
+>>> [s.lower() for s in L]
+## if 表达式的写法
+>>> [x if x %2 == 0 else -x for x in range(1,11)]
+[-1, 2, -3, 4, -5, 6, -7, 8, -9, 10]
+```
+
+**10.迭代器**
