@@ -627,4 +627,90 @@ def power(x):
 225
 ```
 
-​	
+​			将 `power(x)`修改为`power(x,n)` 用来计算x^n:
+
+```python
+def power(x,n):
+  s = 1
+  while n>0:
+    n = n-1
+    s = s*x;
+  return s
+```
+
+ 			对于这个修改后的power(x,n)函数可以计算任意次方
+			*** 由于我们经常计算x^2,所以可以把第二个参数n的默认值设定为2: ***
+
+```python
+def power(x, n=2):
+    s = 1
+    while n > 0:
+        n = n - 1
+        s = s * x
+    return s
+  >>> power(5)
+  25
+  >>> power(5,2)
+  25
+```
+
+​			默认参数：如果我们传入的是list(可变对象)
+
+```python
+def add_end(L=[]):
+  L.append('END')
+  return L;
+```
+
+​		  定义默认参数要牢记一点：默认参数必须指向不变对象！
+
+```python
+>>> add_end()
+['END', 'END']
+>>> add_end()
+['END', 'END', 'END']
+```
+
+​		 Python 中有`str` `None` 这样的不变对象，这样创建后对象的内部数据就不会在被修改
+
+```python
+def add_end(L=None):
+  if L is None:
+    L=[]
+  L.append('END')
+  return L
+```
+
+​	可变参数：
+​		可变参数就是传入的参数个数是可变的,
+​		例如要求完成a^2+b^2+c^2 + ... 。
+
+```python
+def calc(number):
+  sum = 0
+  for n in number:
+    sum = sum + n*n
+   return sum
+# 首先想到的是传入一个数组或者元组
+>>> cacl([1,2,3])
+14
+>>> cacl((1,3,5,7))
+84
+```
+
+​		我们将函数的参数如果改为可变参数:
+
+```python
+def calc(*numbers):
+    sum = 0
+    for n in numbers:
+        sum = sum + n * n
+    return sum
+  # 函数代码不用变，但是调用该函数时，可以传入任意参数
+  >>> calc(1,2)
+  5
+  >>> calc()
+  0
+```
+
+​		当然如果我们已经有了`list`或`tuple`  我们也可以用`*nums` 表示 `nums`将list或tuple中的参数都传进入
