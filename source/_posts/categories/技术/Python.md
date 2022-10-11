@@ -937,9 +937,22 @@ print(aList)
 ## 默认升序排列 且是改变原数组无返回值
 aList.sort()
 ## 可以指定参数让数组逆序
-aList.sort(reveser = Tr)
+aList.sort(reveser = True)
+## sort 中的 参数 key的理解与用法
+# 传递给key参数的是一个函数，他指定可迭代对象中的每个元素来按照该函数进行排序
+aList =[[1, 7], [1, 5], [2, 4], [1, 1]]
+aList.sort()
+[[1, 1], [1, 5], [1, 7], [2, 4]] ## 默认按照0维排序
+def fun(li):
+  return li[i]
+li.sort(key = fun)
+[[1, 1], [2, 4], [1, 5], [1, 7]] ## 按照1维排序
+## lambda函数 匿名函数 只包含函数的返回值 无名字
+aList.sort(key = lambda x:len(str(x)))
+## 对于每个元素中转化为字符串的长度进行排序
 ```
 
+​		使用内置函数 `sorted` 对列表进行排序并返回新列表
 ​	**迭代**
 ​		如果给定一个l `list` 通过`for`循环遍历这个`list` 这种遍历我们称为迭代(Iteration)
 
@@ -1000,6 +1013,7 @@ for x, y in [(1, 1), (2, 4), (3, 9)]:
 ```
 
 ​	**列表生成式**
+​		指可以再列表中写循环和条件，生成特定的`list`
 
 ```python
 >>> list(range(1,11))
@@ -1023,6 +1037,40 @@ d = ['x':'A','y':'B','z':'C']
 ## if 表达式的写法
 >>> [x if x %2 == 0 else -x for x in range(1,11)]
 [-1, 2, -3, 4, -5, 6, -7, 8, -9, 10]
+## 在列表推导式中使用多个循环，实现多序列元素的任意组合，并可结合条件语句过滤特定的元素
+[(x, y) for x in range(3) for y in range(3)]
+[(x, y) for x in [1, 2, 3] for y in [3, 1, 4] if x != y] ## 类似双层循环捏 
+## 使用列表推导实现矩阵的转置
+matrix = [ [1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]] 
+[[row[i] for row in matrix] for i in range(4)] 
+## 使用推导式生成100以内的素数
+import math
+def isprime(x):
+    for i in range(2, int(math.sqrt(x)) + 1):
+        if (x % i) == 0:
+            return False
+    return True
+  [x for x in  range(2, 100) if isprime(x)]
 ```
 
-**10.迭代器**
+**10.生成器**
+	Python的一种边循环边算的机制，称为生成器：generator
+	要创建generator很简单把列表生成式用 () 表示就行
+
+```python
+g = (x * x for x in range(10))
+>>> g
+<generator object <genexpr> at 0x0000017B0A829A10>
+# 可以通过next() 来打印generator
+next(g)
+next(g)
+## 使用迭代对象
+for n in g:
+  print(n)
+```
+
+​	另外一种生成生成器是直接在 函数中包含 `yield` 关键字
+
+###### 10.字符串的常用方法
+
+​	1.
