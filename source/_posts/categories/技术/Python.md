@@ -298,12 +298,101 @@ classmates = ['meigumi','toka','kurumi']
 ['meigumi','toka','kurumi']
 ```
 
-​		list中的元素类型不确定，list里面也能再包含list list替换直接令值替换就行
+​		5.将另外一组可迭代对象扩展至列表尾部--extend()
+
+```python
+a = [1,2,3,4,5,6]
+a.extend([7,8,9])
+print(a)
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+​		6.删除列表对象首次出现的指定元素--remove()
+
+```python
+a_list = [3,5,7,9,7,11]
+a_list.remove(7)
+print(a_list)
+[3,5,9,7,11]
+a_list.remove(7)
+print(a_list)
+[3,5,9,11]
+###### 注意每次删除元素后 list会自动把元素往前移动一次，如果想去重则需要考虑数组移动问题
+## 有问题的代码 ，如果元素重复则删除不彻底
+x = [1,2,1,2,1,2,1,2,1]
+for i in x:
+    if i == 1:
+      x.remove(i)
+ ## 用如下代码
+x = [1,2,1,2,1,1,1]  
+for i in x[::]:  
+    if i == 1:  
+        x.remove(i)
+x = [1,2,1,2,1,1,1]  
+for i in range(len(x)-1,-1,-1): 
+    if x[i]==1:  
+        del x[i]
+##del 防止数组下标发生错乱，一般是从后删起
+## 可以使用.count方法辅助, .count 方法返数值的次数
+x = [1,2,1,2,1,1,1] 
+for i in range(x.count(1)):
+    x.remove(1)
+x
+```
+
+​		7.对象列表指定元素首次出现的下标--index
+
+```python
+aList = [1,2,3,4,9,9,1,5]
+>>> aList
+[1, 2, 3, 4, 9, 9, 1, 5]
+>>> aList.index(9)
+4
+```
+
+​		8.对象列表统计对象出现的次数--count
+
+```python
+aList = [7, 4, 5, 5.5, 5, 11, 7, 15, 7] 
+aList.count(5)
+2
+```
+
+​		9.连接多个数组形成tuple(元组)--zip
+
+```python
+aList = [3, 5, 7, 9, 11]
+bList = ['a', 'b', 'c', 'd']
+zip(aList, bList)
+<zip at 0x4558ac8> ## 返回一个对象迭代器
+list(zip(aList, bList))
+[(3, 'a'), (5, 'b'), (7, 'c'), (9, 'd')]
+aList = [3, 5, 7, 9, 11]
+bList = ['a', 'b', 'c', 'd']
+(3, 'a') in zip(aList, bList)
+True
+```
+
+
+​	list中的元素类型不确定，list里面也能再包含list list替换直接令值替换就行
 
 ```python
 >>> MyList = ['yueyun',1,True,1.234]
 >>> p = ['HTML','CSS','Javascript',['Vue','Reacte'],'C']
 ```
+
+​	当然判断列表中是否有值，可以使用count判断，或者直接使用 `in` 关键字返回结果
+
+```python
+aList = [7, 4, 5, 5.5, 5, 11, 7, 15, 7] 
+3 in aList
+True
+16 in aList
+False
+16 not in aList
+True
+```
+
 
 tuple:
 	另外一种有序列表：tuple。 tuple与list非常类似，但是tuple一旦初始化之后就不能再修改，没有append，pop等方法
@@ -362,7 +451,7 @@ for name in names:
   print(name)
 ```
 
-​	range() 函数，生成一个整数数列，左闭右开，在通过list()函数可以转换为list。
+​	range() 函数，生成一个整数数列，左闭右开，在通过list()函数可以转换为list。(可以加上第三个参数，表示step,(步长))
 
 ```python
 >>> list(range(5))
@@ -836,8 +925,23 @@ L[:3]
 'ACEG'
 ```
 
-**迭代**
-	如果给定一个l `list` 通过`for`循环遍历这个`list` 这种遍历我们称为迭代(Iteration)
+​	**列表排序**
+​		使用列表对象的 `sort` 方法进行原地排序
+
+```python
+import random
+aList=[3,4,5,6,7,9,11,13,15,17]
+## 类似于重新洗牌
+random.shuffle(aList)
+print(aList)
+## 默认升序排列 且是改变原数组无返回值
+aList.sort()
+## 可以指定参数让数组逆序
+aList.sort(reveser = Tr)
+```
+
+​	**迭代**
+​		如果给定一个l `list` 通过`for`循环遍历这个`list` 这种遍历我们称为迭代(Iteration)
 
 ```python
 for i in range(100):
