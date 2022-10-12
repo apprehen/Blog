@@ -1073,4 +1073,104 @@ for n in g:
 
 ###### 10.字符串的常用方法
 
-​	1.
+​	**1.切割---split()**
+
+```python
+s = 'apple,peach,banana,pear'
+li = s.split(",")
+print(li)
+['apple', 'peach', 'banana', 'pear']
+# 如果不指定分隔符，则字符串中的任何空白符号，都会被认为是空白符，返回最终最终分割结果的列表
+s = 'apple peach banana pear'
+li = s.split()
+print(li)
+['apple', 'peach', 'banana', 'pear']
+# split() 方法允许指定最大分割次数
+s = '\n\nhello\t\t world \n\n\n My name is Dong   '
+s.split(None,1)
+['hello', 'world \n\n\n My name is Dong   ']
+```
+
+​	2.连接---join()
+
+```python
+## 注意是字符串的方法 不是数组方法 (与JS中的join正好相反)
+str1 = ''.join(arr)
+aList = ['真由理','薰','saber','Mashiro','kurumi','meigumi','kota']
+result = ' '.join(aList)
+print(result)
+真由理 薰 saber Mashiro kurumi meigumi kota
+```
+
+​	3... 其余的不太重要需要的时候在自己查找即可
+
+**11.高阶函数**
+	map / reduce
+	map:
+		`map()` 函数接受两个参数，一个是函数，一个是`Iterable` map将传入的函数依次作用到序列的每个元素，并作为新的 `Iterator` 
+
+```python
+def f(x):
+    return x*x
+r = map(f,[1,2,3,4,5,6,7,8,9])
+blist = list(r)
+print(blist)
+[1, 4, 9, 16, 25, 36, 49, 64, 81]
+```
+
+​	`reduce()` reduce用法把一个函数作用在一个序列上，必须接受两个参数，作用效果如下捏
+
+```python
+from functools import reduce
+reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+def add(x,y):
+  return x*10+y
+reduce(add,[1,3,5,7,9	])
+```
+
+ 	`filter` ():
+ 		和map类似，`filter` 也接受一个函数和序列，和map不同的是，filter 把传入的函数依次作用于每个元素，然后根据返回值是 `True` 和 `False` 决定是保留还是丢弃
+
+```python
+def is_odd(n):
+    return n % 2 == 1
+
+list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))
+# 结果: [1, 5, 9, 15]
+```
+
+###### **11.面向对象的编程**
+
+​	面向对象重要的概念就是 `类` 和 `实例` 使用class来定义类
+​		--- 类是对实例(对象)的抽象化，实例是对类的具体化
+
+```python
+# 定义类
+class Car:
+    def infor(self):
+         print("This is a car")
+# 定义类之后可以实例化对象
+car = Car()
+car.infor()
+This is a car
+```
+
+​		-- self 参数 (类似于JS中的this) 参数必须是第一个形参，self参数代表要创建的对象本身，再类的实例方法中访问都要通过self访问
+
+```python
+class A:
+    def __init__(self, v):
+        self.value = v
+        print('call init with', v)
+    
+    def show(self):
+        print(self.value)
+a = A(3)
+3
+a.show()
+3
+```
+
+​	**类成员与实例成员**
+​		实例属性：实例属性一般是指在构造函数__init__()中定义的，定义和使用时必须以`self`作为前缀
+​		类属性：类中所有方法之外定义的数据成员，类属性属于类，可以通过类名或对象名访问.在Python中比较特殊的是，可以动态地为类和对象增加成员，这一点是和很多面向对象程序设计语言不同的，也是Python动态类型特点的一种重要体现
