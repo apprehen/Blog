@@ -1174,3 +1174,204 @@ a.show()
 ​	**类成员与实例成员**
 ​		实例属性：实例属性一般是指在构造函数__init__()中定义的，定义和使用时必须以`self`作为前缀
 ​		类属性：类中所有方法之外定义的数据成员，类属性属于类，可以通过类名或对象名访问.在Python中比较特殊的是，可以动态地为类和对象增加成员，这一点是和很多面向对象程序设计语言不同的，也是Python动态类型特点的一种重要体现
+
+```python
+class Car:
+    price = 10000
+    def __init__(self,color):
+        self.color = color
+car1 = Car('Blue')
+car2 = Car('Red')
+print(car1.color,Car.price)
+Blue 10000
+## 修改类的属性
+Car.price = 20000
+## 增加类的属性
+Car.name = 'Pivix'
+## 修该实例属性
+car1.color = 'Yellow'
+print(car2.color, Car.price, Car.name)
+print(car1.color, Car.price, Car.name)
+######################################
+import types
+def setSpeed(self,s):
+    self.speed = s
+#动态为对象增加成员方法
+car1.setSpeed = types.MethodType(setSpeed,Car)
+#调用对象的成员方法
+car1.setSpeed(50)
+print(car1.speed)
+```
+
+​	在Python中，函数和方法是有区别的。方法一般指与特定实例绑定的函数，通过对象调用方法时，对象本身将被作为第一个参数传递过去，普通函数并不具备这个特点。
+
+```python
+class Demo:
+    pass
+t = Demo()
+def test(self, v):
+    self.value = v
+## 作为函数
+t.test = test
+t.test
+t.test(t, 3)  ## 需要传入参数t
+print(t.value)
+## 作为方法
+t.test = types.MethodType(test, t)
+t.test
+t.test(5) ## self 已经第一个对象被传递过去
+print(t.value)
+```
+
+​	私有成员和公有成员
+​		私有成员:如果属性名以两个下划线“__”开头则表示是私有属性，否则是公有属性私有属性在类的外部不能直接访问，需要通过调用对象的公有成员方法来访问，或者通过Python支持的特殊方式来访问,但是不建议，因为很危险__
+`___xxx`：这样的对象叫做保护成员，不能用'from module import *'导入，只有类对象和子类对象能访问这些成员；
+`__xxx__`：系统定义的特殊成员；
+`__xxx`：类中的私有成员，只有类对象自己能访问，子类对象也不能访问到这个成员，但在对象外部可以通过“对象名._类名__xxx”这样的特殊方式来访问
+
+```python
+class A:
+    def __init__(self, value1=0, value2=0):
+        self._value1 = value1
+        self.__value2 = value2
+    def setValue(self, value1, value2):
+        self._value1 = value1
+        self.__value2 = value2
+    def show(self):
+        print(self._value1)
+        print(self.__value2)
+a = A(1,2)
+a._A__value2 = 3
+print(a._value1,a._A__value2)
+class Fruit:
+    def __init__(self):
+        self.__color = 'Red'
+        self.price = 1
+apple = Fruit()
+apple.price #显示对象公开数据成员的值
+1
+apple.price = 2 #修改对象公开数据成员的值
+apple.price
+2
+print(apple.price, apple._Fruit__color) #显示对象私有数据成员的值
+2 Red
+apple._Fruit__color = "Blue" #修改对象私有数据成员的值
+print(apple.price, apple._Fruit__color)
+2 Blue
+print(apple.__color)
+# 嘎嘎报错
+```
+
+​	**方法**
+​		公有方法 ， 私有方法 ， 静态方法， 类方法
+​			公有办法：属于对象，访问属于类和对象的成员
+​			私有方法：私有方法的名字以两个下划线“__”开始公有方法通过对象名直接调用，私有方							  法不能通过对象名直接调用，只能在属于对象的方法中通过“self”调用或在外							  部通过Python支持的特殊方式来调用。
+​			静态方法和类方法都可以通过类名和对象名调用，但不能直接访问属于对象的成员，只能访问属于类的成员。一般将“cls”作为类方法的第一个参数名称，但也可以使用其他的名字作为参数，并且在调用类方法时不需要为该参数传递值
+
+```python
+class Root:
+    __total = 0
+    def __init__(self,v): ## 私有方法
+        self.__value = v
+        Root.__total+=1
+    def show(self): ## 公有方法
+        print('self.__value:',self.__value)
+        print('Root.__total:',Root.__total)
+    @classmethod ## 类方法
+    def classShowTotal(cls):
+        print(cls.__total,Root.__total)
+    @staticmethod ## 静态方法
+    def staticShowTotal():
+        print(Root.__total)
+r = Root(3)
+# 通过对象调用
+r.classShowTotal()
+r.staticShowTotal()
+r.show()
+rr = Root(5)
+Root.classShowTotal()
+Root.staticShowTotal()
+#试图通过类名直接调用实例方法(即公有方法)，失败
+Root.show()
+# 通过类名调用实例方法时为self参数显式传递对象名
+Root.show(rr)
+```
+
+​		属性
+​	1.如果设置属性为只读，则无法修改其值，也无法为对象增加与属性同名的新成员，同时，也无法删除对象属性
+
+```python
+class Test:
+    def __init__(self, value):
+        self.__value = value
+
+    @property
+    def value(self):  # 只读，无法修改和删除
+        return self.__value
+t = Test(3)
+print(t.value)
+#只读属性不允许修改值
+t.value = 5
+#动态增加新成员
+t.v=5
+print(t.v)
+#动态删除成员
+del t.v
+#试图删除对象属性，失败
+del t.value
+print(t.value)
+```
+
+​	2.把属性设置为可读、可修改，而不允许删除。
+
+```python
+class Test:
+    def __init__(self, value):
+        self.__value = value
+
+    def __get_value(self):
+        print('__get_value')
+        return self.__value
+
+    def __set_value(self, v):
+        print('__set_value')
+        self.__value = v
+
+    value = property(__get_value, __set_value)
+
+    def show(self):
+        print(self.__value)
+t = Test(3)
+## 允许读取属性值
+print(t.value)
+## 允许修改属性值
+t.value = 5
+print(t.value)
+t.show()
+#试图删除属性，失败
+del t.value
+```
+
+​	也可以将属性设置为可读、可修改、可删除
+
+```python
+class Test:
+    def __init__(self, value):
+        self.__value = value
+    
+    def __get_value(self):
+        #print('__get_value')
+        return self.__value
+    def __set_value(self, v):
+        #print('__set_value')
+        self.__value = v
+    def __del_value(self):
+        #print('__del_value')
+        del self.__value
+    
+    value = property(__get_value, __set_value, __del_value)
+
+    def show(self):
+        print(self.__value)
+```
+
