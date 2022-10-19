@@ -26,7 +26,7 @@
     "hexo-butterfly-tag-plugins-plus": "^1.0.17",
     "hexo-butterfly-wowjs": "^1.0.5",
     "hexo-filter-gitcalendar": "^1.0.9",
-    "hexo-generator-archive": "^1.0.0",
+    "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^1.0.0",
     "hexo-generator-feed": "^3.0.0",
     "hexo-generator-index": "^2.0.0",
