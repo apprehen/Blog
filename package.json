@@ -44,7 +44,7 @@
     "workbox-build": "^6.5.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.3",
+    "@babel/core": "^7.19.6",
     "@babel/preset-env": "^7.19.3",
     "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
