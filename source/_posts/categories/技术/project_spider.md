@@ -199,12 +199,6 @@ def scrap_page(url):
 # 返回具体的url地址
 def scrap_index(page):
     url = f'{base_url}/ranking?date={today_str}&mode={mode}&p={page}'
-    '''
-    base_url:https://www.vilipix.com
-    today_str:获取当天网站榜单日期
-    mode: 日 周 月
-    page:榜单页码
-    '''
     return scrap_page(url)
 
 
