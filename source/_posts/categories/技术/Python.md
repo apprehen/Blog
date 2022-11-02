@@ -1265,7 +1265,7 @@ print(apple.__color)
 ​	**方法**
 ​		公有方法 ， 私有方法 ， 静态方法， 类方法
 ​			公有办法：属于对象，访问属于类和对象的成员
-​			私有方法：私有方法的名字以两个下划线“__”开始公有方法通过对象名直接调用，私有方							  法不能通过对象名直接调用，只能在属于对象的方法中通过“self”调用或在外							  部通过Python支持的特殊方式来调用。
+​			私有方法：私有方法的名字以两个下划线“__”开始公有方法通过对象名直接调用，私有方法不能通过对象名直接调用，只能在属于对象的方法中通过“self”调用或在外部通过Python支持的特殊方式来调用。
 ​			静态方法和类方法都可以通过类名和对象名调用，但不能直接访问属于对象的成员，只能访问属于类的成员。一般将“cls”作为类方法的第一个参数名称，但也可以使用其他的名字作为参数，并且在调用类方法时不需要为该参数传递值
 
 ```python
@@ -1373,5 +1373,161 @@ class Test:
 
     def show(self):
         print(self.__value)
+```
+
+###### 12.继承和多态
+
+​	1.继承
+  - 当我们定义一个类的时候，可以从某个现有的class类中继承，则新的被称为子类，被继承的类称为基类，父类，超类
+    如下我们编写代码
+
+    ```python
+    class Animal(object):
+        def run(self):
+            print("Animal is running...")
+    ```
+
+    当我们要编写`dog`和`cat`类时,可以直接从Animal继承
+
+    ```python
+    class dog(Animal):
+        pass
+    class cat(Animal):
+        pass
+    # 好处是子类继承了父类的全部方法
+    dog = Dog()
+    dog.run()
+    cat = Cat()
+    cat.run()
+    ```
+
+    当然我们也可以对子类增加一些方法，甚至可以把原来父类的方法覆盖(多态)
+
+    ```python
+    class Dog(Animal):
+        def run():
+            print("Dog is runnig")
+        def eat():
+            print("like to eat meat")
+    class Cat(Animal):
+        def run():
+            print("Cat is running")
+        def eat():
+            print("like to eat fish")
+            
+    ```
+
+    要理解多态的方便不如来看一下代码
+
+    ```python
+    class Animal:
+      def run(self):
+        print("Animal is running")
+    
+    class Dog(Animal):
+      def run(self):
+        print("Dog is running")
+    
+    class Cat(Animal):
+      def run(self):
+        print("Cat is runnig")
+    
+    def run_twice(animal):
+      animal.run()
+    
+    run_twice(Animal())
+    run_twice(Dog())
+    run_twice(Cat())
+    # Animal is runnig
+    # dog is runnig
+    # cat is runnig
+    ```
+
+    传入什么实例时，就打印出对应的run() 函数，当我们新增子类的时候不需要在原函数上修改任何东西
+
+    ```python
+    class Tortoise(Animal):
+        def run(self):
+            print('Tortoise is running slowly...')
+    run_twice(Tortoise())
+    # Tortoise is running slowly
+    ```
+
+    - 继承可以把父类的所有功能都直接拿过来，这样就不必重零做起，子类只需要新增自己特有的方法，也可以把父类不适合的方法覆盖重写。
+
+    - 动态语言的鸭子类型特点决定了继承不像静态语言那样是必须的。
+
+```python
+class Student:
+  # 类属性都能访问到
+  count = 0
+  def __init__(self,name):
+    self.name = name
+    Student.count+=1
+
+a = Student("aa")
+b = Student("bb")
+c = Student("cc")
+d = Student("dd")
+print(Student.count)
+print(Student.count == a.count)
+```
+
+###### 13.错误处理
+
+​	`try` ... `except` ... `finally`
+
+```python
+try:
+  print('try...')
+  r =  10/0
+  print('result:',r)
+except ZeroDivisionError as e:
+  print('except:',e)
+finally:
+  print('finally...')
+print('END')
+# try...
+# except: division by zero
+# finally...
+# END
+```
+
+​	当我们认为某些代码可能会出错时，就可以使用 `try` 来运行这段代码，如果执行出错，则后续代码不会执行，会跳转到错误处理代码
+​	没有错误的时候  `except` 语句不会被执行，但是 `finally` 如果有一定会被执行，然后继续按照流程
+
+```python
+try:
+  print('try...')
+  r =  10/2 # 将 0 改成 2
+  print('result:',r)
+except ZeroDivisionError as e:
+  print('except:',e)
+finally:
+  print('finally...')
+print('END')
+# 则会输出一下结果
+# try...
+# result: 5
+# finally...
+# END
+```
+
+​	当然错误也有很多种，可以写多种错误
+
+```python
+try:
+    print('try...')
+    r = 10 / int('a')
+    print('result:', r)
+except ValueError as e:
+    print('ValueError:', e)
+except ZeroDivisionError as e:
+    print('ZeroDivisionError:', e)
+else:
+    print('no error!')
+finally:
+    print('finally...')
+print('END')
 ```
 
