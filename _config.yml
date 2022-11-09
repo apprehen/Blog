@@ -200,3 +200,6 @@ cinema: # 追剧设置
 aplayer:
   meting: true
   asset_inject: false
+
+butterfly_article_double_row:
+  enable: true
