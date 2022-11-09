@@ -23,7 +23,7 @@ highlight_copy: true # copy button
 highlight_lang: true # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
 highlight_height_limit: false # unit: px
-code_word_wrap: false
+code_word_wrap: true
 
 # copy settings
 # copyright: Add the copyright information after copied content (複製的內容後面加上版權信息)
@@ -140,7 +140,7 @@ error_404:
 
 post_meta:
   page: # Home Page
-    date_type: both # created or updated or both 主頁文章日期是創建日或者更新日或都顯示
+    date_type:  # created or updated or both 主頁文章日期是創建日或者更新日或都顯示
     date_format: date # date/relative 顯示日期還是相對日期
     categories: true # true or false 主頁是否顯示分類
     tags: true # true or false 主頁是否顯示標籤
