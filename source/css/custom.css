@@ -400,3 +400,28 @@ button:not(:disabled) {
 .framework-info{
   display: none !important;
 }
+/* tags样式 */
+#aside-content .card-tag-cloud a {
+  color: var(--anzhiyu-fontcolor) !important;
+  font-size: 1.05rem !important;
+  border-radius: 8px;
+  display: inline-block;
+  margin-right: 4px;
+}
+#aside-content .card-tag-cloud a:hover {
+  background: var(--anzhiyu-theme);
+  color: var(--anzhiyu-white) !important;
+  box-shadow: var(--anzhiyu-shadow-theme);
+}
+@media screen and (min-width: 1300px) {
+  #aside-content .card-tag-cloud a:hover {
+    transform: scale(1.03);
+  }
+  #aside-content .card-tag-cloud a:active {
+    transform: scale(0.97);
+  }
+}
+#aside-content .card-tag-cloud a sup {
+  opacity: 0.4;
+  margin-left: 2px;
+}
