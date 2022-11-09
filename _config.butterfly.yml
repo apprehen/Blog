@@ -1101,12 +1101,16 @@ categoryBar:
 inject:
   head:
     - <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    # - <script src="/js/video.js" defer></script>
     # 自定义CSS
+    - <link rel="stylesheet" href="/css/year.css"  media="defer" onload="this.media='all'">
     - <link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'">
     - <link rel="stylesheet" href="/css/Right.css" media="defer" onload="this.media='all'">
     - <link rel="stylesheet" href="/css/Loading.css" media="defer" onload="this.media='all'">
+    - <link rel="stylesheet" href="https://cdn.cbd.int/qweather-icons@1.1.1/font/qweather-icons.css">
   bottom:
+  # 自定义js文件
+    - <script async src="js/title/title.js"></script>
+    - <script async src="/js/ali_font.js"></scripy>
     # aplayer 音乐
 
 # CDN

@@ -1,0 +1,59 @@
+@import url("//at.alicdn.com/t/font_2264842_3izu8i5eoc2.css");
+/* 这是我的阿里矢量图标库的引入链接，里面存放了十二生肖的图标 */
+.iconfont {
+font-family: "iconfont" !important;
+font-size: 1.85em;
+/* 可以定义图标大小 */
+font-style: normal;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+/* 生肖鼠 */
+.icon-rat:before {
+  color: #85c3de;
+  /* 可以自定义图标颜色 */
+}
+/* 生肖牛 */
+.icon-ox:before {
+  color: #ffaf6e;
+}
+/* 生肖虎 */
+.icon-tiger:before {
+  color: #f7c768;
+}
+/* 生肖兔 */
+.icon-rabbit:before {
+  color: #ffbdd8;
+}
+/* 生肖龙 */
+.icon-dragon:before {
+  color: #ff8787;
+}
+/* 生肖蛇 */
+.icon-snake:before {
+  color: #c3d686;
+}
+/* 生肖马 */
+.icon-horse:before {
+  color: #ffaf6e;
+}
+/* 生肖羊 */
+.icon-goat:before {
+  color: #f7c768;
+}
+/* 生肖猴 */
+.icon-monkey:before {
+  color: #c3d686;
+}
+/* 生肖鸡 */
+.icon-rooster:before {
+  color: #ff8787;
+}
+/* 生肖狗 */
+.icon-dog:before {
+  color: #85c3de;
+}
+/* 生肖猪 */
+.icon-boar:before {
+  color: #ffbdd8;
+}
