@@ -397,3 +397,6 @@ button:not(:disabled) {
 .topGroup .top-group-list-item {
   box-shadow:  0 8px 16px -4px #2c2d300c !important;
 }
+.framework-info{
+  display: none !important;
+}

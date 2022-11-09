@@ -1056,7 +1056,7 @@ swiper:
       class: red
       icon: fas fa-burn
     - name: 生活
-      path: /categories/生活/
+      path: /categories/冻鳗高手/
       shadow: var(--anzhiyu-shadow-green)
       class: green
       icon: fas fa-book
@@ -1069,6 +1069,32 @@ swiper:
   people_js: https://npm.elemecdn.com/hexo-butterfly-swiper-anzhiyu-pro/lib/people.min.js
   categorygroup_css: https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu-pro/lib/categoryGroup.css
 
+# hexo-butterfly-categories-card
+# see https://akilar.top/posts/a9131002/
+categoryBar:
+  enable: true # 开关
+  priority: 5 #过滤器优先权
+  enable_page: / # 应用页面
+  layout: # 挂载容器类型
+    type: id
+    name: recent-posts
+    index: 0
+  column: even # odd：3列 | even：4列
+  row: 1 #显示行数，默认两行，超过行数切换为滚动显示
+  message:
+    - descr: 大学学习史
+      cover: https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover1.webp
+    - descr: 生活欢乐多
+      cover: https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover2.webp
+    - descr: 冻鳗高手
+      cover: https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover3.webp
+    - descr: 前端成长历程
+      cover: https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover4.webp
+    - descr:
+      cover: https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover5.webp
+    - descr:
+      cover: https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover6.webp
+  custom_css: https://cdn.cbd.int/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css
 # Inject
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
@@ -1079,6 +1105,7 @@ inject:
     # 自定义CSS
     - <link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'">
     - <link rel="stylesheet" href="/css/Right.css" media="defer" onload="this.media='all'">
+    - <link rel="stylesheet" href="/css/Loading.css" media="defer" onload="this.media='all'">
   bottom:
     # aplayer 音乐
 
