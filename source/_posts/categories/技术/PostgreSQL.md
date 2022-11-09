@@ -140,3 +140,11 @@ print("Total number of rows deleted :",cur.rowcount)
 # cur.rowcount 表示的删除多少行数据
 ```
 
+#### 	5.postgreSQL排序
+
+​		postgresql中使用 `ORDER BY` 子句用于按升序或者降序对数据进行排列
+
+```sql
+
+```
+

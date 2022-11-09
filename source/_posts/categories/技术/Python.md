@@ -1224,7 +1224,7 @@ print(t.value)
 ```
 
 ​	私有成员和公有成员
-​		私有成员:如果属性名以两个下划线“__”开头则表示是私有属性，否则是公有属性私有属性在类的外部不能直接访问，需要通过调用对象的公有成员方法来访问，或者通过Python支持的特殊方式来访问,但是不建议，因为很危险__
+​		私有成员:如果属性名以两个下划线“__”开头则表示是私有属性，否则是公有属性,私有属性在类的外部不能直接访问，需要通过调用对象的公有成员方法来访问，或者通过Python支持的特殊方式来访问,但是不建议，因为很危险__
 `___xxx`：这样的对象叫做保护成员，不能用'from module import *'导入，只有类对象和子类对象能访问这些成员；
 `__xxx__`：系统定义的特殊成员；
 `__xxx`：类中的私有成员，只有类对象自己能访问，子类对象也不能访问到这个成员，但在对象外部可以通过“对象名._类名__xxx”这样的特殊方式来访问
@@ -1473,7 +1473,66 @@ print(Student.count)
 print(Student.count == a.count)
 ```
 
-###### 13.错误处理
+###### 13.面向对象高级
+
+​	1.`__slots__`	
+
+```python
+# 可以给实例绑定任何属性和方法,如下所示
+class Student(object):
+    pass
+# 给实例绑定一个属性:
+s = Student()
+s.name = 'megumi'
+print(s.name)
+# 也可以给实例绑定方法
+def set_age(self,age):
+  self.age = age
+from types import MethodType
+# 给实例绑定一个方法
+s.set_age =MethodType(set_age,s)
+# 调用实例方法
+s.set_age(18)
+# 测试结果
+print(s.age)
+>>> megumi
+>>> 18
+
+## 但是对之后进行新的实例不起作用，只能在类中定义才能全都使用,可以使用solts对实例进行限制
+class Student(object):
+  __slots__ = ('name', 'age') # 使用tuple定义运行绑定的属性
+  # 注意对继承的子类slot不起作用
+s = Student()
+s.name = 'megumi'
+s.age = 18
+s.address = "heart "
+>>> 报错
+```
+
+​	2.`使用@property`
+
+```python
+class Student():
+  def get_score(self):
+    return self.score
+  def set_score(self,value):
+    if not isinstance(value,int):
+      raise ValueError('score must be an integer')
+    if value < 0 or value > 100:
+      raise ValueError('score must between 0~100')
+    self.score = value
+
+s = Student()
+s.set_score(60)
+print(s.get_score())
+>>> 60
+# 上面的写法有些繁琐我们直接用装饰器 (decorator) 可以给函数动态加上功能，Python中内置的 `@property` 装饰器就是负责把一个方法变成属性调用 防止被修改
+
+```
+
+
+
+###### 14.错误处理
 
 ​	`try` ... `except` ... `finally`
 
