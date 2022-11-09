@@ -165,7 +165,7 @@ plugins:
 bangumi: # 追番设置
   enable: true
   path:
-  vmid: 372204786
+  vmid: 554370301
   title: '追番列表'
   quote: '生命不息，追番不止！'
   show: 1
@@ -180,7 +180,7 @@ bangumi: # 追番设置
 cinema: # 追剧设置
   enable: false
   path:
-  vmid: 372204786
+  vmid: 554370301
   title: '追剧列表'
   quote: '生命不息，追剧不止！'
   show: 1
