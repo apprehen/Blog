@@ -724,3 +724,7 @@ li.card-archive-list-item {
   background:url('https://cdn1.tianli0.top/npm/anzhiyu-blog@2.1.1/img/avatar.webp') no-repeat center center !important;
   background-size: cover !important;
 }
+.aside-content{
+  max-width:312px;
+  min-width:300px;
+}
