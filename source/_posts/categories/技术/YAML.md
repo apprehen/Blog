@@ -2,10 +2,10 @@
 title: yaml基本使用入门
 description: 一些程序所需要的配置文件写法
 cover: >-
-date: 2022-11-09
   https://cdn.staticaly.com/gh/apprehen/pciture@master/102587184.1jiu32u74uqo.webp
 categories: 技术
 tags: yaml配置文件
+date: 2022-11-09
 abbrlink: d0a1c72f
 ---
 
