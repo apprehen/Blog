@@ -2,6 +2,7 @@
 title: 国庆节第五天
 abbrlink: '1'
 categories: 生活
+date: 2022-10-05
 description: 去图书馆完成 数电/计组/线代/python基本语法
 cover: https://cdn.staticaly.com/gh/apprehen/pciture@master/20221005/91f2dbbaa8c75220c2af056878315d70.475plieu1vo.webp
 ---

@@ -1109,15 +1109,10 @@ inject:
     # 自定义CSS
     - <link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'">
     - <link rel="stylesheet" href="/css/Right.css" media="defer" onload="this.media='all'">
-    # - <link rel="stylesheet" href="https://cdn.cbd.int/qweather-icons@1.1.1/font/qweather-icons.css">
-    # - <link rel="stylesheet" href="/css/iconfont.css">
-    - <link rel="stylesheet" href="/css/rightmenu.css">
-    # - <script async type="text/javascript" src="https://cdn1.tianli0.top/npm/jquery@latest/dist/jquery.min.js"></script>
   bottom:
   # 自定义js文件
     - <script async src="js/title/title.js"></script>
     - <script async src="/js/ali_font.js"></scripy>
-    - <script async type="text/javascript" src="/js/rightmenu.js" defer ></script>
     # 顶部小进度条
     - <script data-pjax src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script>
     # aplayer 音乐

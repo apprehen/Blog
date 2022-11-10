@@ -1,10 +1,11 @@
 ---
-title: 具体的源码以及分析(拙劣) --- Python 爬虫
+title: 具体的源码以及分析() --- Python 爬虫
 description: 爬爬爬 (梦想爬p站)
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/2022_10_29_20_38_10.3btx639tpec0.webp
 swiper_index: 3
 top_group_index: 3
+date: 2022-10-29
 categories: 技术
 tags: 爬虫实战项目
 abbrlink: 9def99ba
