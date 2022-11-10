@@ -43,7 +43,7 @@ social:
   Email: https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=3514392356@qq.com || icon-youxiang || faa-tada
   RSS: atom.xml || icon-rss || faa-tada
   BiliBili: https://space.bilibili.com/554370301 || icon-bilibili || faa-tada
-  QQ: tencent://Message/?Uin=3514392356&amp;websiteName=local.edu.com:8888=&amp;Menu=yes || icon-QQ1 || faa-tada
+  QQ: https://api.vvhan.com/api/qqCard?qq=3514392356 || icon-QQ1 || faa-tada
 
 # search (搜索)
 # see https://butterfly.js.org/posts/ceeb73f/#搜索系統
