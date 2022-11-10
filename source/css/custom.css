@@ -720,3 +720,7 @@ li.card-archive-list-item {
 .site-data > a .length-num {
   color: var(--anzhiyu-white);
 }
+#loading-img {
+  background:url('https://cdn1.tianli0.top/npm/anzhiyu-blog@2.1.1/img/avatar.webp') no-repeat center center !important;
+  background-size: cover !important;
+}

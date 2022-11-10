@@ -1107,14 +1107,12 @@ inject:
   head:
     - <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     # 自定义CSS
-    - <link rel="stylesheet" href="/css/Loading.css">
     - <link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'">
     - <link rel="stylesheet" href="/css/Right.css" media="defer" onload="this.media='all'">
-    - <link rel="stylesheet" href="/css/Loading.css" media="defer" onload="this.media='all'">
-    - <link rel="stylesheet" href="https://cdn.cbd.int/qweather-icons@1.1.1/font/qweather-icons.css">
-    - <link rel="stylesheet" href="/css/iconfont.css">
+    # - <link rel="stylesheet" href="https://cdn.cbd.int/qweather-icons@1.1.1/font/qweather-icons.css">
+    # - <link rel="stylesheet" href="/css/iconfont.css">
     - <link rel="stylesheet" href="/css/rightmenu.css">
-    - <script async type="text/javascript" src="https://cdn1.tianli0.top/npm/jquery@latest/dist/jquery.min.js"></script>
+    # - <script async type="text/javascript" src="https://cdn1.tianli0.top/npm/jquery@latest/dist/jquery.min.js"></script>
   bottom:
   # 自定义js文件
     - <script async src="js/title/title.js"></script>
