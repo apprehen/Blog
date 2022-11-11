@@ -1053,12 +1053,12 @@ swiper:
       shadow: var(--anzhiyu-shadow-blue)
       class: blue
       icon: fas fa-dove
-    - name: 大学
-      path: /categories/大学/
+    - name: 大学学习
+      path: /categories/大学学习/
       shadow: var(--anzhiyu-shadow-red)
       class: red
       icon: fas fa-burn
-    - name: 生活
+    - name: 冻鳗高手
       path: /categories/冻鳗高手/
       shadow: var(--anzhiyu-shadow-green)
       class: green
