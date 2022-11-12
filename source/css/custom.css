@@ -7059,7 +7059,7 @@ blockquote.pullquote.right {
 
 .read-mode #page-header.post-bg {
   background-color: transparent;
-  background-image: none !important
+  /* background-image: none !important */
 }
 
 .read-mode #page-header.post-bg:before {
@@ -9228,14 +9228,13 @@ a.extend.next {
   height: 550px;
   transition: 0s;
   background-color: transparent;
-  background-image: none !important
 }
 
 #page-header:not(.not-top-img):before {
   position: absolute;
   width: 100%;
   height: calc(100% - 75px);
-  background-color: rgba(0, 0, 0, .3);
+  /* background-color: rgba(0, 0, 0, .3); */
   content: "";
   max-width: 1430px;
   margin: 75px auto 0;
@@ -10168,47 +10167,47 @@ svg.icon.faa-tada {
 }
 
 /*top-img黑色透明玻璃效果移除，不建议加，除非你执着于完全一图流或者背景图对比色明显 */
-#page-header:not(.not-top-img):before {
+/* #page-header:not(.not-top-img):before {
   background-color: transparent !important;
-}
+} */
 
 #page-header{
   background: transparent
 }
 /* 首页文章卡片 */
-#recent-posts > .recent-post-item {
+/* #recent-posts > .recent-post-item {
   background: rgba(255, 255, 255, 0.9);
-}
+} */
 
 /* 首页侧栏卡片 */
-#aside-content .card-widget {
+/* #aside-content .card-widget {
   background: rgba(255, 255, 255, 0.9);
-}
+} */
 
 /* 文章页面正文背景 */
-div#post {
+/* div#post {
   background: rgba(255, 255, 255, 0.9);
-}
+} */
 
 /* 分页页面 */
-div#page {
+/* div#page {
   background: rgba(255, 255, 255, 0.9);
-}
+} */
 
 /* 归档页面 */
-div#archive {
+/* div#archive {
   background: rgba(255, 255, 255, 0.9);
-}
+} */
 
 /* 标签页面 */
-div#tag {
+/* div#tag {
   background: rgba(255, 255, 255, 0.9);
-}
+} */
 
 /* 分类页面 */
-div#category {
+/* div#category {
   background: rgba(255, 255, 255, 0.9);
-}
+} */
 
 /*夜间模式伪类遮罩层透明*/
 [data-theme='dark'] #recent-posts > .recent-post-item {
@@ -10631,7 +10630,7 @@ li.card-archive-list-item {
 }
 
 .loading-img {
-  background:url('https://cdn1.tianli0.top/npm/anzhiyu-blog@2.1.1/img/avatar.webp') no-repeat center center !important;
+  background:url(https://cdn1.tianli0.top/npm/anzhiyu-blog@2.1.1/img/avatar.webp) no-repeat center center !important;
   background-size: cover !important;
 }
 
@@ -11159,11 +11158,11 @@ a.extend.next {
 #page-header.full_page::before{
   height: 100% !important;
   background-attachment: fixed !important;
-  background: url(https://cdn.staticaly.com/gh/apprehen/pciture@master/thumb.403ap1akh560.webp) !important;
+  background: url(https://cdn.staticaly.com/gh/apprehen/pciture@master/thumb.403ap1akh560.webp);
   background-size: cover !important;
   background-position: center center !important;
   overflow: hidden;
-  opacity: 0.7;
+  opacity: 0.9;
   content: '';
   z-index: -100;
   width: 99% !important;
@@ -11183,4 +11182,14 @@ a.extend.next {
 }
 #content-inner.layout{
   margin-top: 100px !important;
+}
+
+#page-header:not(.not-top-img):before{
+  background-color: transparent !important;
+}
+#site-info #site-title{
+  color: #DB5A6C !important;
+}
+#site-info #site-subtitle{
+  color: #1a507e !important;
 }

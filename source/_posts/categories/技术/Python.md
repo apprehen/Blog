@@ -1,6 +1,7 @@
 ---
 title: Python基本语法
 description: 纪录学习Python的日记捏
+top_img: https://cdn.staticaly.com/gh/apprehen/pciture@master/20221006/yuzhi.7ew8d6bi3fs0.webp
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/20221006/yuzhi.7ew8d6bi3fs0.webp
 swiper_index: 1
@@ -8,7 +9,7 @@ top_group_index: 1
 categories: 技术
 tags: Python
 abbrlink: b90ddedd
-date: 2022-10-09
+date: 2022-10-09 22:05:07
 sticky: 1
 ---
 # Python
