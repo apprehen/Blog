@@ -11156,7 +11156,7 @@ a.extend.next {
 }
 
 #page-header.full_page::before{
-  height: 100% !important;
+  height: 95% !important;
   background-attachment: fixed !important;
   background: url(https://cdn.staticaly.com/gh/apprehen/pciture@master/thumb.403ap1akh560.webp);
   background-size: cover !important;
@@ -11165,7 +11165,7 @@ a.extend.next {
   opacity: 0.9;
   content: '';
   z-index: -100;
-  width: 99% !important;
+  width: 100% !important;
   max-width: 3000px !important;
 }
 /* #page-header.full_page{
