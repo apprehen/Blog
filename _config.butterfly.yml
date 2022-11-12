@@ -5,17 +5,8 @@
 menu:
   首页: / || fas fa-home || faa-tada
   时间轴: /archives/ || fas fa-archive
-  闲言碎语: /artitalk/ || fas fa-comment-dots
-  音乐馆: /music/ || fas fa-music
   分类: /categories/ || fas fa-folder-open
-  # List||fas fa-list:
-  #   Music: /music/ || fas fa-music
-  #   Movie: /movies/ || fas fa-video
-
-  朋友圈: /fcircle/ || fab fa-artstation
   留言板: /comments/ || fas fa-envelope
-  友人帐: /link/ || fas fa-link
-  # 闲言碎语: /hpptalk/ || fas fa-comment-dots
   追番: /bangumis/ || icon-bilibili1
   关于: /about/ || icon-zhifeiji
 
@@ -518,7 +509,7 @@ tag_ui: # 留空或 index
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background: url(https://cdn.staticaly.com/gh/apprehen/pciture@master/20221004/swift6.1i8czfc0qfa8.webp)
+background: url(https://cdn.staticaly.com/gh/apprehen/pciture@master/thumb.403ap1akh560.webp)
 
 # Footer Background
 footer_bg: false  
@@ -1105,15 +1096,15 @@ inject:
   head:
     - <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     # 自定义CSS
-    - <link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'">
-    - <link rel="stylesheet" href="/css/Right.css" media="defer" onload="this.media='all'">
+    - <link rel="stylesheet" href="/css/custom.css">
+    - <link rel="stylesheet" href="/css/Right.css">
   bottom:
   # 自定义js文件
-    - <script async src="js/title/title.js"></script>
-    - <script async src="/js/ali_font.js"></scripy>
+    - <script src="js/title/title.js" defer></script>
+    - <script src="/js/ali_font.js" defer></script>
     # 顶部小进度条
-    - <script data-pjax src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script>
-    # aplayer 音乐
+    # - <script data-pjax src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js" defer></script>
+    - <script async src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 
 # CDN
 # Don't modify the following settings unless you know how they work
