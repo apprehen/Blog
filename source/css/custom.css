@@ -11114,6 +11114,8 @@ a.extend.next {
     max-width: 768px !important;
     border-radius: 0 !important;
     z-index: -1;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 }
 
