@@ -3284,6 +3284,15 @@ figure.highlight pre .tag .attr {
   -webkit-line-clamp: 2
 }
 
+#recent-posts .recent-post-item:hover {
+  border: var(--style-border-hover);
+  box-shadow: var(--anzhiyu-shadow-main)
+}
+#recent-posts .recent-post-item:hover .recent-post-info .article-title {
+  color: var(--anzhiyu-theme)
+}
+
+
 .tag-cloud-list a {
   display: inline-block;
   padding: 0 8px;
@@ -10822,16 +10831,6 @@ a{
   -o-transition: all .3s;
   -ms-transition: all .3s;
   transition: all .3s
-}
-
-#aside-content .card-widget:hover,
-#recent-posts>.recent-post-item:hover,
-.cardHover:hover,
-.error404 #error-wrap .error-content:hover,
-.layout>.recent-posts .pagination>:not(.space):hover,
-.layout>div:first-child:not(.recent-posts):hover {
-  -webkit-box-shadow: var(--card-hover-box-shadow);
-  box-shadow: var(--card-hover-box-shadow)
 }
 
 #pagination .next-post:hover img,
