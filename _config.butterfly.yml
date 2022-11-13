@@ -475,6 +475,8 @@ site_verification:
 # Beautify/Effect (美化/效果)
 # --------------------------------------
 
+
+
 # Theme color for customize
 # Notice: color value must in double quotes like "#000" or may cause error!
 
@@ -584,10 +586,10 @@ display_mode: light
 
 # Beautify (美化頁面顯示)
 beautify:
-  enable: false
+  enable: true
   field: post # site/post
-  title-prefix-icon: # '\f0c1'
-  title-prefix-icon-color: # '#F47466'
+  title-prefix-icon: '\f863' # '\f0c1'
+  title-prefix-icon-color: "#F47466" #F47466
 
 # Global font settings
 # Don't modify the following settings unless you know how they work (非必要不要修改)
