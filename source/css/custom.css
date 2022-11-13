@@ -11121,7 +11121,7 @@ a.extend.next {
   #page-header.full_page::before{
     height: 95% !important;
     background-attachment: fixed !important;
-    background: url(https://cdn.staticaly.com/gh/apprehen/pciture@master/thumb.403ap1akh560.webp) no-repeat;
+    background: url(https://cdn.staticaly.com/gh/apprehen/pciture@master/thumb.403ap1akh560.webp) no-repeat !important;
     background-size: cover !important;
     background-position: center center !important;
     overflow: hidden;
