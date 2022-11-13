@@ -11120,6 +11120,8 @@ a.extend.next {
 @media screen and (min-width: 769px) {
   #page-header.full_page::before{
     height: 95% !important;
+    margin: 0 !important;
+    padding: 0 !important;
     background-attachment: fixed !important;
     background: url(https://cdn.staticaly.com/gh/apprehen/pciture@master/thumb.403ap1akh560.webp) no-repeat !important;
     background-size: cover !important;
