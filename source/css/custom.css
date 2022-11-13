@@ -4638,7 +4638,8 @@ h1.page-title+.tag-cloud-list {
 }
 
 #nav .menus_items {
-  display: inline
+  display: inline;
+  min-width: 668px;
 }
 
 #nav .menus_items .menus_item {
@@ -11173,4 +11174,11 @@ a.extend.next {
 }
 #site-info #site-subtitle{
   color: #1a507e !important;
+}
+
+#page-header #nav #menus #menus_items{
+  /* display: none; */
+  width: 668.34px;
+  width: fit-content;
+  min-width: 668px !important;
 }
