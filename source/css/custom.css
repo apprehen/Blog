@@ -10251,41 +10251,6 @@ svg.icon.faa-tada {
   display: none !important;
 } */
 
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-  left: -66px !important;
-  transition: all 0.3s;
-  /* 默认情况下缩进左侧66px，只留一点箭头部分 */
-}
-
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-  left: 0 !important;
-  transition: all 0.3s;
-  /* 鼠标悬停是左侧缩进归零，完全显示按钮 */
-}
-
-.aplayer.aplayer-fixed {
-  z-index: 999999 !important;
-}
-
-/* 评论框  */
-.vwrap {
-  box-shadow: 2px 2px 5px #bbb;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  padding: 30px;
-  margin: 30px 0px 30px 0px;
-}
-
-/* 设置评论框 */
-
-.vcard {
-  box-shadow: 2px 2px 5px #bbb;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  padding: 30px;
-  margin: 30px 0px 0px 0px;
-}
-
 /* 鼠标图标 */
 body {
   cursor: url('/img/x1.cur'), auto;
@@ -10607,10 +10572,6 @@ li.card-archive-list-item {
   color: var(--anzhiyu-white);
 }
 
-.loading-img {
-  background:url(https://cdn1.tianli0.top/npm/anzhiyu-blog@2.1.1/img/avatar.webp) no-repeat center center !important;
-  background-size: cover !important;
-}
 
 #aside-content .aside-list > .aside-list-item .content > time {
   display: none;
@@ -10732,8 +10693,6 @@ li.card-archive-list-item {
 }
 
 /* 个人 Social 样式重构  */
-#aside-content .card-info .is-center{
-}
 #aside-content .card-info #card-info-btn:hover{
   padding: 20px 12px;
   background: var(--anzhiyu-theme);
@@ -11127,6 +11086,9 @@ a.extend.next {
     background-attachment: fixed !important;
     background: url(https://cdn.staticaly.com/gh/apprehen/pciture@master/thumb.403ap1akh560.webp);
     background-size: cover !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-position: center center !important;
     overflow: hidden;
     opacity: 0.9;
@@ -11146,6 +11108,9 @@ a.extend.next {
   overflow: hidden;
   opacity: 0.9;
   border-radius: 0px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: -1;
   width: 100% !important;
   max-width: 3000px !important;
