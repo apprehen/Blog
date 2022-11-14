@@ -11180,3 +11180,21 @@ a.extend.next {
   color: black !important;
   font-weight: 700 !important;
 }
+
+#page-header.not-home-page:not(.not-top-img):before {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 75px);
+  content: "";
+  max-width: 1430px;
+  margin: 75px auto 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 24px;
+  z-index: 2;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-image: url("https://cdn.staticaly.com/gh/apprehen/pciture@master/2022_11_14_18_13_8.1suw5slc2alc.webp");
+  z-index: -1;
+}
