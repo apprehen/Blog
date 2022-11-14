@@ -9,18 +9,18 @@ abbrlink: de045643
 date: 2022-11-14 15:46:25
 ---
 
-#### 1.Cookie
+#### Cookie
 
-##### 	1.1 Cookie简介
+##### 	Cookie简介
 
 ​	cookie是HTTP协议中用来解决无状态问题的技术
 ​	cookie的本质就是一个头分有request cookie respon cookie
 
-##### 1.2 Cookie本质
+##### Cookie本质
 
 ​	服务器以响应头的形式将cookie发送给客户端，客户端收到之后会将其存储并在下次向服务器请求时将其传回，这样服务器就可以根据cookie来识别客户端
 
-##### 1.3 Cookie基本演示
+##### Cookie基本演示
 
 ​	这里我们使用nodejs中express快速构建服务器演示一下
 
@@ -47,7 +47,7 @@ app.get("/get-cookie",(req,res)=>{
 ​	这个时候我们就可以读到cookie值
 ![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.3qi6i9nme0w0.webp)
 
-##### 1.4 Cookie的有效期
+##### Cookie的有效期
 
 ​	cookie是有有效期的
 
@@ -64,7 +64,7 @@ app.get("/set",(req,res)=>{
 })
 ```
 
-##### 1.5 Cookie的修改和删除  
+##### Cookie的修改和删除  
 
 ​	cookie一旦发送给浏览器我们就不能在修改了，但是我们可以去发送同名的cookie去替换旧的cookie，从而达到修改
 
@@ -77,27 +77,27 @@ app.get("/delete-cookie",(req,res)=>{
 })
 ```
 
-#### 2.Session  
+#### Session  
 
-##### 2.1 为什么要使用Session
+##### 为什么要使用Session
 
 ​	因为cookie存在严重的不足：cookie是由服务器创建，浏览器保存，每次浏览器访问服务器时都需要将cookie发回，这就导致不能在cookie中存放较多的数据，并且cookie直接存储在客户端，很容易被篡改伪造
 并且注意  
 
 >  使用cookie时一定不要存储一些敏感信息！！！
 
-##### 2.2 Session的本质
+##### Session的本质
 
 ​	每个用户的数据统一存储在服务器中，每一个用户的数据都对应一个id，我们只需要通过cookie将id发送给客户端浏览器，浏览器只需要每次访问时将id发回，既可读取到服务器中存储的数据
 
-##### 2.3 Session的性质
+##### Session的性质
 
 ​	a. session是服务器中的一个对象，这个对象用来存储用户的数据
 ​	b. 每一个session对象都有唯一的id，id会通过cookie的形式发送给客户端
 ​	c. 客户端每次访问只需要将存储有id的cookie发回既可获取它在服务器中的存储的数据
 ​	d. express中可以通过express-session 组件来实现session功能
 
-##### 2.4 Session的演示
+##### Session的演示
 
 ```javascript
 // 引入session
@@ -124,7 +124,7 @@ app.get("/get",(req, res) => {
 
 ![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.1k69q3xz9tq8.webp)
 
-##### 2.5 Session的配置
+##### Session的配置
 
 ​	session 是服务器创建的一个对象，这个对象用来储存用户信息每一个session都会有唯一的id，session创建后id会以cookie的形式发送给浏览器，浏览器收到以后，每次访问都会将id发回，服务器中就可以根据id找到对应的session
 ​	id(cookie) <---------> session 对象
@@ -134,6 +134,8 @@ app.get("/get",(req, res) => {
 ​	express-session 默认是将session存储在内存中，所以服务器一旦重启session就失效辣，考虑使用session通常会对session进行一个持久化的操作(写到文件中或者数据库里)
 
 ```javascript
+// 引入session存储工具的包
+const FileStore = require("session-file-store")(session)
 app.use(session({
     secret:"megumi",
 		store: new FileStore({
@@ -147,9 +149,49 @@ app.use(session({
 			// reapInterval 用来指定清除session的间隔 单位默认s 默认一小时
 			reapInterval:3600
 		}),
+    	// cookie 的持久化 -- 配合使用
 		cookie: {
 			maxAge: 1000 * 3600
 		}
 }))
+```
+
+#### Token
+
+##### token的使用
+
+token(令牌)：
+	可以配合post方法使用在创建表单时随机生成一个令牌
+	然后将令牌存储到session中，并且通过模板发送给用户
+	用户提交表单的时候必须将token发回，才能进行后续操作，token可以去使用随机的uuid
+
+##### token的简易使用演示
+
+```javascript
+// 引入uuid
+const uuid = require("uuid").v4
+
+app.get("/get-students-list",(req,res)=>{
+    //生成一个token
+    const usertoken = uuid()
+    //将token添加到session中
+    req.session.usertoken = usertoken
+    req.session.save(()=>{
+        res.render("students",{
+            stus:STUDENT_ARR,
+            username: req.session.loginUser
+            usertoken;
+        })
+    })
+})
+router.post("/add",(req,res)=>{
+    const token = req.body.csrf
+    const sessionToken = req.session.usertoken
+    // token 是一次性的
+    req.session.usertoken = null
+    if(sessionToken === token) {
+        pass....
+    }
+})
 ```
 

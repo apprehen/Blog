@@ -7151,8 +7151,8 @@ blockquote.pullquote.right {
 .read-mode #article-container h4:before,
 .read-mode #article-container h5:before,
 .read-mode #article-container h6:before {
-  content: ''
-}
+  content: ' ';
+} 
 
 .read-mode #article-container h1:hover,
 .read-mode #article-container h2:hover,
@@ -9320,8 +9320,11 @@ a.extend.next {
   display: none
 }
 
-#article-container .headerlink::before {
-  content: "\f0c1";
+#article-container h1 .headerlink::before,
+#article-container h2 .headerlink::before,
+#article-container h3 .headerlink::before,
+#article-container h4 .headerlink::before{
+  content: "❤";
   font-family: "Font Awesome 6 Pro"
 }
 
