@@ -93,4 +93,36 @@ console.log(promise)
 ```
 
 resolve 是执行正常时存储的数据
-reject 是执行错误时存储的数据 这个都是函数
+reject 是执行错误时存储的数据 这两个个都是函数
+promise获取数据用`then`获取用`catch` 抓捕异常用`finally`来执行一些不论成功或失败的代码
+
+```js
+const promise = new Promise((resolve,reject)=>{
+  resolve("Explosion")
+  setTimeout(()=>{
+    resolve('我是setTimeout中的存储数据')
+  },2000)
+})
+promise.then((result)=>{
+  console.log('1',result)
+},(reason)=>{
+  console.log('2',reason)
+})
+
+```
+Promise中隐藏的两个属性
+
+>  - ###### PromiseResult
+>
+>    - 用来储存数据
+>
+>  - ###### PromiseState
+>
+>    - 记录Promise的状态 (三种状态)
+>    - pending (进行中)
+>    - fulfilled (完成) 通过 `resolve` 存储数据
+>    - State只能修改一次，修改以后永远不会在改
+
+Promise工作的流程
+
+> 当创建Promise时候
