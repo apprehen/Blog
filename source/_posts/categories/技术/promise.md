@@ -94,7 +94,7 @@ console.log(promise)
 
 resolve 是执行正常时存储的数据
 reject 是执行错误时存储的数据 这两个个都是函数
-promise获取数据用`then`获取用`catch` 抓捕异常用`finally`来执行一些不论成功或失败的代码
+promise获取数据用`then`获取,then需要两个回调函数作为参数做为成功接收的结果和拒绝接受的结果
 
 ```js
 const promise = new Promise((resolve,reject)=>{
@@ -125,4 +125,21 @@ Promise中隐藏的两个属性
 
 Promise工作的流程
 
-> 当创建Promise时候
+> 当创建Promise时候，PromiseState初始值为pending
+>
+> ​	当通过resolve存储数据的时候 PromiseState会变成fulfilled
+> ​		PromiseResult 变成储存的数据
+> ​	当通过reject储存数据或者出错时 PromiseState变成rejected
+>
+> 当我们通过then读取数据时，相当于为Promise设置了回调函数
+> 	如果PromiseState变成fulfilled 则调用then的第一个回调函数
+> 	如果PromiseState变为rejected 则调用then的第二个回调函数
+
+catch() 用法和then类似,但catch只需要一个回调函数作为参数
+	catch() 中的回调函数只会在Promise被拒绝的时候调用
+	catch() 相当于 then(null,reason=>{  })
+	catch() 就是专门用来处理Promise异常的方法
+finally()
+	无论是正常储存数据还是出现异常了，finally总会执行|
+	但是finally的回调函数中不会接受到数据
+	finally() 通常来编写一些无论成功与否都会执行代码
