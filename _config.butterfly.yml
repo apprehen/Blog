@@ -8,7 +8,7 @@ menu:
   分类: /categories/ || fas fa-folder-open
   留言板: /comments/ || fas fa-envelope
   追番: /bangumis/ || icon-bilibili1
-  关于: /about/ || icon-zhifeiji
+  关于: /about/index.html || icon-zhifeiji
 
 # Code Blocks (代碼相關)
 # --------------------------------------
@@ -78,7 +78,7 @@ favicon: /img/favicon.png
 
 # Avatar (頭像)
 avatar:
-  img: https://cdn.staticaly.com/gh/apprehen/pciture@master/1.16arfv1fikow.webp
+  img: https://cdn.staticaly.com/gh/apprehen/pciture@master/H.gqpq4hqtd28.webp
   effect: false
 
 # Disable all banner image
