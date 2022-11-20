@@ -4266,8 +4266,9 @@ h1.page-title+.tag-cloud-list {
 #page-header #post-info {
   position: absolute;
   bottom: 80px;
-  padding: 0 10%;
+  padding: 0% 10%;
   width: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -4363,9 +4364,12 @@ h1.page-title+.tag-cloud-list {
 }
 
 #post>#post-info .post-title {
-  padding-bottom: 4px;
+  /* padding-bottom: 4px; */
   border-bottom: 1px solid var(--light-grey);
-  color: var(--text-highlight-color)
+  color: var(--text-highlight-color);
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
 }
 
 #post>#post-info .post-title .post-edit-link {
@@ -4382,12 +4386,12 @@ h1.page-title+.tag-cloud-list {
   color: black;
   font-weight: 700;
   font-size: 2.5em;
-  line-height: 1.5;
   -webkit-line-clamp: 3;
   background-color: #68355a;
   border-radius: 5px;
-  padding: 0 25px;
+  padding: 5px 25px;
   box-sizing: content-box !important;
+  margin-bottom: 20px !important;
 }
 
 @media screen and (max-width:768px) {
@@ -4406,14 +4410,15 @@ h1.page-title+.tag-cloud-list {
   font-size: 95%;
   background-color: rgba(221, 213, 213, 0.815);
   border-radius: 20px;
-
   width: 300px;
   bottom: 50px;
+  padding: 8px 10px !important;
+  box-sizing: content-box !important;
 }
 #post-info #post-meta a{
   color: #DB5A6C !important;
   font-weight: 700;
-  font-size: 95%
+  font-size: 95%;
 }
 
 @media screen and (min-width:768px) {
@@ -10090,9 +10095,9 @@ span.tags-punctuation {
   font-display: swap;
   font-weight: lighter;
 }
-*{
+/* *{
   box-sizing: border-box !important;
-}
+} */
 div#menus {
   font-family: 'ZhuZiAYuanJWD';
 }

@@ -191,3 +191,138 @@ sum(123,456)
 	.then(result => console.log(result))
 ```
 
+### JS中的事件循环机制
+
+> ###### JS是单线程，它的运行时基于事件循环机制
+>
+>  - 调用栈
+>    	栈：一种数据结构，后进先出
+>    	调用栈：放入要执行的代码
+>  - 任务队列
+>        队列：一种数据结构，先进先出
+>        任务队列中放入的是要执行的代码
+>        在JS中任务队列有两种
+>                ①：宏任务队列 (大部分代码都在宏任务队列中去排队)
+>                ②：微任务队列(Promise的回调函数(then,catch,finally))
+>
+> ###### JS执行的整个流程：
+>
+> 	- 执行调用栈中的代码
+> 	- 执行微任务队列中的所有任务
+> 	- 执行宏任务中的所有任务
+
+比如判断下面的输出顺序
+
+```javascript
+/*
+  queueMicrotask () 向微任务中添加一个微任务中 (先进先出)
+*/
+console.log(333)
+setTimeout(()=>{
+  console.log(111)
+})
+Promise.resolve(1).then((result)=>{
+  console.log(222) //第一种
+  setTimeout(()=>{
+    console.log('我是pro中的settime')
+  },0)
+  Promise.resolve(1).then(()=>{
+    console.log('微中微')
+  })
+})
+
+queueMicrotask(()=>{
+  console.log('que中',111)
+})
+/*
+	输出结果
+	333
+	222
+	que中111
+	微中微
+	111
+	我是pro中的settime
+*/
+```
+
+### ASYNC和AWAIT语法糖
+
+通过async可以快速创建异步函数,通过async声明的异步函数返回值会自动封装成一个Promise函数，在async声明的异步函数中可以使用await关键字来调用异步函数
+
+```javascript
+function fn1(){
+    return Promise.resolve(10)
+}
+async function fn2(){
+    return 10
+}
+// fn1 === fn2
+```
+
+当我们通过await去调用异步函数的时候，他会暂停代码的运行
+直到异步代码执行有结果，才会将结果返回
+await 只能用于async 声明的异步函数中或es模块的顶级作用域
+await阻塞的只是异步函数内部的代码，不会影响外部代码
+通过await调用异步代码需要通过try-catch来处理异常
+
+```javascript
+function sum(a,b){
+  return new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      resolve(a+b)
+    },2000)
+  })
+}
+async function fn3(){
+    try{
+        let result = await sum(123,456)
+        result = await sum(result,8)
+        result = await sum(result,9)
+        console.log(result)
+    }
+    catch(e){
+        console.log("出错辣")
+    }
+}
+async function fn4 () {
+  console.log(1)
+  /*
+    当我们使用await调用函数后，当前函数后边的所有代码
+        会在当前函数执行完毕后，被放入到微任务队伍中
+  */
+  await console.log(2)
+  console.log(3)
+}
+fn4()
+```
+
+如果async声明的函数中没用写 await 那么它里边就会依次
+
+```javascript
+async function fn4 () {
+  console.log(1)
+  console.log(2)
+  console.log(3)
+}
+fn4()
+console.log(4)
+function fn5 () {
+  return new Promise((resolve,reject)=>{
+    console.log(1)
+    console.log(2)
+    console.log(3)
+    resolve()
+  })
+}
+fn5()
+//fn4 === fn5
+```
+
+我们还可以通过立即回调函数去调用异步函数
+
+```javascript
+;(async () => {
+  await console.log("hhh")
+})()
+```
+
