@@ -75,6 +75,7 @@ const promise = new Promise((resolve,reject)=>{
     // 构造函数中需要一个函数作为参数传递进去
     // Promise构造函数的回调函数，在创建Promise时调用，调用时会有两个参数(也是函数)传递进去
     resolve('Explosion')
+    // reject("出错辣")
 })
 console.log(promise)
 ```
@@ -112,16 +113,16 @@ promise.then((result)=>{
 ```
 Promise中隐藏的两个属性
 
->  - ###### PromiseResult
+>  ###### PromiseResult
 >
->    - 用来储存数据
+>  - 用来储存数据
 >
->  - ###### PromiseState
+>  ###### PromiseState
 >
->    - 记录Promise的状态 (三种状态)
->    - pending (进行中)
->    - fulfilled (完成) 通过 `resolve` 存储数据
->    - State只能修改一次，修改以后永远不会在改
+>  - 记录Promise的状态 (三种状态)
+>  - pending (进行中)
+>  - fulfilled (完成) 通过 `resolve` 存储数据
+>  - State只能修改一次，修改以后永远不会在改
 
 Promise工作的流程
 
@@ -143,3 +144,50 @@ finally()
 	无论是正常储存数据还是出现异常了，finally总会执行|
 	但是finally的回调函数中不会接受到数据
 	finally() 通常来编写一些无论成功与否都会执行代码
+
+### Promise的链式调用
+
+Promise就是一个用来存储数据的对象，因为存取方式特殊，可以直接将异步调用的结果存储到Promise中
+对Promise 进行链式调用时
+	1.后面的方法(then,catch)读取上一步的执行结果
+	2.如果上一步的执行结果不是当前想要的结果则掉过当前方法
+	3.Promise中出现异常时，如果整个流程没有catch，则异常会向外抛出
+
+```javascript
+const promise = new Promise((resolve,reject)=>{
+  // resolve("数据存储成功")
+  reject('出错辣')
+})
+promise
+	.then(result => "hihihi")
+	.catch(reason => {
+    	throw new Error("亚哒~")
+    	console.log('异常处理',reason)
+    	return 'Explosion!!'
+	})
+	.then(result => console.log('第二个then',reason))
+	.catch(reason => console.log('又出错辣',reason))
+/*
+	打印结果
+	又出错辣 Error:亚哒~
+*/
+```
+
+使用promise回调解决问题
+
+```js
+function sum(a,b){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve(a+b)
+        },1000)
+    })
+}
+sum(123,456)
+	.then(result => result+7)
+	.then(result => result+8)
+	.then(result => result+9)
+	.then(result => result+10)
+	.then(result => console.log(result))
+```
+
