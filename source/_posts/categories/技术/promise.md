@@ -113,12 +113,9 @@ promise.then((result)=>{
 ```
 Promise中隐藏的两个属性
 
->  ###### PromiseResult
->
+>###### PromiseResult
 >  - 用来储存数据
->
->  ###### PromiseState
->
+>###### PromiseState
 >  - 记录Promise的状态 (三种状态)
 >  - pending (进行中)
 >  - fulfilled (完成) 通过 `resolve` 存储数据
@@ -127,14 +124,12 @@ Promise中隐藏的两个属性
 Promise工作的流程
 
 > 当创建Promise时候，PromiseState初始值为pending
->
-> ​	当通过resolve存储数据的时候 PromiseState会变成fulfilled
-> ​		PromiseResult 变成储存的数据
-> ​	当通过reject储存数据或者出错时 PromiseState变成rejected
->
+> ​	-  当通过resolve存储数据的时候 PromiseState会变成fulfilled
+> ​	-	 PromiseResult 变成储存的数据
+> ​	- 当通过reject储存数据或者出错时 PromiseState变成rejected
 > 当我们通过then读取数据时，相当于为Promise设置了回调函数
-> 	如果PromiseState变成fulfilled 则调用then的第一个回调函数
-> 	如果PromiseState变为rejected 则调用then的第二个回调函数
+> -	 如果PromiseState变成fulfilled 则调用then的第一个回调函数
+> -	 如果PromiseState变为rejected 则调用then的第二个回调函数
 
 catch() 用法和then类似,但catch只需要一个回调函数作为参数
 	catch() 中的回调函数只会在Promise被拒绝的时候调用
@@ -195,21 +190,19 @@ sum(123,456)
 
 > ###### JS是单线程，它的运行时基于事件循环机制
 >
->  - 调用栈
->    	栈：一种数据结构，后进先出
->    	调用栈：放入要执行的代码
->  - 任务队列
->        队列：一种数据结构，先进先出
->        任务队列中放入的是要执行的代码
->        在JS中任务队列有两种
->                ①：宏任务队列 (大部分代码都在宏任务队列中去排队)
->                ②：微任务队列(Promise的回调函数(then,catch,finally))
->
-> ###### JS执行的整个流程：
->
-> 	- 执行调用栈中的代码
-> 	- 执行微任务队列中的所有任务
-> 	- 执行宏任务中的所有任务
+>  - 调用栈  
+>  1.栈：一种数据结构，后进先出  
+>  2.调用栈：放入要执行的代码
+>  - 任务队列  
+>  1.队列：一种数据结构，先进先出  
+>  2.任务队列中放入的是要执行的代码  
+>  3.在JS中任务队列有两种  
+>   ①：宏任务队列 (大部分代码都在宏任务队列中去排队)  
+>   ②：微任务队列(Promise的回调函数(then,catch,finally))
+>###### JS执行的整个流程：
+> - 执行调用栈中的代码
+> - 执行微任务队列中的所有任务
+> - 执行宏任务中的所有任务
 
 比如判断下面的输出顺序
 
