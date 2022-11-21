@@ -1,9 +1,11 @@
 ---
 title: Ajax介绍和用法
-description: Ajax学习记录,xhr,fetch,axios
-cover: https://cdn.staticaly.com/gh/apprehen/pciture@master/2022_11_21_13_07_73.gojqpxla7h4.webp
+description: 'Ajax学习记录,xhr,fetch,axios'
+cover: >-
+  https://cdn.staticaly.com/gh/apprehen/pciture@master/2022_11_21_13_07_73.gojqpxla7h4.webp
+tags: 'Ajax,前后端交互'
+abbrlink: f7509f2
 date: 2022-11-21 13:20:51
-tags: Ajax,前后端交互
 ---
 
 ### AJAX简介
