@@ -2,6 +2,8 @@
 title: 异步Promise
 tags: Promise.异步
 description: 使用异步的踩坑和一些心得
+swiper_index: 2
+top_group_index: 2
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/102629230_p0.3yd2fxgj0100.webp
 abbrlink: e6cca6f4
