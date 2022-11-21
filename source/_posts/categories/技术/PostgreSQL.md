@@ -7,11 +7,12 @@ categories: 技术
 tags: 数据库库库
 abbrlink: c008bbd9
 date: 2022-11-01
+
 ---
 
-### 关系型数据库`Postgresql`教程
+# 关系型数据库`Postgresql`教程
 
-## 1.简介   
+## 简介   
 
 ​	使用的是 服务端/客户端 的模型  
 
@@ -24,9 +25,69 @@ date: 2022-11-01
 建议使用UI界面 pgadmin4 进行可视化管理 如下图所示  
 ![image-20221103112443662](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.5bqxmbwemms0.webp)
 
-## 2.初级部分
+## 初级部分
 
-#### 	1.postgreSQL插入数据
+#### postgreSQL建表
+
+在postgreSQL中，`CREATE TABLE` 语句用于在任何给定的数据库中创建一个新表
+具体语法如下
+
+```sql
+CREATE TABLE table_name(
+	column1 datatype,
+    column2 datatype,
+    column3 datatype,
+    ...
+    columnN datatype,
+    PRIMARY KEY(one or more cloumns)
+);
+```
+
+首先我们尝试使用pgadmin4的UI来操作一下
+![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.6smjdwiqsbk0.webp)
+
+选择插入的column 和 字符类型
+
+![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.m6noqce8um8.webp)
+
+使用sql语法创建表如下
+
+```sql
+CREATE TABLE public.student2
+(
+  id integer NOT NULL,
+  name character(100),
+  major character(100),
+  CONSTRAINT student2_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.student2
+  OWNER TO postgres;
+COMMENT ON TABLE public.student2
+  IS '这是一个学生信息表2';
+```
+
+![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.2tg57ofk6vq0.webp)
+
+使用python语言操作创建表的写法如下
+
+```python
+import psycopg2 as pg
+conn = pg.connect(database="test_db", user="postgres", password="Apprehen", host="127.0.0.1", port="xxxx")
+print("Opened database successfully")
+cur = conn.cursor()
+cur.execute('''CREATE TABLE students3
+  (ID INT PRIMARY KEY   NOT NULL,
+  EMPNO           INT   NOT NULL,
+  ENAME           CHAR(50),
+  JOB             TEXT  NOT NULL,
+  SALARY          REAL);''')
+print("Table created successfully")
+```
+
+#### 	postgreSQL插入数据
 
 ```sql
 INSERT INTO TABLE_NAME (column1, column2, column3,...columnN)  
@@ -36,7 +97,7 @@ VALUES (value1, value2, value3,...valueN);
 
 * column1,column2,column3,columnN 是插入数据的表中的列的名称 （如下图所示）
 
-  ![image-20221103114349180](C:\Users\35143\AppData\Roaming\Typora\typora-user-images\image-20221103114349180.png)
+  ![image-20221103114349180](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.b80igj3o8tc.webp)
 
 ​		若想用python操作这个数据库可以
 
@@ -61,7 +122,7 @@ conn.close()
 
 ![image-20221103153703381](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.3lqupzkh0m00.webp)
 
-#### 	2.postgreSQL查询数据
+#### 	postgreSQL查询数据
 
 ​	在postgresql中，使用SELECT语句可以从数据库中检索数据，数据以表格形式返回，这些结果表称为结果集
 
@@ -96,7 +157,7 @@ conn.close()
 # 则会在控制台一一打印出来
 ```
 
-#### 	3.postgreSQL更新数据
+#### 	postgreSQL更新数据
 
 ​		在postgresql中，update语句用于修改现有的记录，更新所选行，必须使用WHERE子句
 
@@ -120,7 +181,7 @@ conn.close()
 
 ![image-20221103171624601](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.21znxedw5qps.webp)
 
-#### 	4.postgreSQL删除数据
+#### 	postgreSQL删除数据
 
 ​		DELETE语句用于从表中删除现有记录。WHERE子句用于指定所选记录的条件，如果不指定条件则删除所有的记录
 
@@ -141,11 +202,67 @@ print("Total number of rows deleted :",cur.rowcount)
 # cur.rowcount 表示的删除多少行数据
 ```
 
-#### 	5.postgreSQL排序
+#### 	postgreSQL排序
 
-​		postgresql中使用 `ORDER BY` 子句用于按升序或者降序对数据进行排列
+postgresql中使用 `ORDER BY` 子句用于按升序或者降序对数据进行排列
 
 ```sql
-
+SELECT column-list  
+FROM table_name  
+[WHERE condition]  
+[ORDER BY column1, column2, .. columnN] [ASC | DESC];
 ```
+
+参数解释：
+	`column-list` : 指定检索的列或计算
+	`table_name`:	指定从中检索记录的表,FROM子句中至少有一张表
+	`WHERE condition` : 可选值，满足匹配条件的才能检索记录
+	`ASC` : 可选，按照升序排列(默认值
+	`DESC` : 可选，降序
+
+![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.1n53q9f0owtc.webp)
+
+  也可以指定多个值来降序
+
+```sql
+SELECT * FROM public.students
+ORDER BY salary,major DESC;
+```
+
+#### PostgreSQL分组
+
+PostgreSQL `GROUP BY` 子句用于将具有相同数据的表中的这些分组在一起，它与`SELECT` 语句一起使用
+`GROUP BY` 字句通过记录收集数据，并将结果分组到一个或多个列,可以减少输出中的冗余
+sql语法如下
+
+```sql
+SELECT column-list
+FROM table_name
+WHERE [conditions]
+GROUP BY column1,column2,....columnN
+ORDER BY column1, column2....columnN
+```
+
+> 注意：在`GROUP BY` 多个列的情况下，使用的任何列进行分组时，要确保这些列应在列表中可用(不能有null？)
+
+如何减少数据的冗余
+比如我们先往表里面插入一些重复的数据
+
+```sql
+INSERT INTO public.students VALUES(5,'Megumi','hahaha',19,20000);
+INSERT INTO public.students VALUES(6,'kazimi','hahaha',19,20000);
+INSERT INTO public.students VALUES(7,'kurumi','hahaha',19,20000);
+INSERT INTO public.students VALUES(8,'kurumi','hahaha',19,20000);
+SELECT * FROM public.students ORDER BY ID;
+```
+
+![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.4gqg7xqtiza0.webp)
+
+通过sql语句GROUP BY 去除耦合后
+
+![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.2s6undlzqiu0.webp)
+
+#### PostgreSQL的Having子句
+
+
 

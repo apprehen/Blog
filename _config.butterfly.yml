@@ -1108,7 +1108,6 @@ inject:
     # - <script data-pjax src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js" defer></script>
     - <script async src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
     # 主页的背景图
-    - <script async src="/js/randowbg.js" defer></script>
 
 # CDN
 # Don't modify the following settings unless you know how they work

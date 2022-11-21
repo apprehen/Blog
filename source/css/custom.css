@@ -4986,7 +4986,7 @@ h1.page-title+.tag-cloud-list {
   position: absolute;
   top: calc(50% - 7px);
   color: #f47466;
-  content: '\f0c1';
+  content: '❤';
   line-height: 1;
   -webkit-transition: all .2s ease-out;
   -moz-transition: all .2s ease-out;
@@ -5001,7 +5001,7 @@ h1.page-title+.tag-cloud-list {
 #article-container.post-content h4:hover:before,
 #article-container.post-content h5:hover:before,
 #article-container.post-content h6:hover:before {
-  color: #3b70fc
+  color: #3b70fc;
 }
 
 #article-container.post-content h1 {
@@ -9322,15 +9322,19 @@ a.extend.next {
 #article-container.post-content h4:before,
 #article-container.post-content h5:before,
 #article-container.post-content h6:before {
-  display: none
+  /* display: none */
+  display: none;
+  /* font-family: "Font Awesome 6 Pro" */
 }
 
-#article-container h1 .headerlink::before,
-#article-container h2 .headerlink::before,
-#article-container h3 .headerlink::before,
-#article-container h4 .headerlink::before{
-  content: "❤";
-  font-family: "Font Awesome 6 Pro"
+#article-container h1 .headerlink:before,
+#article-container h2 .headerlink:before,
+#article-container h3 .headerlink:before,
+#article-container h4 .headerlink:before{
+  height: 10px;
+  width: 10px;
+  content: "❤" !important;
+  font-family: "Font Awesome 6 Pro" !important;
 }
 
 #article-container h1 .headerlink {
