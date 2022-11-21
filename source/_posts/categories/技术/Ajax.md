@@ -42,7 +42,7 @@ CORS (跨域资源共享)
 	Access-Control-Allow-Origin
 		允许客户端访问我们的服务器(详细可见下文)
 
-### Xhr使用
+### Xhr使用(技术很老，基本不使用，了解即可)
 
 前端部分
 
@@ -76,6 +76,7 @@ CORS (跨域资源共享)
       xhr.send()
       // 读取响应信息
       // console.log(xhr.response) //异步代码不能同步加载
+      // 放在加载完之后响应即可()
       xhr.onload = ()=> {
         //xhr表示响应状态码
         if(xhr.status === 200) {
@@ -102,3 +103,10 @@ CORS (跨域资源共享)
 </body>
 </html>
 ```
+
+node编写的后端部分
+
+```javascript
+
+```
+
