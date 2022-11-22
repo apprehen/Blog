@@ -25,7 +25,7 @@ date: 2022-11-01
 建议使用UI界面 pgadmin4 进行可视化管理 如下图所示  
 ![image-20221103112443662](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.5bqxmbwemms0.webp)
 
-## 初级部分
+## 初级部分(增删改查)
 
 ### postgreSQL建表
 
@@ -397,3 +397,82 @@ WHERE age NOT IN(18,19);
 #### `LIKE` 条件
 
 PostgreSQL LIKE条件与WHERE子句一起用于从指定条件满足`LIKE`条件的表中获取数据。
+sql语法如下
+
+```sql
+SELECT column1 column2...columnN
+FROM TABLE_NAME
+WHERE [condition] LIKE [condition];
+```
+
+实例：查询名字以`me`开头的数据记录，如下查询语句
+
+```sql
+SELECT * FROM PUBLIC.STUDENTS WHERE NAME LIKE 'Ma%'
+```
+
+查询名字以`su`结尾的数据记录，如下查询
+
+```sql
+SELECT * FROM PUBLIC.STUDENTS WHERE NAME LIKE '%su'
+```
+
+查询地址中包含有`大道的数据记录` 如下查询
+
+```sql
+SELECT * FROM PUBLIC.STUDENTS WHERE ADDRESS LIKE '%大道%'
+```
+
+#### `IN`条件
+
+PostgreSQL IN条件与WHERE子句一起使用，从指定条件满足`IN`条件的表中获取数据。
+sql语法
+
+```sql
+SELECT column1, column2, ..... columnN    
+FROM table_name    
+WHERE [search_condition] IN [condition];
+```
+
+实例 查询表中年龄为18或19的学生信息，执行如下查询
+
+```sql
+SELECT * FROM PUBLIC.STUDENTS WHERE AGE IN (18,19)
+```
+
+#### NOT IN 条件
+
+PostgreSQL NOT IN条件与WHERE子句一起使用，以从指定条件否定`IN`条件的表中获取数据。
+sql语法
+
+```sql
+SELECT column1, column2, ..... columnN    
+FROM table_name    
+WHERE [search_condition] NOT IN [condition];
+```
+
+实例 查询表中年龄不为18，19的学生信息，执行如下
+
+```sql
+SELECT * FROM PUBLIC.STUDENTS WHERE AGE NOT IN (18,19)
+```
+
+#### `BETWEEN` 条件
+
+PostgreSQL BETWEEN条件与WHERE子句一起使用，以从两个指定条件之间的表中获取数据。
+sql语法
+
+```sql
+SELECT column1, column2, ..... columnN    
+FROM table_name    
+WHERE [search_condition] BETWEEN [condition];
+```
+
+实例 查询表中年龄在24~27的数据信息，执行如下
+
+```sql
+SELECT * FROM PUBLIC.STUDENTS WHERE AGE BETWEEN 24 AND 27
+```
+
+## 中级部分(表连接)
+
