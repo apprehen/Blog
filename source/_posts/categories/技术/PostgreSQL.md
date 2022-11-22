@@ -27,7 +27,7 @@ date: 2022-11-01
 
 ## 初级部分
 
-#### postgreSQL建表
+### postgreSQL建表
 
 在postgreSQL中，`CREATE TABLE` 语句用于在任何给定的数据库中创建一个新表
 具体语法如下
@@ -87,7 +87,7 @@ cur.execute('''CREATE TABLE students3
 print("Table created successfully")
 ```
 
-#### 	postgreSQL插入数据
+### 	postgreSQL插入数据
 
 ```sql
 INSERT INTO TABLE_NAME (column1, column2, column3,...columnN)  
@@ -122,7 +122,7 @@ conn.close()
 
 ![image-20221103153703381](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.3lqupzkh0m00.webp)
 
-#### 	postgreSQL查询数据
+### 	postgreSQL查询数据
 
 ​	在postgresql中，使用SELECT语句可以从数据库中检索数据，数据以表格形式返回，这些结果表称为结果集
 
@@ -157,7 +157,7 @@ conn.close()
 # 则会在控制台一一打印出来
 ```
 
-#### 	postgreSQL更新数据
+### 	postgreSQL更新数据
 
 ​		在postgresql中，update语句用于修改现有的记录，更新所选行，必须使用WHERE子句
 
@@ -181,7 +181,7 @@ conn.close()
 
 ![image-20221103171624601](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.21znxedw5qps.webp)
 
-#### 	postgreSQL删除数据
+### 	postgreSQL删除数据
 
 ​		DELETE语句用于从表中删除现有记录。WHERE子句用于指定所选记录的条件，如果不指定条件则删除所有的记录
 
@@ -202,7 +202,7 @@ print("Total number of rows deleted :",cur.rowcount)
 # cur.rowcount 表示的删除多少行数据
 ```
 
-#### 	postgreSQL排序
+### 	postgreSQL排序
 
 postgresql中使用 `ORDER BY` 子句用于按升序或者降序对数据进行排列
 
@@ -229,7 +229,7 @@ SELECT * FROM public.students
 ORDER BY salary,major DESC;
 ```
 
-#### PostgreSQL分组
+### PostgreSQL分组
 
 PostgreSQL `GROUP BY` 子句用于将具有相同数据的表中的这些分组在一起，它与`SELECT` 语句一起使用
 `GROUP BY` 字句通过记录收集数据，并将结果分组到一个或多个列,可以减少输出中的冗余
@@ -262,7 +262,138 @@ SELECT * FROM public.students ORDER BY ID;
 
 ![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.2s6undlzqiu0.webp)
 
-#### PostgreSQL的Having子句
+### PostgreSQL的Having子句
 
+在PostgreSQL中，HAVING子句在与`GROUP BY` 子句组合使用，用于选择函数结果满足某些条件的特定行，sql语句如下
 
+```sql
+SELECT column1,column2
+FROM table1,table2
+WHERE [conditions]
+GROUP BY column1 column2
+HAVING [conditions]
+ORDER BY cloumn1,cloumn2
+```
 
+ 用我们的数据库中的学生表演示一下
+
+```sql
+SELECT NAME FROM PUBILIC.STUDENTS GROUP BY NAME
+HAVING COUNT(NAME) < 2
+```
+
+(我们发现并没有什么明显变化因为这个是语句的条件是名字次数小于二次都满足于是没什么变化)
+
+```sql
+-- 我们先插入一些重复数据之后在用having指定条件查询
+INSERT INTO PUBLIC.STUDENTS VALUES(5,'Megumi','explosion',18,10000);
+INSERT INTO PUBLIC.STUDENTS VALUES(6,'gujian','explosion',18,10000);
+INSERT INTO PUBLIC.STUDENTS VALUES(7,'kazimi','explosion',18,10000);
+SELECT NAME FROM PUBLIC.STUDENTS GROUP BY NAME
+HAVING COUNT(NAME)<3;
+```
+
+> 1. 当name < 3时 -- 显然所有条件都满足
+> 2. 当name < 2时 -- name为megumi和kazimi的都name有两个不满足条件于是被筛出在表外
+> 3. 当name > 1时 -- name为megumi和kazimi的name唯一满足故在表内
+
+### PostgreSQL条件查询
+
+PostgreSQL条件用于从数据库获取更具体的结果，通常WHERE 子句一起使用，具有子句的条件就像双层过滤器
+
+> - AND 条件
+> - OR 条件
+> - AND & OR 条件
+> - NOT 条件
+> - LIKE 条件
+> - IN 条件
+> - NOT IN 条件
+> - BETWEEN 条件
+
+#### `AND` 条件
+
+`AND` 条件与`WHERE` 子句一起使用，以从表中的多个列中选择唯一的数据
+
+```sql
+SELECT column1,column2,...columnN
+FROM table_name
+WHERE [CONDITION] AND [CONDITION];
+```
+
+我们需要查询所有ID < 4 并且薪水 >1000 的员工信息
+
+```sql
+SELECT * FROM PUBLIC.STUDENTS WHERE SALARY>1000 AND ID > 4;
+```
+
+![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.2xndvn1l4960.webp)
+
+执行sql语句后![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.4371xnozeh00.webp)
+
+#### `OR` 条件
+
+PostgreSQL OR条件与WHERE子句一起使用，以从表中的一列或多列中选择唯一的数据
+
+```sql
+SELECT column1, column2, ..... columnN    
+FROM table_name    
+WHERE [search_condition]    
+OR [search_condition];
+```
+
+查询名字是megumi 或 major是e'x'plosion的项
+
+```sql
+SELECT * FROM PUBLIC.STUNDETS 
+WHERE NAME = 'Megumi' OR major = 'explosion'
+```
+
+#### `AND` & `OR` 语句的混合使用
+
+PostgreSQL AND&OR综合使用的优点
+
+```sql
+SELECT column1, column2, ..... columnN    
+FROM table_name    
+WHERE [search_condition]  AND [search_condition]     
+OR [search_condition];
+```
+
+结合表中的数据 查询name为megumi和年龄为18或id值小于8的记录信息
+
+```sql
+SELECT *  
+FROM PUBLIC.STUDENS  
+WHERE (NAME = 'Megumi' AND age = 18)  
+OR (ID<= 8);
+```
+
+#### `NOT` 条件
+
+PostgreSQL NOT 条件与WHERE子句一起使用以否定查询中的条件
+
+```sql
+SELECT column1, column2, ..... columnN    
+FROM table_name    
+WHERE [search_condition] NOT [condition];
+```
+
+查询那些年龄不为`NULL`的记录信息，执行以下查询
+
+```sql
+SELECT *  
+FROM Public.students 
+WHERE age IS NOT NULL ;
+```
+
+再来看另外一个示例，查询那些年龄不是`21`和`24`的所有记录，执行以下查询
+
+```sql
+SELECT *  
+FROM Public.students 
+WHERE age NOT IN(18,19);
+```
+
+#### `LIKE` 条件
+
+PostgreSQL LIKE条件与WHERE子句一起用于从指定条件满足`LIKE`条件的表中获取数据。
