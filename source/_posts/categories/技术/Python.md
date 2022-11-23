@@ -12,11 +12,9 @@ abbrlink: b90ddedd
 date: 2022-10-09 22:05:07
 sticky: 1
 ---
-# Python
+# **Python**          --从入门到入土
 
-### 											--从入门到入土
-
-###### 1.I/O流
+## 1.I/O流
 
 input/output (指输入和输出)
 
@@ -44,7 +42,7 @@ b = int(input("Please entry the second number:"))
 print("The result:",a,'+',b,"=",a+b)
 ```
 
-###### 2.Python的语法规则
+## 2.Python的语法规则
 
 ​	Python的语法比较简单,采用缩进的方式，写出来的代码比如下面这样
 
@@ -58,9 +56,9 @@ else:
 # 注意Python是对大小写很敏感的(感觉不如JS)
 ```
 
-###### 3.数据类型
+## 3.数据类型
 
-​	1.整数:
+### 	1.整数:
 
 ​		Python可以处理任意的整数，如1，100，0，-8 等
 
@@ -68,11 +66,11 @@ else:
 
 ​		当数字有很多时也可用_来区分，不影响结果如 100_0000_000等
 
-​	2.浮点数
+### 	2.浮点数
 
 ​		如0.00123 1.2e4(这种表示也行)浮点数运算可能会有四舍五入的误差，在计算机内部浮点数的储存方式的问题捏
 
-​	3.字符串
+### 	3.字符串
 
 ​		字符串是以''或者""括起来的任意文本，如'yueyun',"handsome",等，但是如果字符串内部包括**''**和**""**怎么办？？                                                                                               			----使用转义字符\来标识一下就行
 
@@ -100,7 +98,8 @@ print(r'''Welcome To \n
 My Blog''')
 ```
 
-​	4.布尔值
+### 	4.布尔值
+
 ​		布尔值和布尔代数的表示完全一样，一个布尔值只有True,False（注意大写）,在Python中可以直接用True,False表示
 ​		如下面
 
@@ -150,7 +149,7 @@ PI = 3.14159265359
 3
 ```
 
-###### 4.Python中的字符串和编码方式
+## 4.Python中的字符串和编码方式
 
 ​	在python3版本中，字符串是以Unicode编码的，Python的字符串支持多种语言
 
@@ -233,24 +232,25 @@ b'\xe4\xb8\xad\xe6\x96\x87'
 print('%02d-%02d' % (3, 1))
 ```
 
-###### 5.Python中的list和tuple
+## 5.Python中的list和tuple
 
-​	list：	
-​		Python内置的一种数据类型是列表: list。list 是一种有序的集合，可以随时添加和删除其中的元素(类似于数组辣)
-​		如下面班级里的同学就可以用list表示
+### list：	
+
+Python内置的一种数据类型是列表: list。list 是一种有序的集合，可以随时添加和删除其中的元素(类似于数组辣)
+​如下面班级里的同学就可以用list表示
 
 ```python
 classmates = ['meigumi','toka','kurumi']
 ```
 
-​		classmates 就是一个list，用len可以获取长度
+classmates 就是一个list，用len可以获取长度
 
 ```python
 >>> len(classmates)
 3
 ```
 
-​		用索引来访问list中的每一个位置的元素，索引是从0开始的:
+用索引来访问list中的每一个位置的元素，索引是从0开始的:
 
 ```python
 >>> classmates[0]
@@ -266,8 +266,9 @@ classmates = ['meigumi','toka','kurumi']
 'kurumi' #等等等的操作
 ```
 
-​		当然list是可变数组，可以往组数中添加和删除一些元素
-​		1.追加到末尾的元素 --- **append**
+当然list是可变数组，可以往组数中添加和删除一些元素
+
+#### 1.追加到末尾的元素 --- **append**
 
 ```python
 >>> classmates.append('nagesa')
@@ -275,7 +276,7 @@ classmates = ['meigumi','toka','kurumi']
 ['meigumi','toka','kurumi','nagesa']
 ```
 
-​		2.把元素插入到指定的位置 --- insert
+#### 2.把元素插入到指定的位置 --- insert
 
 ```python
 >>> classmates.insert(1,'funiya')
@@ -283,7 +284,7 @@ classmates = ['meigumi','toka','kurumi']
 ['meigumi','funiya','toka','kurumi','nagesa']
 ```
 
-​		3.要删除list末尾的元素 --- pop() 方法
+#### 3.要删除list末尾的元素 --- pop() 方法
 
 ```python
 >>> classmates.pop()
@@ -292,7 +293,7 @@ classmates = ['meigumi','toka','kurumi']
 ['meigumi','funiya','toka','kurumi']
 ```
 
-​		4.要删除指定位置的元素 --- pop(i)
+#### 4.要删除指定位置的元素 --- pop(i)
 
 ```python
 >>> classmates.pop(i) ## i 表示索引位置
@@ -301,7 +302,7 @@ classmates = ['meigumi','toka','kurumi']
 ['meigumi','toka','kurumi']
 ```
 
-​		5.将另外一组可迭代对象扩展至列表尾部--extend()
+#### 5.将另外一组可迭代对象扩展至列表尾部--extend()
 
 ```python
 a = [1,2,3,4,5,6]
@@ -310,7 +311,7 @@ print(a)
 [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
-​		6.删除列表对象首次出现的指定元素--remove()
+#### 6.删除列表对象首次出现的指定元素--remove()
 
 ```python
 a_list = [3,5,7,9,7,11]
@@ -343,7 +344,7 @@ for i in range(x.count(1)):
 x
 ```
 
-​		7.对象列表指定元素首次出现的下标--index
+#### 7.对象列表指定元素首次出现的下标--index
 
 ```python
 aList = [1,2,3,4,9,9,1,5]
@@ -353,7 +354,7 @@ aList = [1,2,3,4,9,9,1,5]
 4
 ```
 
-​		8.对象列表统计对象出现的次数--count
+#### 8.对象列表统计对象出现的次数--count
 
 ```python
 aList = [7, 4, 5, 5.5, 5, 11, 7, 15, 7] 
@@ -361,7 +362,7 @@ aList.count(5)
 2
 ```
 
-​		9.连接多个数组形成tuple(元组)--zip
+#### 9.连接多个数组形成tuple(元组)--zip
 
 ```python
 aList = [3, 5, 7, 9, 11]
@@ -377,7 +378,7 @@ True
 ```
 
 
-​	list中的元素类型不确定，list里面也能再包含list list替换直接令值替换就行
+list中的元素类型不确定，list里面也能再包含list list替换直接令值替换就行
 
 ```python
 >>> MyList = ['yueyun',1,True,1.234]
@@ -406,7 +407,7 @@ tuple:
 ## 使用小括号定义tuple tuple不能被改变所以更加的安全
 ```
 
-###### 6.Python的条件判断
+## 6.Python的条件判断
 
 ​	注意python的缩进规则
 
@@ -444,7 +445,7 @@ if x:
   ### X 是非零数组，非空字符串，非空list 即判断为True
 ```
 
-###### 7.循环
+## 7.循环
 
 ​	Python的循环有两种 : for in 可以依次将list 或 tuple 的每个元素迭代出来
 
@@ -481,7 +482,8 @@ while n<=100:
 print(sum)
 ```
 
-​	break
+### break
+
 ​	在循环种，break 语句可以提前退出循环，例如打印1~100的数字
 
 ```python
@@ -505,7 +507,8 @@ print("END")
 >>> 0 1 2 3 4 5 6 7 8 9 10 
 ```
 
-​		continue
+### continue
+
 ​		在循环过程中，也可以通过 contimie 语句 跳过当前循环 直接开始下一次循环
 
 ```
@@ -517,33 +520,34 @@ while n < 10:
     print(n)
 ```
 
-8.`dict` 和 `set`
+## 8.`dict` 和 `set`
 
-​	dict：
-​		Python中内置字典，类似于其他语言的map 使用键--值 (key-value) 存储，具有很快的查找速度
-​		例子如下
+### 1.dict：
+
+Python中内置字典，类似于其他语言的map 使用键--值 (key-value) 存储，具有很快的查找速度(js中的对象) -- json
+​例子如下
 
 ```python
 name = ['meigumi','toka','kurumi']
 scores = [95,75,85]
 ```
 
-​		如果使用list按顺序查找，则list越长，时间越慢
-​		如果我们用`dict` 字典去查找
+如果使用list按顺序查找，则list越长，时间越慢
+​如果我们用`dict` 字典去查找
 
 ```python
 >>> d = {'meigumi':95,'toka':75,'kurumi':85}
 d['meigumi']
 ```
 
-​		key - value存储方式，在放进去的时候，必须根据key算出value的存放位置，这样取的时候才能根据key 直接拿到value
+key - value存储方式，在放进去的时候，必须根据key算出value的存放位置，这样取的时候才能根据key 直接拿到value
 ​		把数据让入dict的方法，除了初始化时指定外，还可以通过key放入：
 
 ```python
 d['meigumi'] = 67
 ```
 
-​		一个key只能对应一个 value 所以，多次对一个key放入value 后面的值会把前面的题替换掉
+一个key只能对应一个 value 所以，多次对一个key放入value 后面的值会把前面的题替换掉
 
 ```python
 >>> d['meigumi'] = 90
@@ -554,16 +558,17 @@ d['meigumi'] = 67
 88
 ```
 
-​		**注意：`dict` 的 `key` 必须是不可变对象**
-​		要避免 `key` 不存在的错误，有两种办法
-​			1.通过 in 判断
+**注意：`dict` 的 `key` 必须是不可变对象**
+​要避免 `key` 不存在的错误，有两种办法
+
+#### 1.通过 in 判断
 
 ```python
 >>> 'yueyun' in d
 False
 ```
 
-​			2.通过dict 提供的get() 方法，如果key不存在，则会返回None,
+#### 2.通过dict 提供的get() 方法，如果key不存在，则会返回None,
 
 ```python
 >>> d.get('yueyun')  ##不存在则返回None
@@ -572,9 +577,9 @@ None
 -1
 ```
 
-​		2.set:
+### 2.set:
 
-​			set 和 dict 类似，也是一组key的集合，但是不能存储value，由于key不能重复，在set中，没有重复的key
+set 和 dict 类似，也是一组key的集合，但是不能存储value，由于key不能重复，在set中，没有重复的key
 
 ```python
 >>> s = set([1,2,3])
@@ -582,7 +587,7 @@ None
 {1,2,3}
 ```
 
-​			重复元素在set中自动被过滤：
+#### 重复元素在set中自动被过滤：
 
 ```python
 s =set([1,1,2,3,2,3,3])
@@ -590,7 +595,7 @@ s =set([1,1,2,3,2,3,3])
 {1,2,3}
 ```
 
-​			通过 `add(key)` 方法可以添加到 `set` 中，可以重复添加，但不会有效果:
+#### 通过 `add(key)` 方法可以添加到 `set` 中，可以重复添加，但不会有效果:
 
 ```python
 >>> s.add(4)
@@ -601,7 +606,7 @@ s =set([1,1,2,3,2,3,3])
 [1,2,3,4]
 ```
 
- 		通过 `remove(key)` 方法可以删除元素：
+#### 通过 `remove(key)` 方法可以删除元素：
 
 ```python
 >>> s.remove(4)
@@ -609,7 +614,7 @@ s =set([1,1,2,3,2,3,3])
 {1, 2, 3}
 ```
 
-​		set 可以看成是集合具有 交并 集的方法
+#### set 可以看成是集合具有 交并 集的方法
 
 ```python
 >>> s1 = set([1, 2, 3])
@@ -620,9 +625,10 @@ s =set([1,1,2,3,2,3,3])
 {1, 2, 3, 4}
 ```
 
-###### 8.函数
+## 9.函数
 
-​	1.函数的调用：
+### 1.函数的调用：
+
 ​		调用 `abs` 函数
 
 ```python
@@ -632,8 +638,8 @@ s =set([1,1,2,3,2,3,3])
 20
 ```
 
-​		调用函数的时候，如果传入的参数数量不对，参数的类型不对会报错
-​		调用 `max` 函数将max( ) 可以接收任意多个参数，并返回最大的那个
+调用函数的时候，如果传入的参数数量不对，参数的类型不对会报错
+​调用 `max` 函数将max( ) 可以接收任意多个参数，并返回最大的那个
 
 ```python
 >>> max(1,2)
@@ -642,7 +648,7 @@ s =set([1,1,2,3,2,3,3])
 3
 ```
 
-​		 **函数名其实就是指向一个函数对象的引用，完全可以把函数名赋给一个变量，相当于给这个函数起了一个“别名”**
+**函数名其实就是指向一个函数对象的引用，完全可以把函数名赋给一个变量，相当于给这个函数起了一个“别名”**
 
 ```python
 >>> Myabs = abs #变量Myabs指向abs函数
@@ -650,7 +656,8 @@ s =set([1,1,2,3,2,3,3])
 100
 ```
 
-​		2.定义函数
+### 2.定义函数
+
 ​			在python中，定义一个函数要使用 `def` 语句，依次写出函数名，域名，括号中的参数和冒号`:` ,然后在缩进的代码块中编写函数体，返回值使用`return`语句
 ​			如下的自定义函数
 
@@ -666,7 +673,8 @@ print(my_abs(-99))
 ​			如果函数没有return语句，函数执行完毕后也会返回结果，只是结果是`None` 
 return None 可以简写为 `return`
 
-​		3.空函数：
+### 3.空函数：
+
 ​			如果想定义一个什么事情也不做的函数，可以用 `pass` 占位符
 
 ```python
@@ -701,7 +709,8 @@ print(x,y)
 
 ​			其实python的返回值依然是单一值，只是返回值成为了元组(tuple)而已
 
-​		4.函数的参数
+### 4.函数的参数
+
 ​			先写一个计算x^2的函数
 
 ```python
@@ -773,7 +782,8 @@ def add_end(L=None):
   return L
 ```
 
-​	**可变参数**：
+#### 	**可变参数**：
+
 ​		可变参数就是传入的参数个数是可变的,
 ​		例如要求完成a^2+b^2+c^2 + ... 。
 
@@ -813,7 +823,8 @@ num = [1,2,3,4]
 30
 ```
 
-​		**关键字参数**：
+#### **关键字参数**：
+
 ​		可变参数允许传入0或者任意多个参数，这些可变参数在调用时组装成tuple，关键字参数运行传入0或者任意个含参数名的参数，会自动在参数内部组装成dict，如下
 
 ```python
@@ -846,7 +857,8 @@ person('kurumi', 18, **extra)
 ## 有点类似JS中es6 的展开运算符??
 ```
 
-​	**命名关键字参数**：
+#### **命名关键字参数**：
+
 ​		如果我们想限制关键字参数的名字，就可以用命名关键字参数，例如，只接受 `city` 和 `job` 作为关键字参数，这种定义方式的函数如下：
 
 ```python
@@ -868,7 +880,7 @@ def person(name, age, *, city='Beijing', job):
   ##给取默认值也是可行的
 ```
 
-###### 9.列表List高级
+## 10.列表List高级
 
 ​	取一个 `list` 或 `tuple` 的部分元素是很常见的操作
 
@@ -881,7 +893,7 @@ for i in range(3):
 print(r)
 ```
 
-​	**切片(Slice)**
+### **切片(Slice)**
 
 ```python
 >>>L[0:3]
@@ -928,7 +940,8 @@ L[:3]
 'ACEG'
 ```
 
-​	**列表排序**
+### **列表排序**
+
 ​		使用列表对象的 `sort` 方法进行原地排序
 
 ```python
@@ -956,7 +969,9 @@ aList.sort(key = lambda x:len(str(x)))
 ```
 
 ​		使用内置函数 `sorted` 对列表进行排序并返回新列表
-​	**迭代**
+
+### **迭代**
+
 ​		如果给定一个l `list` 通过`for`循环遍历这个`list` 这种遍历我们称为迭代(Iteration)
 
 ```python
@@ -1015,7 +1030,8 @@ for x, y in [(1, 1), (2, 4), (3, 9)]:
 3 9
 ```
 
-​	**列表生成式**
+### **列表生成式**
+
 ​		指可以再列表中写循环和条件，生成特定的`list`
 
 ```python
@@ -1056,9 +1072,10 @@ def isprime(x):
   [x for x in  range(2, 100) if isprime(x)]
 ```
 
-**10.生成器**
-	Python的一种边循环边算的机制，称为生成器：generator
-	要创建generator很简单把列表生成式用 () 表示就行
+## **11.生成器**
+
+​	Python的一种边循环边算的机制，称为生成器：generator
+​	要创建generator很简单把列表生成式用 () 表示就行
 
 ```python
 g = (x * x for x in range(10))
@@ -1074,9 +1091,9 @@ for n in g:
 
 ​	另外一种生成生成器是直接在 函数中包含 `yield` 关键字
 
-###### 10.字符串的常用方法
+## 12.字符串的常用方法
 
-​	**1.切割---split()**
+### 	**1.切割---split()**
 
 ```python
 s = 'apple,peach,banana,pear'
@@ -1094,7 +1111,7 @@ s.split(None,1)
 ['hello', 'world \n\n\n My name is Dong   ']
 ```
 
-​	2.连接---join()
+### 	2.连接---join()
 
 ```python
 ## 注意是字符串的方法 不是数组方法 (与JS中的join正好相反)
@@ -1105,12 +1122,13 @@ print(result)
 真由理 薰 saber Mashiro kurumi meigumi kota
 ```
 
-​	3... 其余的不太重要需要的时候在自己查找即可
+### 	3... 其余的不太重要需要的时候在自己查找即可
 
-**11.高阶函数**
-	map / reduce
-	map:
-		`map()` 函数接受两个参数，一个是函数，一个是`Iterable` map将传入的函数依次作用到序列的每个元素，并作为新的 `Iterator` 
+## **12.高阶函数**
+
+​	map / reduce
+​	map:
+​		`map()` 函数接受两个参数，一个是函数，一个是`Iterable` map将传入的函数依次作用到序列的每个元素，并作为新的 `Iterator` 
 
 ```python
 def f(x):
@@ -1142,7 +1160,7 @@ list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))
 # 结果: [1, 5, 9, 15]
 ```
 
-###### **11.面向对象的编程**
+## **13.面向对象的编程**
 
 ​	面向对象重要的概念就是 `类` 和 `实例` 使用class来定义类
 ​		--- 类是对实例(对象)的抽象化，实例是对类的具体化
@@ -1174,7 +1192,8 @@ a.show()
 3
 ```
 
-​	**类成员与实例成员**
+### **类成员与实例成员**
+
 ​		实例属性：实例属性一般是指在构造函数__init__()中定义的，定义和使用时必须以`self`作为前缀
 ​		类属性：类中所有方法之外定义的数据成员，类属性属于类，可以通过类名或对象名访问.在Python中比较特殊的是，可以动态地为类和对象增加成员，这一点是和很多面向对象程序设计语言不同的，也是Python动态类型特点的一种重要体现
 
@@ -1226,7 +1245,8 @@ t.test(5) ## self 已经第一个对象被传递过去
 print(t.value)
 ```
 
-​	私有成员和公有成员
+### 私有成员和公有成员
+
 ​		私有成员:如果属性名以两个下划线“__”开头则表示是私有属性，否则是公有属性,私有属性在类的外部不能直接访问，需要通过调用对象的公有成员方法来访问，或者通过Python支持的特殊方式来访问,但是不建议，因为很危险__
 `___xxx`：这样的对象叫做保护成员，不能用'from module import *'导入，只有类对象和子类对象能访问这些成员；
 `__xxx__`：系统定义的特殊成员；
@@ -1265,7 +1285,8 @@ print(apple.__color)
 # 嘎嘎报错
 ```
 
-​	**方法**
+### **方法**
+
 ​		公有方法 ， 私有方法 ， 静态方法， 类方法
 ​			公有办法：属于对象，访问属于类和对象的成员
 ​			私有方法：私有方法的名字以两个下划线“__”开始公有方法通过对象名直接调用，私有方法不能通过对象名直接调用，只能在属于对象的方法中通过“self”调用或在外部通过Python支持的特殊方式来调用。
@@ -1300,8 +1321,9 @@ Root.show()
 Root.show(rr)
 ```
 
-​		属性
-​	1.如果设置属性为只读，则无法修改其值，也无法为对象增加与属性同名的新成员，同时，也无法删除对象属性
+### 属性
+
+#### 	1.如果设置属性为只读，则无法修改其值，也无法为对象增加与属性同名的新成员，同时，也无法删除对象属性
 
 ```python
 class Test:
@@ -1325,7 +1347,7 @@ del t.value
 print(t.value)
 ```
 
-​	2.把属性设置为可读、可修改，而不允许删除。
+#### 2.把属性设置为可读、可修改，而不允许删除。
 
 ```python
 class Test:
@@ -1355,7 +1377,7 @@ t.show()
 del t.value
 ```
 
-​	也可以将属性设置为可读、可修改、可删除
+#### 3.也可以将属性设置为可读、可修改、可删除
 
 ```python
 class Test:
@@ -1378,9 +1400,10 @@ class Test:
         print(self.__value)
 ```
 
-###### 12.继承和多态
+## 14.继承和多态
 
-​	1.继承
+### 	1.继承
+
   - 当我们定义一个类的时候，可以从某个现有的class类中继承，则新的被称为子类，被继承的类称为基类，父类，超类
     如下我们编写代码
 
@@ -1476,9 +1499,9 @@ print(Student.count)
 print(Student.count == a.count)
 ```
 
-###### 13.面向对象高级
+## 15.面向对象高级
 
-​	1.`__slots__`	
+### 	1.`__slots__`	
 
 ```python
 # 可以给实例绑定任何属性和方法,如下所示
@@ -1512,7 +1535,7 @@ s.address = "heart "
 >>> 报错
 ```
 
-​	2.`使用@property`
+### 	2.`使用@property`
 
 ```python
 class Student():
@@ -1530,12 +1553,118 @@ s.set_score(60)
 print(s.get_score())
 >>> 60
 # 上面的写法有些繁琐我们直接用装饰器 (decorator) 可以给函数动态加上功能，Python中内置的 `@property` 装饰器就是负责把一个方法变成属性调用 防止被修改
-
 ```
 
+### 3.多重继承
 
+继承是面向对象编程的重要的方式，因为通过继承，子类可以继承父类的功能
+比如我们要完成下列四种动物的列的编写
 
-###### 14.错误处理
+> - Dog -- 狗
+> - Bat -- 蝙蝠
+> - Parrot -- 鹦鹉
+> - Ostrich -- 鸵鸟
+
+如果按照飞和跑来分类，可以分为Animal --> Runnable || Animal --> Flyable
+Runnable --> Dog,Ostrich || Flyable --> Parrot,Bat
+我们可以按照哺乳类和鸟类设计甚至更多
+当然我们的类还是单一继承(不然多重继承很容易呈指数增长)，需要混入额外的功能，通过多重继承就可以实现，比如让`Ostrich` 继承鸟类的同时继承Runnable的功能，这种一般称为MixIn
+
+```python
+class Animal(object):
+    pass
+# 大类
+class Mammal(Animal):
+    pass
+class Bird(Animal):
+    pass
+# 功能
+class RunnaleMixIn(object):
+    def run(self):
+        print("Running...")
+class Flyable(object):
+    def fly(self):
+        print("Flying...")
+# 定义动物
+class Dog(Mammal, RunnableMixIn, CarnivorousMixIn):
+    pass
+```
+
+ 这样一来，我们不需要复杂而庞大的继承链，只要选择组合不同的类的功能，就可以快速构造出所需的子类。
+
+###  4.定制类
+
+#### 1. \_\_str\_\_
+
+与\_\_slots\_\_ 形式类似在python中有特殊用途
+比如定义一个students类
+
+```python
+class Students(object):
+	def __init__class Students(object):
+    def __init__(self,name) -> None:
+        self.name = name
+      
+print(Students('megumi'))
+```
+
+打印出的结果是`<__main__.Students object at 0x0000022D47A30580>` 并不容易观察
+打印的好看只需要定义 `__str__` 方法就可返回一个好看的字符串
+
+```python
+class Students(object):
+    def __init__(self,name) -> None:
+        self.name = name
+    def __str__(self) -> str:
+        return f'Student object name is: {self.name}'
+      
+print(Students('megumi'))
+```
+
+此时打印的是`Student object name is: megumi` 比较直观好看
+
+#### 2.`__iter__`
+
+如果一个类想被用于`for ... in`循环，类似list或tuple那样，就必须实现一个`__iter__()`方法，该方法返回一个迭代对象，然后，Python的for循环就会不断调用该迭代对象的`__next__()`方法拿到循环的下一个值，直到遇到`StopIteration`错误时退出循环
+比如下面实例
+
+```python
+class Fib(object):
+    def __init__(self):
+        self.a, self.b = 0, 1 # 初始化两个计数器a，b
+
+    def __iter__(self):
+        return self # 实例本身就是迭代对象，故返回自己
+
+    def __next__(self):
+        self.a, self.b = self.b, self.a + self.b # 计算下一个值
+        if self.a > 100000: # 退出循环的条件
+            raise StopIteration()
+        return self.a # 返回下一个值
+```
+
+#### 3.`__call__`
+
+任何类，只需要定义一个`__call__()`方法，就可以直接对实例进行调用，如下演示
+
+```python
+class Student(object):
+    def __init__(self,name) -> None:
+        self.name = name
+    def __call__(self):
+        print(f"My name is {self.name}")
+        
+megumi = Student('Megumi')
+megumi()
+```
+
+`__call__()`还可以定义参数。对实例进行直接调用就好比对一个函数进行调用一样，所以你完全可以把对象看成函数，把函数看成对象，因为这两者之间本来就没啥根本的区别。
+
+### 5.枚举类
+
+当我们需要定义常量时（懒的说辣）
+
+## 15.错误处理
 
 ​	`try` ... `except` ... `finally`
 
