@@ -1098,8 +1098,8 @@ inject:
   head:
     - <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     # 自定义CSS
-    - <link rel="stylesheet" href="/css/custom.css">
     - <link rel="stylesheet" href="/css/Right.css">
+    - <link rel="stylesheet" href="/css/custom.css">
   bottom:
   # 自定义js文件
     - <script src="js/title/title.js" defer></script>
