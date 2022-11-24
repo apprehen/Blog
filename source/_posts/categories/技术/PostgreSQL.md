@@ -476,3 +476,40 @@ SELECT * FROM PUBLIC.STUDENTS WHERE AGE BETWEEN 24 AND 27
 
 ## 中级部分(表连接)
 
+### 内连接
+
+PostgreSQL内部连接也被称为简单连接，常见的连接类型，此连接返回满足连接条件多个表中的所有行
+sql语法
+
+```sql
+SELECT table1.columns,table2.columns FROM table1 INNER JOIN
+table2 ON table1.common_filed = table2.common_field;
+```
+
+PostgreSQL INNER JOIN演示如下
+首先我们创建两张表![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.6agjglu0a400.webp)
+
+![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.1vt4waifkxq8.webp)
+
+接下来执行两个表的内连接，sql代码如下
+
+```sql
+SELECT PUBLIC.STUDENTS.ID,PUBLIC.STUDENTS.NAME,PUBLIC.DEPARTMENT.DEPT
+FROM public.students INNER JOIN PUBLIC.DEPARTMENT
+ON PUBLIC.STUDENTS.ID = PUBLIC.DEPARTMENT.ID
+```
+
+查询结果图如下![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.5yyefokufe80.webp)
+
+### 左外连接
+
+左外连接返回 `ON` 条件中指定的左侧表中的所有行，只返回满足条件的另一个表中行sql语法如下
+
+```sql
+SELECT table1.columns, table2.columns  
+FROM table1  
+LEFT OUTER JOIN table2  
+ON table1.common_filed = table2.common_field;
+```
+
+ 
