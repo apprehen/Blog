@@ -15,3 +15,8 @@ document.addEventListener("visibilitychange", function () {
     }, 2000);
   }
 });
+
+// 返回时间
+const setname = document.querySelector("#site-name")
+// const i = document.querySelector
+setname.insertAdjacentHTML('beforeend',"<i class='fa-fw fas fa-home faa-tada'></i>")

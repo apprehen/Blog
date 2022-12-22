@@ -512,4 +512,9 @@ LEFT OUTER JOIN table2
 ON table1.common_filed = table2.common_field;
 ```
 
- 
+接上面用过的表我们执行如下的sql语句
+
+```sql
+SELECT * FROM 
+```
+
