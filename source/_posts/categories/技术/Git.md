@@ -2,7 +2,7 @@
 title: git的一些技巧和指令
 date: 2022-12-31 01:47:22
 tags: Git
-description: AI注册和使用
+description: git的一些常见报错和一些指令
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/8B4787E869B5FA6AB1FCBC196D389E7A.68cbv0l1m1s0.webp
 ---
