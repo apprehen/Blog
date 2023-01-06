@@ -45,3 +45,75 @@ fatal: index-pack failed
 
 # git的远程分支和本地分支
 
+git管理的创库最大的好处就是多人可以协同开发，这里我们可以分成远程分支和本地分支,远程分支一般都是有origin的
+
+`git branch -a` 可以观察出项目存在的那些分支,一般红色字体表示的是远程分支![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.4kx02oilql40.webp)
+
+> 本地分支: 本地存在的不同分支版本
+>
+> 远程分支: 项目中存在的不同的版本
+
+一般都是有一个主线 master 然后不同的程序员有不同的线，在自己的需求完成后去merge到主线上面,可以防止版本覆盖什么的
+
+如何创建本地分支:
+`git checkout -b my-test` : 在当前分支下面创建my-test的本地分支
+
+然后可以将本地分支推送到远程,在远程创建同样的远程分支
+`git push origin my-test` : 将本地分支推送到远程并且注意**名称要相同**
+
+可以将本地分支与远程分支关联起来
+`git branch --set-upstream-to origin/my-test` 将本地分支关联到远程分支
+
+可以使用指令查看分支
+`git branch` : 查看本地分支
+`git branch -r` : 查看远程分支
+`git branch -a` : 查看所有分支
+
+使用指令可以查看本地分支和远程分支的关联:
+`git branch -vv`
+
+拉取远程分支到指定本地分支操作
+`git pull origin <远程分支名> : <本地分支名>`
+拉取远程分支到现在本地分支操作
+`git pull origin <远程分支名>`
+如果当前本地分支和远程分支相关联可以直接
+`git pull`
+
+推送指定分支到指定远程分支
+`git push origin <本地分支名> : <远程分支名>`
+将指定分支推送到同名远程分支
+`git push origin <本地分支名>`
+将本地分支推送到同名远程分支
+`git push`
+
+创建与本地同名远程分支
+`git push -u origin <本地分支名>`
+
+# git的解决冲突merge
+
+当我们完成自己写的代码的时候需要提交到主分支上面，有时候就不得不去merge，merge是一个技术活，很容易一不小心就把别人写的代码覆盖掉
+
+> 第一种情况就是你正在主分支上面写东西要提交到主分支上面但是你写之前不知道你的版本是否跟库里面的版本相同，你可以手动merge
+
+`git add .`
+`git commit -m 'xxx'`
+`git pull`
+输入三个指令之后会在本地生成待合并的文件，可以手动解决完冲突，重新push即可
+
+> 第二种情况就是你提交在你自己写的分支上面然后需要合并到主分支上面下面假设我自己的分支名词叫 `yueyun` 主分支名词叫`master` 
+> 注意是`master`需要合并`yueyun` 
+
+`git checkout master` （切换到主分支master上面）
+`git merge yueyun` (将现在的master分支合并yueyun)
+`git push origin master` (把本地的分支master同步到远程)
+**注意：此时的yueyun和master都是本地分支存在的不能直接用远程分支来操控,将本地分支合并完成后在提交到远程分支覆盖既可**
+
+# git的指令回退版本
+
+`git log` : 控制台输入git log 可以看到之前的版本信息
+![](https://cdn.staticaly.com/gh/apprehen/pciture@master/image.4xb1l1aqh9m0.webp)
+
+`git reset -- hard HEAD^` : 回退到上个版本
+`git reset -- hard HEAD~3` : 回退到前3次提交之前,以此类推
+`git reset -- hard commit-id` : 回退/进到 指定的commit的id码
+`commit-id` : 不同的仓库管理会生成不同的commit-id
