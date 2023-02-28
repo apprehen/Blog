@@ -8,7 +8,7 @@ cover: >-
 abbrlink: e08c89f9
 date: 2023-02-27 09:28:53
 ---
-# VUE认识
+# Vue认识
 
 渐进式的JS框架，关注视图层，数据驱动
 初始vue
