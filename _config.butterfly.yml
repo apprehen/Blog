@@ -1019,7 +1019,7 @@ gitcalendar:
   #   name: content
   #   index: 0
   user: apprehen #git用户名
-  apiurl: 'https://github.anzhiy.cn'
+  apiurl: 'github-calenda.vercel.app'
   minheight:
     pc: 280px #桌面端最小高度
     mibile: 0px #移动端最小高度
@@ -1033,7 +1033,7 @@ gitcalendar:
 
 swiper:
   enable: true # 开关
-  randomenable: true # 人潮汹涌开关
+  randomenable: false # 人潮汹涌开关
   priority: 5 #过滤器优先权
   enable_page: / # 应用页面
   timemode: date #date/updated
