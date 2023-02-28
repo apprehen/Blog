@@ -1,10 +1,11 @@
 ---
 title: git的一些技巧和指令
-date: 2022-12-31 01:47:22
 tags: Git
 description: git的一些常见报错和一些指令
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/8B4787E869B5FA6AB1FCBC196D389E7A.68cbv0l1m1s0.webp
+abbrlink: cd590cd0
+date: 2022-12-31 01:47:22
 ---
 
 有于最近做了一些协同开发的项目，对git的一些指令又有了了解，故想写一遍博客来增加自己的想法和理解

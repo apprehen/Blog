@@ -1,9 +1,11 @@
 ---
 title: 前端打包工具
-date: 2023-01-10 17:03:22
 tags: Webpack.Vite
 description: 学习前端打包工具webpack 和 vite 的学习记录
-cover: https://cdn.staticaly.com/gh/apprehen/pciture@master/102840030_1.1w4upuv6qmsg.webp
+cover: >-
+  https://cdn.staticaly.com/gh/apprehen/pciture@master/102840030_1.1w4upuv6qmsg.webp
+abbrlink: ebbf2d55
+date: 2023-01-10 17:03:22
 ---
 
 # 构建工具
