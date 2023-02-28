@@ -5,6 +5,7 @@ categories: 技术
 tags: 前端框架
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/6A5D0E39BB880E70137F03011E597BBF.2uhydryacw40.webp
+abbrlink: ce292cdd
 date: 2023-02-27 09:28:53
 ---
 # Vue认识
