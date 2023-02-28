@@ -1,11 +1,10 @@
 ---
-title: VUE2
+title: Vue2~Vue3
 description: 一款简单的前端框架
 categories: 技术
 tags: 前端框架
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/6A5D0E39BB880E70137F03011E597BBF.2uhydryacw40.webp
-abbrlink: e08c89f9
 date: 2023-02-27 09:28:53
 ---
 # Vue认识
@@ -80,7 +79,7 @@ Vue模板语法有两大类:
 
 ​	功能:用于解析标签体内容。
 
-​	写法:{{xxx}},xxx是js表达式,且可以直接读取到data中的所有属性。
+​	写法:`{{xxx}}`,xxx是js表达式,且可以直接读取到data中的所有属性。
 
 2.指令语法:
 
@@ -660,13 +659,13 @@ computed和watch之间的区别：
 
 绑定样式：
 	1.class样式
-		写法：class="xxx" xxx可以是字符串，对象，数组。
+		写法：`class="xxx"` xxx可以是字符串，对象，数组。
 			字符串写法适用于：类名不确定，要动态获取。
 			对象写法适用于：要绑定多个样式，个数不确定，名字也不确定。
 			数组写法适用于：要绑定多个样式，个数确定，名字也确定，但不确定用不用。
 	2.style样式
-		:style="{fontSize:xxx}"其中xxx是动态值。
-		:style="[a,b]"其中a，b是样式对象
+		`:style="{fontSize:xxx}"`其中xxx是动态值。
+		`:style="[a,b]"`其中a，b是样式对象
 
 # Vue条件渲染
 
@@ -760,7 +759,7 @@ computed和watch之间的区别：
 
 v-for 指令：
 	1.用于展示列表数据
-	2.语法: v-for = "(item, index) in xxx"  :key = "yyy"
+	2.语法: `v-for = "(item, index) in xxx"  :key = "yyy"`
 	3.可遍历：数组，对象，字符串，指定的次数
 
 渲染列表中key的作用:
@@ -1029,9 +1028,9 @@ Vue监视数据的原理:
 
 ​    (2).如需给后添加的属性做响应式，请使用如下API
 
-​       Vue.set(target,propertyName/index,value)或
+​       `Vue.set(target,propertyName/index,value)`或
 
-​       vm.$set(target,propertyName/index,value)
+​       `vm.$set(target,propertyName/index,value)`
 
  
 
@@ -1109,11 +1108,11 @@ Vue监视数据的原理:
 
 收集表单数据：
 
- 若：<input type="text"/>,则v-model收集的是value值，用户输入的就是value值。
+ 若：`<input type="text"/>`,则v-model收集的是value值，用户输入的就是value值。
 
- 若：<input type="radio"/>,则v-model收集的是value值，且要给标签配置value的值。
+ 若：`<input type="radio"/>`,则v-model收集的是value值，且要给标签配置value的值。
 
- 若：<input type="checkbox"/>
+ 若：`<input type="checkbox"/>`
 
    1.没有配置input的value属性，那么收集的就是checked(勾选 or 未勾选，是布尔值)
 
@@ -1311,11 +1310,13 @@ Vue监视数据的原理:
 
 ​    1.局部指令:
 
-​       new Vue({              new Vue({
+```js
+new Vue({              new Vue({
 
-​        directives:{指令名:配置对象} 或      directives{指令名:回调函数}
+	directives:{指令名:配置对象} 或      directives{指令名:回调函数}
 
-​       })                  })
+})                  })
+```
 
 ​    2.全局指令:
 
@@ -1504,9 +1505,9 @@ render:h => h(App)
 
 3.使用方式：
 
-  打标识：<h1 *ref*="xxx">.....</h1> 或 <School *ref*="xxx"></School>
+  打标识：`<h1 *ref*="xxx">.....</h1>` 或 `<School *ref*="xxx"></School>`
 
-  获取：this.$refs.xxx
+  获取：`this.$refs.xxx`
 
 # Vue的配置项props
 
@@ -1514,7 +1515,7 @@ render:h => h(App)
 
  (1).传递数据：
 
-​    <Demo *name* = "xxx" />
+​    `<Demo *name* = "xxx" />`
 
  (2).接收数据：
 
@@ -1524,27 +1525,25 @@ render:h => h(App)
 
 ​    第二种方式(限制类型):
 
-​     props:{
+```js
+props:{
 
-​      name:Number
+	name:Number
 
-​     }
+}
+```
 
 ​    第三种方式(限制类型，限制必要性，指定默认值):
 
-​     props:{
-
-​      name:{
-
-​       type:String,//类型
-
-​       required:true,//必要性
-
-​       default:'老王'//默认值
-
-​      }
-
+```js
+props:{
+	name:{
+       type:String,//类型
+       required:true,//必要性
+       default:'老王'//默认值
    }
+}
+```
 
  备注：
 
@@ -1558,21 +1557,23 @@ render:h => h(App)
 
   第一步定义混合，例如：
 
-​    {
+```js
+{
 
-​      data(){....},
+    data(){....},
 
-​      methods:{...}
+        methods:{...}
 
-​      ...
+            ...
 
-​    }
+ }
+```
 
   第二步使用混入，例如：
 
-​    (1).全局混入：Vue.mixin(xxx)
+​    (1).全局混入：`Vue.mixin(xxx)`
 
-​    (2).局部混入：mixins:['xxx']
+​    (2).局部混入：`mixins:['xxx']`
 
 # Vue插件
 
@@ -1598,7 +1599,7 @@ render:h => h(App)
 
   作用：让样式在局部生效，防止冲突。
 
-  写法：<style scoped>
+  写法：`<style scoped>`
 
 也可以不写scoped 让其污染全局，方便组件直接调用样式名
 
@@ -1610,19 +1611,19 @@ render:h => h(App)
 
 3.相关API:
 
-  1.xxxxxStorage.setItem('key','value');
+  `1.xxxxxStorage.setItem('key','value');`
 
 ​    该方法接受一个键和值作为参数，会把键值对添加到储存中，如果键名存在，则更新其对应的值
 
-  2.xxxxxStorage.getItem('person');
+  `2.xxxxxStorage.getItem('person');`
 
 ​    该方法接受一个键名作为参数，返回键名对应的值。
 
-  3.xxxxxStorage.removeItem('key');
+  `3.xxxxxStorage.removeItem('key');`
 
 ​    该方法接受一个键名作为参数，并把该键名从存储中删掉
 
-  4.xxxxxStorage.clear()
+  `4.xxxxxStorage.clear()`
 
 ​    该方法会清空储存中的所有数据。
 
@@ -1648,25 +1649,27 @@ render:h => h(App)
 
   2.第二种方式，在父组件中:
 
-   <Demo *ref* = "demo"/>
+```js
+<Demo *ref* = "demo"/>
 
    .....
 
    mounted(){
 
-​    this.$refs.xxx.$on('atguigu',this.test)
+    this.$refs.xxx.$on('atguigu',this.test)
 
    }
+```
 
   3.若想让自定义事件只能触发一次，可以使用once修饰符，或$once方法
 
-4.触发自定义事件：this.$emit('atguigu'，数据)
+4.触发自定义事件：`this.$emit('atguigu'，数据)`
 
-5.解绑自定义事件this.$off('atguigu')
+5.解绑自定义事件`this.$off('atguigu')`
 
 6.组件上也可以绑定原生DOM事件，需要使用native修饰符
 
-7.注意:通过this.$refs.xxx.$on('atguigu',回调)绑定自定义事件时，回调要么配置在methods中，要么用箭头函数，否则this指向会出问题
+7.注意:通过`this.$refs.xxx.$on('atguigu',回调)`绑定自定义事件时，回调要么配置在methods中，要么用箭头函数，否则this指向会出问题
 
 # 全局事件总线
 
@@ -1674,27 +1677,30 @@ render:h => h(App)
 
 2.安装全局事件总线:
 
-  new Vue({
+```js
+new Vue({
 
    ...
 
    beforeCreat() {
 
-​    Vue.prototype.$bus = this //安装全局事件总线，$bus就是当前应用的vm
+     Vue.prototype.$bus = this //安装全局事件总线，$bus就是当前应用的vm
 
    },
 
    ....
 
   })
+```
 
 3.使用事件总线:
 
   1.接受数据:A组件想接受数据，则在A组件中给$bus绑定自定义事件，事件的回调留在A组件自身
 
-   methods(){
+```js
+methods(){
 
-​    demo(data){....}
+     demo(data){....}
 
    }
 
@@ -1702,9 +1708,10 @@ render:h => h(App)
 
    mounted() {
 
-​    this.$bus.$on('xxxx',this.demo)
+     this.$bus.$on('xxxx',this.demo)
 
    }
+```
 
   2.提供数据:this.$bus.$emit('xxx',数据)
 
@@ -1716,33 +1723,35 @@ render:h => h(App)
 
 2.使用步骤：
 
-  1.安装pubsub: npm i 'pubsub-js'
+  1.安装pubsub: `npm i 'pubsub-js'`
 
-  2.引入: import pubsub from 'pubsub-js'
+  2.引入: `import pubsub from 'pubsub-js'`
 
   3.接受数据:A组件想接受数据,则在A组件中订阅消息,订阅的回调留在A组件自身
 
-​    methods () {
+```js
+ methods () {
 
-​     demo(data){...}
+     demo(data){...}
 
-​    }
+    }
 
-​    ....
+    ....
 
-​    mounted () {
+    mounted () {
 
-​     this.pId = pubsub.sunscribe('xxx',this.demo)//订阅消息
+     this.pId = pubsub.sunscribe('xxx',this.demo)//订阅消息
 
-​    }
+   }
+```
 
-  4.提供数据:pubsub.publish('xxx',数据)
+  4.提供数据:`pubsub.publish('xxx',数据)`
 
-  5.最好在beforeDestroy钩子中，用pubsub.unsubscribe(pId)去取消订阅
+  5.最好在beforeDestroy钩子中，用`pubsub.unsubscribe(pId)`去取消订阅
 
 # nextTick
 
-1.语法:this.$nextTick(回调函数)
+1.语法:`this.$nextTick(回调函数)`
 
 2.作用:在下次DOM更新结束后执行其指定的回调
 
@@ -1790,13 +1799,15 @@ opacity:0--------->opacity:1     opacity:1--------->opacity:0
 
 ​      3.v-leave-to:离开的终点
 
-  2.使用<transition>包裹要过度的元素，并配置name属性:
+  2.使用`<transition>`包裹要过度的元素，并配置name属性:
 
-   <transition *name*="hello">
+```html
+<transition *name*="hello">
 
-​     <h1 *v-show*="isShow">你好啊</h1>
+    <h1 *v-show*="isShow">你好啊</h1>
 
-   </transition>
+</transition>
+```
 
   3.备注:若有多个元素需要过渡，则需要使用:<transition-group> 且每个元素都要指定key值
 
@@ -1890,6 +1901,7 @@ opacity:0--------->opacity:1     opacity:1--------->opacity:0
 
 **搭建vuex环境**
 
+```html
 1.创建文件:src/store/index.js.
   <!-- 引入Vue核心库 -->
   improt Vue from 'vue'
@@ -1909,9 +1921,11 @@ opacity:0--------->opacity:1     opacity:1--------->opacity:0
     mutations,
     state
   })
+```
 
 2.在main.js中创建vm时传入store配置项
 
+```js
  .....
 
  <!-- 引入store -->
@@ -1937,43 +1951,47 @@ opacity:0--------->opacity:1     opacity:1--------->opacity:0
  },
 
 })
+```
 
 **基本使用**
-
 1.初始化数据，配置actions，配置mutations，操作文件store.js
-    <!-- 引入Vue核心库 -->
-    improt Vue from 'vue'
-    <!-- 引入Vuex -->
-    improt Vuex from 'vuex'
-    <!-- 应用Vuex插件 -->
-    Vue.use(Vuex)
-    <!--  -->
-    const actions = { 
-      <!-- 响应组件动作 -->
-      jia (context,value) {
+
+```js
+<!-- 引入Vue核心库 -->
+improt Vue from 'vue'
+<!-- 引入Vuex -->
+improt Vuex from 'vuex'
+<!-- 应用Vuex插件 -->
+Vue.use(Vuex)
+<!--  -->
+const actions = { 
+    <!-- 响应组件动作 -->
+    jia (context,value) {
         //  console.log('actions中的jia被调用辣',miniStore,value)
         context.commit('JIA',value)
-      }
     }
-    const mutations = {
-      //  执行加
-      JIA(state,value){
+}
+const mutations = {
+    //  执行加
+    JIA(state,value){
         //  console.log('mutations的JIA被调用辣',state,value)
         state.sum += value
-      }
-      }
-    <!-- 初始化数据 -->
-    const state = { 
-      sum:0
     }
-    <!-- 创建并暴露 -->
-    export default new Vuex.Store({
-      actions,
-      mutations,
-      state
-    })
-2.组件中读取vuex中的数据:$store.state.sum
-3.组件中修改vuex中的数据:$store.dispatch('actions中的方法名',数据) 或 $store.commit('mutation中的方法名',数据)
+}
+<!-- 初始化数据 -->
+const state = { 
+    sum:0
+}
+<!-- 创建并暴露 -->
+export default new Vuex.Store({
+    actions,
+    mutations,
+    state
+})
+```
+
+2.组件中读取vuex中的数据:`$store.state.sum`
+3.组件中修改vuex中的数据:`$store.dispatch('actions中的方法名',数据)` 或 `$store.commit('mutation中的方法名',数据)`
 
 > 备注: 若没有网络请求或其他业务逻辑,组件中也可以越过actions，即不写dispatch,直接写commit
 
@@ -1983,6 +2001,7 @@ opacity:0--------->opacity:1     opacity:1--------->opacity:0
 
 2.在store.js中追加getters配置
 
+```js
 .....
 
 const getters = {
@@ -2004,11 +2023,13 @@ export default new Vuex.store({
  getters
 
 })
+```
 
-3.组件中读取数据: $store.getters.bigSum
+3.组件中读取数据: `$store.getters.bigSum`
 
 **四个map方法的使用**
 
+```js
 1.mapState方法：用于帮助我们映射state中的数据为计算属性
   computed: {
     <!-- 借助mapState生成计算属性，sum,school,subject(对象写法) -->
@@ -2037,7 +2058,9 @@ export default new Vuex.store({
     <!-- 靠mapMutations生成:JIA,JIAN(数组形式) -->
     ...mapMutations(['JIA','JIAN']),
   }
-备注:mapActions与mapMutations使用时,若有传递参数需要:在模板中绑定事件时传递好参数,否则参数是事件对象
+```
+
+> mapActions与mapMutations使用时,若有传递参数需要:在模板中绑定事件时传递好参数,否则参数是事件对象
 
 **模块化＋命名空间**
 
@@ -2045,6 +2068,7 @@ export default new Vuex.store({
 
 2.修改store.js
 
+```js
  const countAbout = {
 
   namespaced:true,//开启命名空间
@@ -2090,46 +2114,47 @@ export default new Vuex.store({
   }
 
  })
+```
 
 3.开启命名空间后，组件中读取state数据:
 
  //方式一：自己直接读取
 
-  this.$store.state.personAbout.list
+  `this.$store.state.personAbout.list`
 
  //方式二：借助mapState读取,
 
-  ...mapState('countAbout',['sum','school','subject']),
+  `...mapState('countAbout',['sum','school','subject'])`,
 
 4.开启命名空间后，组件中读取getters数据:
 
  //方式一：自己直接读取
 
-  this.$store.getters['personAbout/firstPersonName']
+  `this.$store.getters['personAbout/firstPersonName']`
 
  //方式二：借助mapgetters读取
 
-  ...mapGetters('countAbout',['bigSum'])
+  `...mapGetters('countAbout',['bigSum'])`
 
 5.开启命名空间后，组件中调用dispatch
 
  //方式一：自己直接dispatch
 
-  this.$store.dispatch('personAbout/addPersonWang',person)
+  `this.$store.dispatch('personAbout/addPersonWang',person)`
 
  //方式二：借助mapActions:
 
-  ...mapAction('countAbout',{incrementOdd:'jiaOdd',incrementWait:'jiaWait'})
+  `...mapAction('countAbout',{incrementOdd:'jiaOdd',incrementWait:'jiaWait'})`
 
 6.开启命名空间后，组件中调用commit
 
  //方式一：自己直接commit
 
-  this.$store.commit('personAbout/ADD_PERSON',person)
+  `this.$store.commit('personAbout/ADD_PERSON',person)`
 
  //方式二：借助mapMutations：
 
-  ...mapMutations('countAbout',{increment:'JIA',decrement:'JIAN'}),
+  `...mapMutations('countAbout',{increment:'JIA',decrement:'JIAN'}),`
 
 # 路由
 
@@ -2144,7 +2169,8 @@ export default new Vuex.store({
 
 3.编写router配置项:
 
-  //引入VueRouter
+```js
+//引入VueRouter
 
   import VueRouter from 'vue-router'
 
@@ -2160,21 +2186,21 @@ export default new Vuex.store({
 
    routes:[
 
-​    {
+    {
 
-​     path: '/About'，
+     path: '/About'，
 
-​     component:About
+     component:About
 
-​    },
+    },
 
-​    {
+    {
 
-​     path: '/home',
+     path: '/home',
 
-​     component: Home
+     component: Home
 
-​    }
+    }
 
    ]
 
@@ -2183,6 +2209,7 @@ export default new Vuex.store({
   //暴露router
 
   export default router
+```
 
 4.实现切换(active-class可配置高亮样式)
 	`<router-link active-class = 'active' to = '/about'>About</router-link>`
