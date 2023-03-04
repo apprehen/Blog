@@ -2520,3 +2520,206 @@ beforeRouteLeave (to, from, next) {
 	1.地址干净，美观 。
 	2.兼容性和hash模式相比略差。
 	3.应用部署上线时需要后端人员支持，解决刷新页面服务端404的问题。
+
+
+
+
+
+# **Vue3常用的Composition API**
+
+**setup**
+
+1.理解: Vue3.0中的一个新的配置项，值为函数
+2.setup是所有Composition API (组合API) 的**表演舞台**
+3.组件中所有的数据，方法，属性等等均配置在setup
+4.setup函数的两种返回值
+	1.若返回一个对象，则对象中的属性，方法，在模板中均可以直接使用
+	2.若返回一个渲染函数：则可以自定义渲染内容
+5.注意点
+1.尽量不要与Vue2.x配置混用
+	 · Vue2.X配置(data,methods,computed...) 中可以访问到setup中的属性，方法。
+	 · 但在setup中不能访问到vue2.x配置（data，methods，computed...）
+	 · 如果有重名，setup优先
+2.setup 不能是一个async函数,因为返回值不再是return的对象，而是promise，模板看不到return对象中的属性
+
+**ref函数**
+作用：定义一个响应式的数据
+语法：`const xxx = ref(initvalue)`
+	· 创建一个包含响应式的应用对象 (reference对象)
+	· JS中操作数据：`xxx.value`
+	· 模板中读取数据：不需要.value 直接`<div>{{ xxx }} </div>`
+备注:
+	· 接收的数据可以是：基本类型，也可以是对象类型
+	· 基本类型的数据：响应式依然是靠`Object.defineProperty()` 中的 `get` 和 `set`完成的
+	· 对象数据类型：内部借用了Vue3.0中的一个新函数 -- `reactive` 函数
+
+**reactive函数**
+作用: 定义一个对象类型的响应式数据(基本数据不用,要用`ref`函数)
+语法：`const 代理对象 = reactive(源对象)` 接收一个对象(或数组),返回一个代理对象(proxy对象)
+reactive定义的响应式数据是深层次的
+内部基于ES6的Proxy实现,通过代理对象操作源对象内部数据进行操作
+
+**Vue3.0中的响应式原理**
+
+Vue2.x的响应式
+	实现原理
+	对象类型：通过`object.defineProperty()对属性进行读取，修改进行拦截(数据劫持)`
+	数组类型：通过重写更新数组的一系列方法来实现拦截(对数组的变更方法进行了包裹)
+
+```js
+Object.defineProperty(data,'count',{
+    get () {}
+	set () {}
+})
+```
+
+存在问题:
+	新增属性：删除属性，界面不会更新 （this.$set ... this.delete）
+	直接通过下标修改数组，界面不会自动更新
+
+Vue3.0的响应式
+	实现原理
+	通过Proxy(代理): 拦截对象中任意属性的变化，包括：属性值的读写，属性的添加，属性的删除等
+	通过Reflect(反射): 对被代理对象的属性进行操作
+
+**Vue3.0的响应式**
+实现原理：
+	通过Proxy(代理): 拦截对象中任意属性的变化,包括：属性值的读写,属性的添加,属性的删除等
+	通过Reflect(反射)：对被代理对象的属性进行操作
+
+```js
+new Proxy(person, {
+    // 拦截读取属性值
+      get(target, key) {
+        return Reflect.get(target, key)
+      },
+	// 拦截设置属性值或添加新属性
+      set(target, key, val) {
+        return Reflect.set(target, key, val)
+      },
+    // 拦截删除属性
+      deleteProperty(target, key) {
+        return Reflect.deleteProperty(target, key)
+      }
+    })
+```
+
+**reactive和ref的对比**
+1.从定义数据角度对比:
+	ref用来定义：基本数据类型
+	reactive用来定义：对象(或数组)类型数据
+	备注：ref也可以用来定义对象(或数组)数据类型，它内部会自动通过`reactive` 转为代理对象
+2.从原理角度对比：
+	ref通过`Object.defineProperty()`的 `get` 和 `set` 来实现响应式(数据劫持)
+	reactive通过使用Proxy来实现响应式(数据劫持),并通过Reflect操作源对象内部的数据
+3.从使用角度对比：
+	ref定义的数据：操作数据需要`.value`,读取数据时模板中直接读取不需要`.value`
+	reactive定义的数据：操作数据与读取数据：均不需要`.value`
+
+**setup的两个注意点**
+setup执行的时机
+	在beforeCreate之前执行一次，this是undefined
+setup的参数
+	props：值为对象，包含：组件外部传递过来，且组件内部声明接收了的属性
+	context：上下文对象
+		attrs：值为对象，包含：组件外部传递过来，但没有在props配置中声明的属性，相当于`this.$attrs`
+		slots：收到的插槽内容,相当于`this.$slots`
+		emit：分发自定义事件的函数,相当于`this.$emit`
+
+**计算属性与监视**
+
+**1.computed函数**
+	与Vue2.x中computed配置功能一致
+	写法：
+
+```js
+import { reactive,computed } from 'vue'
+setup () {
+    ...
+    // 计算属性简写
+	let fullName = computed(()=>{
+        return person.firstName + '-' + person.lastName
+    })
+    // 计算属性完整
+	let fullName = computed({
+        get () {
+            return person.firstName + '-' + person.lastName
+        }
+        set (value) {
+        	let names = value.split('-')
+        	person.fitstName = names[0]
+        	person.lastName = names[1]
+    	}
+    })
+}
+```
+
+**2.watch函数**
+	与Vue2.x中watch配置功能呢一致
+	两个小坑：
+	1.监视reactive定义的响应式：oldVue无法正确获取,强制开启了深度监视 (deep配置失败)
+	2.监视reactive定义的响应式中某个属性时,deep配置有效
+
+```js
+// 情况一：监视ref定义的响应式数据
+watch(sum, (newVal, oldVal) => {
+  console.log('sum发生了变化', newVal, oldVal)
+}, {immediate: true}})
+// 情况二：监视多个ref定义的响应式数据
+watch([sum, msg], ([newSum, newMsg], [oldSum, oldMsg]) => {
+  console.log('sum和msg发生了变化', newSum, newMsg, oldSum, oldMsg)
+}, {immediate: true})
+/*情况三：监视reactive定义的响应式数据
+	若watch监视的是reactive定义的响应式数据，则无法正确获取oldvalue
+	若watch监视的是reactive定义的响应式数据，则强制开启了深度监视
+*/
+watch(person, (newPerson, oldPerson) => {
+  console.log('person发生了变化', newPerson, oldPerson)
+}, {deep: true})
+// 情况四：监视reactive定义的响应式数据中的某个属性
+watch(()=>person.name, (newName, oldName) => {
+  console.log('person.name发生了变化', newName, oldName)
+})
+// 情况五：监视reactive所定义的一个响应式数据中的某些属性变化
+watch([()=>{person.name}, ()=>{person.age}], ([newName, newAge], [oldName, oldAge]) => {
+  console.log('person.name和person.age发生了变化', newName, newAge, oldName, oldAge)
+})
+// 特殊情况
+watch(()=>person.job, (newJob, oldJob) => {
+  console.log('person.job发生了变化', newJob, oldJob)
+}, {deep:true})
+```
+
+**3.watchEffect函数**
+watch的套路是：既要指明监视的属性，也要指明监视的回调
+watchEffect的套路是：不用指明监视那个属性，监视的回调中用到那个属性，那么就监视那个属性
+watchEffect有点像computed
+	1.但computed注重的计算出来的值(回调函数的返回值)，所以必须要写返回值
+	2.而watchEffect更注重的是过程(回调函数的函数体)，所以不用写返回值
+
+```js
+// watchEffect所指定的回调中用到的数据只要发生变化，则直接重新执行回调
+watchEffect(()=>{
+    const x1 = sum.value
+	const x2 = person.age
+	console.log('watchEffect配置的回调执行了')
+})
+```
+
+**4.Vue3的生命周期**
+
+Vue3.0中可以继续使用Vue2.x中的生命周期钩子，但是有两个被更名
+
+​	1.`beforeDestory` 改名为 `beforeUnmount`
+​	2.`destroyed` 改名为 `unmounted`
+
+Vue3.0也提供了Composition API形式的生命周期钩子，与Vue2.x中钩子对应关系如下
+
+​	1.`beforeCreate` ===> `setup()`
+​	2.`created` ===> `setup()`
+​	3.`beforeMount` ===> `onBeforeMount`
+​	4.`mounted` ===> `onMounted`
+​	5.`beforeUpdate` ===> `onBeforeUpdate`
+​	6.`update` ===> `onUpdate`
+​	7.`beforeUnMount` ===> `onBeforeUnmount`
+​	8.`unmounted` ===> `onUnmounted` 
