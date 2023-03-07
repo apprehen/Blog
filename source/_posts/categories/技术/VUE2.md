@@ -2540,7 +2540,7 @@ beforeRouteLeave (to, from, next) {
 	 · Vue2.X配置(data,methods,computed...) 中可以访问到setup中的属性，方法。
 	 · 但在setup中不能访问到vue2.x配置（data，methods，computed...）
 	 · 如果有重名，setup优先
-2.setup 不能是一个async函数,因为返回值不再是return的对象，而是promise，模板看不到return对象中的属性
+2.setup 不能是一个async函数,因为返回值不再是return的对象，而是promise，模板看不到return对象中的属性(后期可以返回promise，但是需要suspense和异步组件的配合捏)
 
 **ref函数**
 作用：定义一个响应式的数据
@@ -2758,4 +2758,224 @@ Vue3.0也提供了Composition API形式的生命周期钩子，与Vue2.x中钩�
 		作用：标记一个对象，使其永远不会再成为响应式对象
 		应用场景：
 			1.有些值不应被设置为响应式的，例如复杂的第三方库
-			2.当渲染具有不可变数据的大列表时，跳过响应式转换可以提高性能 
+			2.当渲染具有不可变数据的大列表时，跳过响应式转换可以提高性能
+
+**customRef**
+	作用：创建一个自定义的ref，并对其依赖项跟踪和更新触发进行显示控制
+	实现防抖效果：
+
+```vue
+<template>
+	<input type="text" v-model="keyword">
+	<h3> {{keyword}} </h3>
+</template>
+<script>
+    import {ref,customRef} from 'vue'
+	export default {
+        name: 'Demo',
+        setup () {
+            // let keyword = ref('Hello') //使用vue准备好的内置函数
+            // 自定义一个myRef
+            function myRef (value,delay) {
+                let timer
+                //通过customRef去实现自定义
+                return customRef((track,trigger)=>{
+                    return {
+                        get () {
+                            track() // 告诉vue这个value值是需要被追踪的
+                            return value
+                        },
+                        set (newValue) {
+                            clearTimeout(timer)
+                            timer = setTimeout(()=>{
+                                value = newValue
+                                trigger() // 告诉vue去更新界面
+                            },delay)
+                        }
+                    }
+                })
+            }
+        }
+        let keyword = myRef('Hello',500) // 自定义的ref
+    }
+</script>
+```
+
+**provide 和 inject**
+	作用：实现祖先和后代组件间的通信
+	套路：父组件有一个 `provide` 选项来提供数据，子组件有一个`inject` 选项来开始使用这些数据
+	具体写法：
+
+父组件中：
+
+```vue
+setup () {
+	....
+	let person reactive({name: 'komisa', age: 18})
+	provide('person', person)
+	...
+}
+```
+
+子组件中：
+
+```vue
+setup () {
+	....
+	const person = inject('car')
+	return {car}
+	....
+}
+```
+
+**响应式数据的判断**
+isRef：检查一个值是否为一个ref对象
+isReactive：检查一个对象是否是由 `reactive` 创建的响应式代理
+isReadonly：检查一个对象是否是由 `readonly` 创建的只读代理
+isProxy：检查一个对象是否是由 `reactive` 或者 `readonly` 方法创建的代理
+
+# **Composition API 的优势**
+
+> **1.Options API 存在的问题**
+
+使用传统Options API 中，新增或修改一个需求，就需要分别在data,methods，computed里修改
+
+> **2.Composition 的优势**
+
+我们可以更加优雅的组织我们的代码，函数，让相关功能的代码更加有序的组织在一起
+
+# 新的组件
+
+**Fragment**
+	在vue2中：组件必须有一个根标签
+	在vue3中：组件可以没有根标签，内部会将多个标签包含在一个Fragment虚拟元素中
+	好处：减少标签层级，减小内存占用
+
+**Teleport**
+	什么是Teleport？ —— `Teleport` 是一种能够将我们的组件html结构移动到指定位置的技术
+
+```vue
+<teleport to="移动位置(body)">
+    <div v-if="isShow" class="mask">
+        <div class="dialog">
+            <h3>我是弹窗</h3>
+            <button @click="isShow = false">
+                关闭弹窗
+            </button>
+        </div>
+    </div>
+</teleport>
+```
+
+**Suspense**
+等待异步组件时渲染一些额外内容，让应用有更好的用户体验
+使用步骤
+异步引入组件
+
+```vue
+import {defineAsyncComponent} from 'vue'
+const Child = defineAsyncComponent(()=> import('./components/child.vue'))
+```
+
+使用·`Suspense` 包裹组件，并配置好`default` 和 `fallback`
+
+```vue
+<template>
+	<div class="app">
+        <h3>我是app组件</h3>
+        <Suspense>
+    		<template v-solt:default>
+                <Child/>
+			</template>
+			<template>
+				<h3>加载中...</h3>
+			</template>
+    	</Suspense>
+    </div>
+</template>
+```
+
+# 其他
+
+**1.全局API的转移**
+Vue2.x有许多全局API和配置
+例如：注册全局组件，注册全局指令等。
+
+```vue
+Vue.component('Mybutton',{
+	data: () => ({
+		count: 0	
+	}),
+	template: '<button @click="count++">Clicked {{count}}</button>'
+})
+// 注册全局指令
+Vue.directive('focus',{
+	inserted: el => el.focus()
+})
+```
+
+Vue3.0对这些API做出了调整
+	将全局的API，即`Vue.xxx` 调整到应用实例 (`app`) 上
+
+| 2.x全局 API (`Vue`)      | 3.x实例 API（`app`）        |
+| :----------------------- | --------------------------- |
+| Vue.config.xxx           | app.config.xxxx             |
+| Vue.config.productionTip | **移除**                    |
+| Vue.component            | app.component               |
+| Vue.directive            | app.directive               |
+| Vue.mixin                | app.mixin                   |
+| Vue.use                  | app.use                     |
+| Vue.prototype            | app.config.globalProperties |
+
+**2.其他改变**
+data选项始终将被声明为一个函数
+过渡类名的更改:
+Vue2.x的写法
+
+```css
+.v-enter,
+.v-leave-to {
+	opcity: 0
+}
+.v-leave,
+.v-enter-to {
+	opcity: 1
+}
+```
+
+Vue3.x的写法
+
+```css
+.v-enter-from,
+.v-leave-to {
+    opcity:0;
+}
+.v-leave-from,
+.v-enter-to {
+    opcity: 1;
+}
+```
+
+移除keyCode作为v-on的修饰符，同时也不在支持`config.keyCode`
+移除`v-on.native`修饰符
+父组件中绑定事件
+
+```html
+<my-component
+v-on:close = "handleComponentEvent"
+v-on:click = "handleNativeClickEvent"
+>
+</my-component>
+```
+
+子组件中声明自定义事件
+
+```vue
+<script>
+	export default {
+        emits: ['close']
+    }
+</script>
+```
+
+移除过滤器(filiter)
