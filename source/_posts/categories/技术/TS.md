@@ -3,8 +3,9 @@ title: TS
 description: 纪录学习typescript
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/6CBAEB415316784394DC127767AD80A1.70vsunrm9uk0.webp
+tags: 'ts,TS'
+abbrlink: 6d6c8ae1
 date: 2023-03-20 13:37:56
-tags: ts,TS
 ---
 
 # TS作用：
