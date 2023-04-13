@@ -631,7 +631,7 @@ subtitle:
   source: false
   # 如果關閉打字效果，subtitle 只會顯示 sub 的第一行文字
   sub:
-    - 生命是有光的❤
+    - 生命是有光的❤❤❤❤
 
 # Loading Animation (加載動畫)
 preloader: false
@@ -1033,8 +1033,8 @@ footer_beautify:
 
 swiper:
   enable: true # 开关
-  randomenable: false # 人潮汹涌开关
-  priority: 5 #过滤器优先权
+  randomenable: true # 人潮汹涌开关
+  priority: 6 #过滤器优先权
   enable_page: / # 应用页面
   timemode: date #date/updated
   layout: # 挂载容器类型
@@ -1107,8 +1107,16 @@ inject:
     - <script src="/js/ali_font.js" defer></script>
     # 顶部小进度条
     # - <script data-pjax src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js" defer></script>
+    # 波奇酱
     - <script async src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    # 主页的背景图
+    - <script src="/js/yueyun.js"></script>
+    - <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+    - <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
+    - <script src="https://cdn.jsdelivr.net/npm/pixi.js@6.5.2/dist/browser/pixi.min.js"></script>
+    # - <script src="/js/live2dpochi/live2dJS/new.min.js"></script>
+    - <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>  
+    - <script src="/js/live2dpochi/poqi.js"></script>
+
 
 # CDN
 # Don't modify the following settings unless you know how they work
