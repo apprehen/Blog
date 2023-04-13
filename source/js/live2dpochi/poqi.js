@@ -1,6 +1,4 @@
-console.log('EXPLOSION!!!');
-const cubism4Model = "http://localhost:4000/js/live2dpochi/character/model.json";
-console.log(window.screen.width);
+let cubism4Model = window.location.href + "js/live2dpochi/character/model.json";
 if (window.screen.width > 1000) {
   (async function main() {
 
