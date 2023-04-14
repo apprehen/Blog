@@ -6,8 +6,6 @@ let cubism4Model = window.location.href + "js/live2dpochi/character/model.json";
     view: document.getElementById("canvas"),
     autoStart: true,
     resolution: window.devicePixelRatio || 1,
-    // width: 200,
-    // height: 200,
     antialias: true,
     transparent: true
   });
@@ -19,7 +17,6 @@ let cubism4Model = window.location.href + "js/live2dpochi/character/model.json";
   app.stage.width = wriper.clientWidth;
   app.stage.height = wriper.clientWidth;
   model4.scale.set(1.0);
-  // model4.position.set(-60, -60);
   model4.on('hit', async (hitAreas) => {
     console.log(hitAreas)
     if (hitAreas.length == 1) {
