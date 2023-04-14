@@ -6,17 +6,20 @@ if (window.screen.width > 1000) {
       view: document.getElementById("canvas"),
       autoStart: true,
       resolution: window.devicePixelRatio || 1,
-      width: 200,
-      height: 200,
+      // width: 200,
+      // height: 200,
       antialias: true,
       transparent: true
     });
-    // if (this.view.style.backgroundColor != stage.backgroundColorString) this.view.style.backgroundColor = stage.backgroundColorString;
-    // app.renderer.backgroundColor = 0xffffff;
+    const wriper = document.getElementById("live2d-wripe");
+    app.renderer.autoResize = true;
+    app.renderer.resize(wriper.clientWidth, wriper.clientWidth);
     const model4 = await PIXI.live2d.Live2DModel.from(cubism4Model);
     app.stage.addChild(model4);
-    model4.scale.set(0.08);
-    model4.position.set(-60, -60);
+    app.stage.width = wriper.clientWidth;
+    app.stage.height = wriper.clientWidth;
+    model4.scale.set(1.0);
+    // model4.position.set(-60, -60);
     model4.on('hit', async (hitAreas) => {
       console.log(hitAreas)
       if (hitAreas.length == 1) {
