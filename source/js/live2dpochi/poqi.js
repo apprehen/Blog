@@ -15,7 +15,7 @@ let cubism4Model = window.location.href + "js/live2dpochi/character/model.json";
   const model4 = await PIXI.live2d.Live2DModel.from(cubism4Model);
   app.stage.addChild(model4);
   app.stage.width = wriper.clientWidth;
-  app.stage.height = wriper.clientWidth;
+  app.stage.height = wriper.clientWidth;  
   model4.scale.set(1.0);
   model4.on('hit', async (hitAreas) => {
     console.log(hitAreas)
