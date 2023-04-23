@@ -280,3 +280,21 @@ upstream httpds{
 		server 192.168.174.134:80 weight=80 backup;
 }
 ```
+
+# Nginx 的一些报错
+
+**nginx: [error] invalid PID number "" in "/run/nginx.pid"**
+
+解决办法
+
+```shell
+nginx -c /etc/nginx/nginx.conf
+nginx -s reload
+```
+
+**could not open error log file: open() "/usr/local/nginx/logs/error.log" failed (13: Permission denied)**
+
+解决办法
+
+> 在指令前面加上 `sudo` 
+

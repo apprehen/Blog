@@ -8,10 +8,6 @@ abbrlink: 532d942c
 date: 2023-04-20 20:25:50
 ---
 
-
-
-# 
-
 **起因:** **因为`openAI`无法连接到互联网，且知识已经落后为了打照属于自己的`chatGPT` 找了很多资料，特地的做下总结！**
 
 第三方开源库`LangChain` 
@@ -23,7 +19,7 @@ date: 2023-04-20 20:25:50
 - 可以将`LLM`模型与外部数据源进行连接 (`LLM` : Large Language Model 大语言模型 )
 - 允许与`LLM` 模型进行交互
 
-## `Models`: LangChain 支持的各种模型类型 
+# `Models`: LangChain 支持的各种模型类型 
 
 `LLMS` :
 大型语言模型 (LLM) 是我们涵盖的第一类模型。这些模型将文本字符串作为输入，并返回文本字符串作为输出。
@@ -50,3 +46,7 @@ To get to the other side.
 
 生成文本：`LLM` 拥有的最基本的功能就是能够调用它，传入一个字符串并取回一个字符串。
 
+`LLM` 调用有如下
+
+- 支持多种模型接口, `OpenAI` `HuggingFace` `AzureOpenAI`  ...
+- 支持数据库缓存 in-mem SQLite Redis， 等
