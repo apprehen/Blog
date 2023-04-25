@@ -118,3 +118,8 @@ git管理的创库最大的好处就是多人可以协同开发，这里我们�
 `git reset -- hard HEAD~3` : 回退到前3次提交之前,以此类推
 `git reset -- hard commit-id` : 回退/进到 指定的commit的id码
 `commit-id` : 不同的仓库管理会生成不同的commit-id
+
+# git的一些好用的操作
+
+1.如果发现有人更改过仓库但是没有merge而本地的是自己辛辛苦苦写好的那么我们可以直接
+**`git push -f`**
