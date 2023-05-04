@@ -1,6 +1,3 @@
-const body = document.querySelector('body')
-body.insertAdjacentHTML('beforeend', '<div id="live2d-wripe" style="background-color: transparent"><canvas id="canvas" style="background-color: transparent"><canvas></div>')
-
 // 给.wiper_container_card添加子元素
 window.onload = function () {
   const swiper_container_card = document.querySelector('.swiper_container_card')

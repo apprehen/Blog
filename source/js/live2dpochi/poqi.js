@@ -1,7 +1,8 @@
 let cubism4Model = window.location.href + "js/live2dpochi/character/model.json";
 // if (window.screen.width > 1000) {
 (async function main() {
-
+  const body = document.querySelector('body')
+  body.insertAdjacentHTML('beforeend', '<div id="live2d-wripe" style="background-color: transparent"><canvas id="canvas" style="background-color: transparent"><canvas></div>')
   const app = new PIXI.Application({
     view: document.getElementById("canvas"),
     autoStart: true,
@@ -15,7 +16,7 @@ let cubism4Model = window.location.href + "js/live2dpochi/character/model.json";
   const model4 = await PIXI.live2d.Live2DModel.from(cubism4Model);
   app.stage.addChild(model4);
   app.stage.width = wriper.clientWidth;
-  app.stage.height = wriper.clientWidth;  
+  app.stage.height = wriper.clientWidth;
   model4.scale.set(1.0);
   model4.on('hit', async (hitAreas) => {
     console.log(hitAreas)

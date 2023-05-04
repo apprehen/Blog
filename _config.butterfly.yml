@@ -837,12 +837,12 @@ lazyload:
 # ---------------
 pwa:
   enable: true
-  manifest: /source/manifest.json
+  manifest: /manifest.json
   theme_color: '#425aef'
-  apple_touch_icon: /source/img/siteicon/128.png
-  favicon_32_32: /source/img/siteicon/32.png
-  favicon_16_16: /source/img/siteicon/16.png
-  mask_icon: /source/img/siteicon/128.png
+  apple_touch_icon: /img/siteicon/128.png
+  favicon_32_32: /img/siteicon/32.png
+  favicon_16_16: /img/siteicon/16.png
+  mask_icon: /img/siteicon/128.png
 
 # Open graph meta tags
 # https://developers.facebook.com/docs/sharing/webmasters/
@@ -1092,13 +1092,13 @@ inject:
     # - <script data-pjax src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js" defer></script>
     # 波奇酱
     - <script async src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    - <script src="/js/yueyun.js" defer></script>
+    - <script src="/js/yueyun.js"></script>
     - <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
     - <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
     - <script src="https://cdn.jsdelivr.net/npm/pixi.js@6.5.2/dist/browser/pixi.min.js"></script>
     # - <script src="/js/live2dpochi/live2dJS/new.min.js"></script>
     - <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>  
-    - <script src="/js/live2dpochi/poqi.js"></script>
+    - <script src="/js/live2dpochi/poqi.js" defer></script>
 
 
 # CDN
