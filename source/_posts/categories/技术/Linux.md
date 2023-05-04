@@ -8,4 +8,10 @@ cover: >-
 categories: 技术
 ---
 
-# EXPLOSION
+# Linux上的常用指令
+
+**ls**
+
+> ls 列出目录内容及其一些所属信息
+> ls -a 列出隐藏文件
+> ls -l (ll) 使用较长格式列出信息
