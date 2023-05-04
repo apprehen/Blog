@@ -5,6 +5,7 @@ tags: AI
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/2022_12_03_15_08_63.tzkq80xre5c.webp
 abbrlink: 5cbd2c11
+categories: 技术
 date: 2022-12-07 11:06:40
 ---
 # 注册前提

@@ -5,6 +5,7 @@ cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/10DCD02E61835FB52BC7421D120F6B62.yr028y2cvao.webp
 tags: 'openai,chatGPT'
 abbrlink: 532d942c
+categories: 技术
 date: 2023-04-20 20:25:50
 ---
 

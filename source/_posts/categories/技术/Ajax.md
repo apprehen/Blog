@@ -5,6 +5,7 @@ cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/2022_11_21_13_07_73.gojqpxla7h4.webp
 tags: 'Ajax,前后端交互'
 abbrlink: f7509f2
+categories: 技术 
 date: 2022-11-21 13:20:51
 ---
 

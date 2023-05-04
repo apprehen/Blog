@@ -7,6 +7,7 @@ top_group_index: 2
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/102629230_p0.3yd2fxgj0100.webp
 abbrlink: e6cca6f4
+categories: 技术
 date: 2022-11-15 10:07:00
 ---
 ### 什么是异步
