@@ -1,13 +1,11 @@
-// // 创建一个live2d的容器
-// var live2dContainer = document.createElement("div");
-// live2dContainer.id = "live2d-div";
-// // 创建一个canvas
-// var live2dCanvas = document.createElement("canvas");
-// live2dCanvas.id = "canvas";
-// live2dContainer.appendChild(live2dCanvas);
-// document.body.appendChild(live2dContainer);
-// // 给canvas设置大小
-// live2dContainer.width = 300 + 'px'
-// live2dContainer.height = 300 + 'px'
 const body = document.querySelector('body')
 body.insertAdjacentHTML('beforeend', '<div id="live2d-wripe" style="background-color: transparent"><canvas id="canvas" style="background-color: transparent"><canvas></div>')
+
+// 给.wiper_container_card添加子元素
+window.onload = function () {
+  const swiper_container_card = document.querySelector('.swiper_container_card')
+  console.log(swiper_container_card)
+  swiper_container_card.insertAdjacentHTML('afterbegin',
+    '<div style="width: 41%; height: 100%; background: url(/img/background/liang.jpg) no-repeat center center;background-size: contain;border-radius: 12px;border: var(--style-border)"></div>'
+  )
+}

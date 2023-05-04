@@ -827,10 +827,10 @@ pangu:
 # Lazyload (圖片懶加載)
 # https://github.com/verlok/vanilla-lazyload
 lazyload:
-  enable: false
+  enable: true
   field: site # site/post
   placeholder:
-  blur: false
+  blur: true
 
 # PWA
 # See https://github.com/JLHwung/hexo-offline
@@ -1033,31 +1033,14 @@ footer_beautify:
 
 swiper:
   enable: true # 开关
-  randomenable: true # 人潮汹涌开关
-  priority: 6 #过滤器优先权
+  randomenable: false # 人潮汹涌开关
+  priority: 5 #过滤器优先权
   enable_page: / # 应用页面
   timemode: date #date/updated
   layout: # 挂载容器类型
     type: id
     name: recent-posts
     index: 1
-  category:
-    - name: 技术
-      path: /categories/技术/
-      shadow: var(--anzhiyu-shadow-blue)
-      class: blue
-      icon: fas fa-dove
-    - name: 大学学习
-      path: /categories/大学学习/
-      shadow: var(--anzhiyu-shadow-red)
-      class: red
-      icon: fas fa-burn
-    - name: 冻鳗高手
-      path: /categories/冻鳗高手/
-      shadow: var(--anzhiyu-shadow-green)
-      class: green
-      icon: fas fa-book
-  default_descr: 再怎么看我也不知道怎么描述它的啦！
   swiper_css: https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu-pro/lib/swiper.min.css #swiper css依赖
   swiper_js: https://npm.elemecdn.com/anzhiyu-blog@1.1.6/js/swiper.min.js #swiper js依赖 #swiper js依赖
   custom_css: https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu-pro/lib/swiperstyle.css # 适配主题样式补丁
@@ -1109,7 +1092,7 @@ inject:
     # - <script data-pjax src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js" defer></script>
     # 波奇酱
     - <script async src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    - <script src="/js/yueyun.js"></script>
+    - <script src="/js/yueyun.js" defer></script>
     - <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
     - <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
     - <script src="https://cdn.jsdelivr.net/npm/pixi.js@6.5.2/dist/browser/pixi.min.js"></script>
