@@ -8938,6 +8938,7 @@ center#name-container {
   height: 60px;
   display: flex;
   align-items: center;
+  margin-left: 30px;
   transition: .3s
 }
 
@@ -8982,7 +8983,8 @@ center#name-container {
 }
 
 #nav #search-button {
-  padding-left: 0
+  padding-left: 0;
+  margin-right: 35px;
 }
 
 #page-header #nav .nav-button {
