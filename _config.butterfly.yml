@@ -1022,17 +1022,18 @@ gitcalendar:
 
 swiper:
   enable: true # 开关
-  priority: 5 # 过滤器优先权
+  priority: 5 #过滤器优先权
   enable_page: all # 应用页面
+  timemode: date #date/updated
   layout: # 挂载容器类型
-    type: class
-    name: swiper-div
+    type: id
+    name: recent-posts
     index: 0
-  default_descr: 
-  swiper_css: https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css
-  swiper_js: https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js
-  custom_css: https://npm.elemecdn.com/hexo-butterfly-swiper-lyx/lib/swiperstyle.css
-  custom_js: https://npm.elemecdn.com/hexo-butterfly-swiper-lyx/lib/swiper_init.js
+  default_descr: 再怎么看我也不知道怎么描述它的啦！
+  swiper_css: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css #swiper css依赖
+  swiper_js: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js #swiper js依赖
+  custom_css: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css # 适配主题样式补丁
+  custom_js: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js # swiper初始化方法
 
 
 # hexo-butterfly-categories-card
