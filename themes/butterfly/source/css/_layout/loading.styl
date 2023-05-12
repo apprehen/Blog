@@ -1,43 +1,7 @@
-if hexo-config('preloader')
-  .loading-bg
-    display: flex;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background: #fff;
-    z-index: 1001;
-    opacity: 1;
-    transition:.3s;
-  #loading-box
-    .loading-img
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin: auto;
-      border: 4px solid #f0f0f2;
-      animation-duration: .3s;
-      animation-name: loadingAction;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-    .loading-image-dot
-      width: 30px;
-      height: 30px;
-      background: #6bdf8f;
-      position: absolute;
-      border-radius: 50%;
-      border: 6px solid #fff;
-      top: 50%;
-      left: 50%;
-      transform: translate(18px, 24px);
-    &.loaded
-      .loading-bg
-        opacity: 0;
-        z-index: -1000;
-  @keyframes loadingAction
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: .4;
-    }
+if hexo-config('preloader.enable')
+  if hexo-config('preloader.load_style') == 'default'
+    @import './_load_style/default'
+  else if hexo-config('preloader.load_style') == 'image'
+    @import './_load_style/image'
+  else
+    @import './_load_style/default'

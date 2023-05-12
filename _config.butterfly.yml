@@ -634,7 +634,12 @@ subtitle:
     - 生命是有光的❤❤❤❤
 
 # Loading Animation (加載動畫)
-preloader: false
+# preloader: false
+preloader:
+  enable: true # true|false
+  load_color: '#000000' # '#37474f'
+  load_style: image # default|gear|ironheart|scarecrow|triangles|wizard|image
+  load_image:  /img/background/liang.jpg # /img/background/1.jpg
 
 # aside (側邊欄)
 # --------------------------------------
@@ -1001,21 +1006,6 @@ gitcalendar:
     type: id
     name: recent-posts
     index: 0
-  # volantis挂载容器
-  # layout:
-  #   type: class
-  #   name: l_main
-  #   index: 0
-  # matery挂载容器
-  # layout:
-  #   type: id
-  #   name: indexCard
-  #   index: 0
-  # mengd挂载容器
-  # layout:
-  #   type: class
-  #   name: content
-  #   index: 0
   user: apprehen #git用户名
   apiurl: 'https://gcapi.yisous.xyz'
   minheight:
@@ -1030,62 +1020,20 @@ gitcalendar:
   gitcalendar_js: https://cdn.cbd.int/hexo-filter-gitcalendar/lib/gitcalendar.js
 
 
-# hexo-filter-gitcalendar
-# see https://akilar.top/posts/1f9c68c9/
-# gitcalendar:
-#   enable: true # 开关
-#   priority: 5 #过滤器优先权
-#   enable_page: / # 应用页面
-#   # butterfly挂载容器
-#   layout: # 挂载容器类型
-#     type: id
-#     name: recent-posts
-#     index: 0
-#   # volantis挂载容器
-#   # layout:
-#   #   type: class
-#   #   name: l_main
-#   #   index: 0
-#   # matery挂载容器
-#   # layout:
-#   #   type: id
-#   #   name: indexCard
-#   #   index: 0
-#   # mengd挂载容器
-#   # layout:
-#   #   type: class
-#   #   name: content
-#   #   index: 0
-#   user: apprehen #git用户名
-#   apiurl: 'https://gcapi.yisous.xyz/api?apprehen'
-#   minheight:
-#     pc: 280px #桌面端最小高度
-#     mibile: 0px #移动端最小高度
-#   color: "['#e4dfd7', '#f9f4dc', '#f7e8aa', '#f7e8aa', '#f8df72', '#fcd217', '#fcc515', '#f28e16', '#fb8b05', '#d85916', '#f43e06']" #橘黄色调
-#   # color: "['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f']" #浅紫色调
-#   # color: "['#ebedf0', '#f0fff4', '#dcffe4', '#bef5cb', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620']" #翠绿色调
-#   # color: "['#ebedf0', '#f1f8ff', '#dbedff', '#c8e1ff', '#79b8ff', '#2188ff', '#0366d6', '#005cc5', '#044289', '#032f62', '#05264c']" #天青色调
-#   container: .recent-post-item(style='width:100%;height:auto;padding:10px;') #父元素容器，需要使用pug语法
-#   gitcalendar_css: https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css
-#   gitcalendar_js: https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.js
-
 swiper:
   enable: true # 开关
-  randomenable: false # 人潮汹涌开关
-  priority: 5 #过滤器优先权
-  enable_page: / # 应用页面
-  timemode: date #date/updated
+  priority: 5 # 过滤器优先权
+  enable_page: all # 应用页面
   layout: # 挂载容器类型
-    type: id
-    name: recent-posts
+    type: class
+    name: swiper-div
     index: 0
-  swiper_css: https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu-pro/lib/swiper.min.css #swiper css依赖
-  swiper_js: https://npm.elemecdn.com/anzhiyu-blog@1.1.6/js/swiper.min.js #swiper js依赖 #swiper js依赖
-  custom_css: https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu-pro/lib/swiperstyle.css # 适配主题样式补丁
-  custom_js: https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu-pro/lib/swiper_init.js # swiper初始化方法
-  gsap_js: https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/gsap/3.9.1/gsap.min.js
-  people_js: https://npm.elemecdn.com/hexo-butterfly-swiper-anzhiyu-pro/lib/people.min.js
-  categorygroup_css: https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu-pro/lib/categoryGroup.css
+  default_descr: 
+  swiper_css: https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css
+  swiper_js: https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js
+  custom_css: https://npm.elemecdn.com/hexo-butterfly-swiper-lyx/lib/swiperstyle.css
+  custom_js: https://npm.elemecdn.com/hexo-butterfly-swiper-lyx/lib/swiper_init.js
+
 
 # hexo-butterfly-categories-card
 # see https://akilar.top/posts/a9131002/

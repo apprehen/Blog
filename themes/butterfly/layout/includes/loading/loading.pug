@@ -1,4 +1,6 @@
-#loading-box(onclick='document.getElementById("loading-box").classList.add("loaded")')
-  .loading-bg
-    div.loading-img
-    .loading-image-dot
+if theme.preloader.enable
+  case theme.preloader.load_style    
+    when 'image'
+      include ./load_style/image.pug
+    default
+      include ./load_style/default.pug
