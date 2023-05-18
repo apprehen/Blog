@@ -131,3 +131,50 @@ date: 2023-05-04 10:11:11
 
 - 通过浏览器访问 `localhost:9090/ui`，其中 `localhost` 替换为 clash 部署服务器的 IP
 
+配置定时更新订阅
+
+使用如下脚本填写相关配置项目并放入 `/etc/cron.weekly` 目录下，每周自动更新订阅配置文件即可
+`sudo vim /etc/cron.weekly/clash.sh`
+
+```shell
+#!/usr/bin/env bash
+
+# 订阅链接地址
+SUBSCRIBE=""
+# web-ui存放目录，留空则保持默认不修改
+WEB_UI=""
+# API 端口，留空则保持默认不修改
+CONTROLLER_API_PROT=""
+# API 口令，留空则保持默认不修改
+SECRET=""
+
+CLASH_CONFIG="/etc/clash/config.yaml"
+
+
+if [ -z "${SUBSCRIBE}" ]; then
+    echo "Subscription address cannot be empty"
+    exit 1
+fi
+
+systemctl stop clash
+
+wget --no-proxy -O ${CLASH_CONFIG} ${SUBSCRIBE}
+
+if [ -n "${WEB_UI}" ]; then
+sed -i "s?^#\{0,1\} \{0,1\}external-ui.*?external-ui: ${WEB_UI}?" ${CLASH_CONFIG}
+fi
+
+if [ -n "${CONTROLLER_API_PROT}" ]; then
+sed -i "s?^external-controller.*?external-controller: '0.0.0.0:${CONTROLLER_API_PROT}'?" ${CLASH_CONFIG}
+fi
+
+if [ -n "${SECRET}" ]; then
+sed -i "s?^secret.*?secret: '${SECRET}'?" ${CLASH_CONFIG}
+fi
+
+systemctl start clash
+```
+
+上述脚本写入 `/etc/cron.weekly/clash.sh` 并配置好相关变量后，保存退出并赋予可执行权限
+`chmod 0755 /etc/cron.weekly/clash.sh`
+至此，Linux 下 clash 配置完成啦！！
