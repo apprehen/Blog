@@ -6,8 +6,8 @@ date: 2023-05-21 14:22:36
 tags:
   - Linux
   - pm2
-cover: ->
-  https://cdn.staticaly.com/gh/apprehen/pciture@master/93F52A40FF3DE2247B3C97D006CE472C.4krl4bfk4t40.webp
+cover: >-
+  https://cdn.staticaly.com/gh/apprehen/pciture@master/IMG_20230521_153207.5m1csx7jah00.webp
 ---
 
 # pm2指令
