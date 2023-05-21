@@ -3,7 +3,9 @@ title: OPENAI 的高阶玩法
 description: 基于LangChain框架的大语言模型技术，可以用于总结，分段，联网，收缩等一系列功能
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/10DCD02E61835FB52BC7421D120F6B62.yr028y2cvao.webp
-tags: 'openai,chatGPT'
+tags: 
+  - openai
+  - chatGPT
 abbrlink: 532d942c
 categories: 技术
 date: 2023-04-20 20:25:50
