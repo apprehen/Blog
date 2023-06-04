@@ -2690,12 +2690,17 @@ figure.highlight pre .tag .attr {
 }
 
 .layout>div:first-child {
-  width: 80%;
+  width: 82%;
   -webkit-transition: all .3s;
   -moz-transition: all .3s;
   -o-transition: all .3s;
   -ms-transition: all .3s;
   transition: all .3s
+}
+@media screen and (max-width: 1450px) {
+  .layout>div:first-child {
+    width: 75% !important;
+  }
 }
 
 @media screen and (max-width:900px) {
