@@ -2698,6 +2698,11 @@ figure.highlight pre .tag .attr {
   transition: all .3s;
   padding: 0 20px;
 }
+@media screen and (max-width: 1200px) {
+  .layout>div:first-child {
+    width: 75% !important;
+  }
+}
 
 @media screen and (max-width:900px) {
   .layout>div:first-child {
