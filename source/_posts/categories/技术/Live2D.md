@@ -1,6 +1,5 @@
 ---
 title: Live2D
-date: 2023-06-08 10:37:53
 description: 介绍一下我的博客的live2d是怎么加载放置的
 categories: 技术
 tags:
@@ -8,6 +7,8 @@ tags:
   - live2d
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/1686118323025.4ykfp44femo0.webp
+abbrlink: c1f359fb
+date: 2023-06-08 10:37:53
 ---
 
 **在博客上面自定义你的live2d ！！**
