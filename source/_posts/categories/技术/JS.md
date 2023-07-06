@@ -19,11 +19,11 @@ date: 2022-11-24 16:05:15
 
 **JavaScript中的原始数据类型包括：**
 
-1.Numbers  - Integers,floats (整数，浮点数)
+1.number  - Integers,floats (整数，浮点数)
 
 2.String - 单引号('')，双引号("")，或者反引号下的任何数据(``)
 
-3.Booleands - 真(true)或假(false)
+3.Boolean - 真(true)或假(false)
 
 4.Null - 空值 或者 无值
 
@@ -31,11 +31,13 @@ date: 2022-11-24 16:05:15
 
 6.Symbol - 可以由Symbol构造函数生成的唯一值
 
+7.BigInt
+
 **JavaScript 中的非原始数据类型包括:**
 
 1.对象
 
-2.数组
+(非原始对象只有Object Array和Function都是object的子类)
 
 *原始*数据类型是不可变的（不可修改的）数据类型。一旦创建了原始数据类型，我们就无法修改它。
 
