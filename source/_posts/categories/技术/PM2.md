@@ -2,12 +2,13 @@
 title: pm2 基本技巧和基本指令
 description: 由于经常忘记一些常用的指令，于是打算记录下来方便自己查找
 categories: 技术
-date: 2023-05-21 14:22:36
 tags:
   - Linux
   - pm2
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/IMG_20230521_153207.5m1csx7jah00.webp
+abbrlink: 9b27a0ac
+date: 2023-05-21 14:22:36
 ---
 
 # pm2指令

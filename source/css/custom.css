@@ -2648,8 +2648,8 @@ figure.highlight pre .tag .attr {
   -ms-flex: 1 auto;
   flex: 1 auto;
   margin: 0 auto;
-  padding: 20px 15px;
-  /* max-width: 1400px; */
+  padding: 20px 15px !important;
+  max-width: 1450px;
   width: 100%
 }
 
@@ -2670,12 +2670,6 @@ figure.highlight pre .tag .attr {
   }
 }
 
-@media screen and (min-width:2000px) {
-  .layout {
-    max-width: 1500px
-  }
-}
-
 .layout>div:first-child:not(.recent-posts) {
   -webkit-align-self: flex-start;
   align-self: flex-start;
@@ -2690,18 +2684,28 @@ figure.highlight pre .tag .attr {
 }
 
 .layout>div:first-child {
-  width: 80%;
+  width: 85% !important;
   -webkit-transition: all .3s;
   -moz-transition: all .3s;
   -o-transition: all .3s;
   -ms-transition: all .3s;
-  transition: all .3s
+  transition: all .3s;
+  padding: 0 20px;
 }
 @media screen and (max-width: 1200px) {
   .layout>div:first-child {
-    width: 75% !important;
+    width: 85% !important;
   }
 }
+@media screen and (max-width: 1500px) {
+  .layout{
+    max-width: 1400px !important;
+  }
+  .layout>div:first-child {
+    width: 80% !important;
+  }
+}
+
 
 @media screen and (max-width:900px) {
   .layout>div:first-child {
