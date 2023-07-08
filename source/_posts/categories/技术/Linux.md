@@ -1,6 +1,8 @@
 ---
 title: Linux技巧
-tags: Linux
+tags: 
+  - Linux
+  - 梯子
 description: 在日常运用中一些Linux好用的指令和技巧和遇到一些错误的解决办法和Linux服务器上怎么挂代理
 cover: >-
   https://cdn.staticaly.com/gh/apprehen/pciture@master/76A563FF42CF2F3735174A1CA66107AD.6iplu6wony40.webp
