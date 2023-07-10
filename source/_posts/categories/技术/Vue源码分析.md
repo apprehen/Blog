@@ -198,7 +198,7 @@ export function trigger(target,key){
   })
 }
 ```
-- utils.js
+ - utils.js
 ```javascript
 export function isObject(val) {
   // 类型是null 类型是object
@@ -215,5 +215,90 @@ export function isArray(target){
 
 export function isFunction(target){
   return typeof target === 'function'
+}
+```
+
+**Ref实现**
+
+ref.js 如下
+```javascript
+import {isObject,hasChanged} from './utils'
+import {track,trigger} from './effect'
+import {reactive} from './reactive'
+export function ref (value) {
+  if(isRef(value)) return value
+  return new RefImpl(value)
+}
+export function isRef(value) {
+  return value.__isRef
+}
+class RefImpl {
+  constructor(value) {
+    this._value = convert(value)
+    this.__isRef = true
+  }
+  get value () {
+    track(this,'value')
+    return this._value
+  }
+  set value (newValue) {
+    if (hasChanged(newValue,this._value)) {
+      this._value = convert(newValue)
+      tigger(this,'value')
+    }
+  }
+}
+
+function convert(value) {
+  return isObject(value) ? reactive(value) : value
+}
+```
+
+**computed实现**  
+computed.js 如下
+```javascript
+import { isFunction } from "../utils"
+import { effect,track,trigger } from "./effect"
+export function computed(getterOrOptions){
+  let getter,setter;
+  if(isFunction(getterOrOptions)){
+    getter = getterOrOptions
+    setter = () => {
+      console.warn('computed value must be readonly')
+    }
+  }else{
+    getter = getterOrOptions.get
+    setter = getterOrOptions.set
+  }
+  return new ComputedRefImpl(getter,setter)
+}
+
+class ComputedRefImpl{
+  constructor(getter,setter){
+    this._dirty = true
+    this._value = null
+    this._setter = setter
+    this.effect = effect(getter, {
+      lazy: true,
+      // 调度机制
+      scheduler: () => {
+        if(!this._dirty){
+          this._dirty = true
+          trigger(this, 'value')
+        }
+      }
+    })
+  }
+  get value(){
+    if(this._dirty){
+      this._value = this.effect()
+      this._dirty = false
+    }
+    track(this, 'value')
+    return this._value
+  }
+  set value(newValue){
+    this._setter(newValue)
+  }
 }
 ```
