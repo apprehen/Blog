@@ -572,3 +572,67 @@ function mountChildren (vnode,container) {
   }
 }
 ```
+
+
+**实现广义的diff算法 `patch`**
+
+render.js
+```javascript
+import {ShapeFlags} from './vnode'
+// 比较vnode的Props差异函数
+import {patchProps} from './patchProp'
+// 渲染render函数
+export function render(vnode, container) {
+  // 初次渲染
+  // 上一次的vnode存储
+  const prevVNode = container._vnode
+  // first: 判断n2是否存在(即newVNode)
+  if(!vnode) {
+    // 如果n1存在,则卸载 
+    if(prevNode) {
+      // 卸载
+      unmount(prevVNode)
+      container._vnode = null
+    }
+  } else {
+    // n2存在 进行patch差异化比较
+    patch(prevVNode,vnode,container)
+  }
+  container._vnode = vnode
+}
+
+/**
+ * @param {VNode | null} n1:旧的vnode
+ * @param {VNode} n2:新的vnode
+ * @param {Element} container:容器
+ * @param {Element | null} anchor:锚点 (插入位置)
+ */
+function patch(n1,n2,container,anchor) {
+  if(n1 && !isSameVNode(n1,n2)) {
+    // n1存在 且 n1和n2不是同一个vnode
+    // n1被卸载后，n2将会创建，因此anchor至关重要。需要将它设置为n1的下一个兄弟节点
+    anchor = (n1.anchor || n1.el).nextSibling
+    umount(n1)
+    n1 = null
+  }
+  const { shapeFlag } = n2
+  if (shapeFlag & ShapeFlags.COMPONENT) {
+    processComponent(n1,n2,container,anchor)
+  } else if (shapeFlag & ShapeFlags.TEXT) {
+    processText(n1, n2, container, anchor)
+  } else if (shapeFlag & ShapeFlags.FRAGMENT) {
+    processFragment(n1, n2, container, anchor)
+  } else {
+    processElement(n1, n2, container, anchor)
+  }
+}
+
+/**
+ * @param {VNode} n1:旧的vnode
+ * @param {Element} container:容器
+ * 
+*/
+function mountElement(vnode,container,anchor) {
+
+}
+```
