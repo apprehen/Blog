@@ -628,11 +628,235 @@ function patch(n1,n2,container,anchor) {
 }
 
 /**
- * @param {VNode} n1:旧的vnode
+ * @param {VNode} vnode: vnode DOM节点
  * @param {Element} container:容器
- * 
+ * @param {Element | null} anchor:锚点 (插入位置)
+ * @apprehen 递归创建子节点
 */
 function mountElement(vnode,container,anchor) {
+  const { type,props,shapeFlag,children } = vnode
+  const el = doucment.createElement(type)
+  // 挂载属性
+  if (props) {
+    patchProps(null, props, el)
+  }
+  // 挂载子节点
+  if (shapeFlag & ShapeFlags.TEXT_CHILDREN) {
+    el.textContent = children // 子结点是文本
+  } else if (shapeFlag & ShapeFlags.ARRAY_CHILDREN) {
+    mountChildren(children, el) // 子结点是数组 遍历子节点挂载
+  }
+}
 
+/**
+ * @param {VNode} vnode:vnode DOM节点
+ * @param {Element} container:容器
+ * @param {Element | null} anchor:锚点 (插入位置)
+ * @apprehen 
+*/
+function mountText(vnode, container, anchor) {
+  const el = document.createTextNode(vnode.children)
+  vnode.el = el
+  container.insertBefore(el, anchor)
+}
+
+/**
+ * @param {Array<VNode>} children:children DOM节点数组 分别挂载
+ * @param {Element} container:容器
+ * @param {Element | null} anchor:锚点 (插入位置)
+ * @apprehen 挂载子节点(数组类型)
+*/  
+function mountChildren(children, container, anchor) {
+  children.forEach(child => {
+    patch(null, child, container, anchor)
+  })
+}
+
+/**
+ * @param {VNode} vnode:vnode DOM节点
+ * @apprehen 卸载vnode
+*/
+function unmount (vnode) {
+  const { shapeFlag,el } = vnode
+  if(shapeFlag & ShapeFlags.COMPONENT) {
+    unmountComponent(vnode)
+  } else if (shapeFlag & ShapeFlags.FRAGMENT) {
+    unmountFragment(vnode)
+  } else {
+    el.parentNode.removeChild(el)
+  }
+}
+
+/**
+ * @param {VNode} vnode:vnode DOM节点
+ * @apprehen 卸载组件vnode
+*/
+function unmountComponent(vnode) {
+  // TODO
+}
+
+/**
+ * @param {VNode} vnode:vnode DOM节点
+*/
+function unmountFragment(vnode) {
+  const { el: cur, anchor:end } = vnode
+  const { parentNode } = cur
+  while(cur !== end) {
+    const next = cur.nextSibling
+    parentNode.removeChild(cur)
+    cur = next
+  }
+  parentNode.removeChild(end)
+}
+
+/**
+ * @param {Array<VNode>} Children: children DOM节点数组 分别卸载
+ * @apprehen 对比vnode是否相同
+*/
+function unmountChildren(Children) {
+  Children.forEach(child => {
+    unmount(child)
+  })
+}
+
+/**
+ * @param {VNode} n1:旧的vnode
+ * @param {VNode} n2:新的vnode
+ * @param {Element} container:容器
+ * @param {Element | null} anchor:锚点 (插入位置)
+ * @apprehen 对比元素Element并进行更新
+*/
+function processElement(n1, n2, container, anchor) {
+  if( n1==null ) {
+    // 直接挂载n2
+    mountElement(n2,container,anchor)
+  } else {
+    patchElement(n1,n2)
+  }
+}
+
+/**
+ * @param {VNode} n1:旧的vnode
+ * @param {VNode} n2:新的vnode
+ * @param {Element} container:容器
+ * @param {Element | null} anchor:锚点 (插入位置)
+ * @apprehen 对比Fragment并进行更新
+*/
+function processFragment(n1, n2, container, anchor) {
+  const fragmentStartAnchor = (n2.el = n1 ? n1.el : document.createTextNode(''))
+  const fragmentEndAnchor = (n2.anchor = n1 ? n1.anchor : document.createTextNode(''))
+  if(n1 == null) {
+    container.insertBefore(fragmentStartAnchor,anchor)
+    container.insertBefore(fragmentEndAnchor,anchor)
+    mountChildren(n2.children,container,fragmentEndAnchor)
+  } else {
+    patchChildren(n1,n2,container,fragmentEndAnchor)
+  }
+}
+
+/**
+ * @param {VNode} n1:旧的vnode
+ * @param {VNode} n2:新的vnode
+ * @param {Element} container:容器
+ * @param {Element | null} anchor:锚点 (插入位置)
+ * @apprehen 组件进行更新
+*/
+function processComponent(n1, n2, container, anchor) {
+  // TODO
+}
+
+
+/**
+ * @param {VNode} n1:旧的vnode
+ * @param {VNode} n2:新的vnode
+ * @param {Element} container:容器
+ * @param {Element | null} anchor:锚点 (插入位置)
+ * @apprehen 对比文本并进行更新 
+*/
+function processText(n1, n2, container, anchor) {
+  if (n1 == null) {
+    mountText(n2, container, anchor)
+  } else {
+    n2.el = n1.el
+    n2.el.textContent = n2.children
+  }
+}
+
+/**
+ * @param {VNode} n1:旧的vnode
+ * @param {VNode} n2:新的vnode
+ * @apprehen 对比vnode是否相同(比较复用)
+*/
+function patchElement(n1, n2) {
+  n2.el = n1.el
+  patchProps(n1.props, n2.props, n2.el)
+  patchChildren(n1,n2,n2.el)
+}
+
+/**
+ * @param {VNode} n1:旧的vnode
+ * @param {VNode} n2:新的vnode
+ * @param {Element} container:容器
+ * @param {Element | null} anchor:锚点 (插入位置)
+ * @apprehen 对比vnode是否相同(比较复用)判断n1 n2 的子结点类型
+ */
+function patchChildren(n1,n2,container,anchor) {
+  const { shapeFlag: prevShapeFlag, children: c1 } = n1
+	const { shapeFlag, children: c2 } = n2
+	if (shapeFlag & ShapeFlags.TEXT_CHILDREN) {
+		// n2 是TEXT_CHILDREN 类型
+		if (c2 !== c1) {
+			container.textContent = c2
+		}
+		if (prevShapeFlag & ShapeFlags.ARRAY_CHILDREN) {
+			unmountChildren(c1)
+		}
+	} else if (shapeFlag & ShapeFlags.ARRAY_CHILDREN) {
+		// n2 是ARRAY_CHILDREN 类型
+		if (prevShapeFlag & ShapeFlags.TEXT_CHILDREN) {
+			// n1 是TEXT_CHILDREN 类型
+			container.textContent = ""
+			mountChildren(c2, container, anchor)
+		} else if (prevShapeFlag & ShapeFlags.ARRAY_CHILDREN) {
+			// n1 是ARRAY_CHILDREN 类型
+			patchArrayChildren(c1, c2, container, anchor)
+		} else {
+			// n1 是EMPTY_CHILDREN 类型 null
+			mountChildren(c2, container, anchor)
+		}
+	} else {
+		// n2 是EMPTY_CHILDREN 类型 null
+		if (prevShapeFlag & ShapeFlags.TEXT_CHILDREN) {
+			// n1 是TEXT_CHILDREN 类型
+			container.textContent = ""
+		} else if (prevShapeFlag & ShapeFlags.ARRAY_CHILDREN) {
+			// n1 是ARRAY_CHILDREN 类型
+			unmountChildren(c1)
+		}
+	}
+}
+
+/**
+ * @param {VNode} n1:旧的vnode
+ * @param {VNode} n2:新的vnode
+ * @param {Element} container:容器
+ * @param {Element | null} anchor:锚点 (插入位置)
+*/
+function patchArrayChildren(c1, c2, container, anchor) {
+	const oldLength = c1.length
+	const newLength = c2.length
+	const commonLength = Math.min(oldLength, newLength)
+	for (let i = 0; i < commonLength; i++) {
+		patch(c1[i], c2[i], container, anchor)
+	}
+	if (oldLength > newLength) {
+		unmountChildren(c1.slice(commonLength))
+	} else {
+		mountChildren(c2.slice(commonLength), container, anchor)
+	}
+}
+
+function isSameVNode(prevVNode, vnode) {
+	return prevVNode.type === vnode.type
 }
 ```
