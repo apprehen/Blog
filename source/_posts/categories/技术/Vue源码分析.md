@@ -15,7 +15,7 @@ cover: >-
 2. runtime 渲染系统
 3. reactive 响应系统
 
-**1.Reactive的实现**
+## **1.Reactive的实现**
 在Vue2中实现响应式是使用Object.defineProperty来实现数据劫持如下
 ```javascript
 let number = 18
@@ -303,7 +303,7 @@ class ComputedRefImpl{
 }
 ```
 
-**2.runtime 渲染系统**  
+## **2.runtime 渲染系统**  
 首先介绍一下什么是虚拟DOM
 
 虚拟DOM：
@@ -860,3 +860,85 @@ function isSameVNode(prevVNode, vnode) {
 	return prevVNode.type === vnode.type
 }
 ```
+
+
+**组件的实现方法**
+> 从开发者的视角：组件分为状态组件和函数组件
+> vue3中的状态组件和函数组件类似，下面只讨论状态组件的实现
+
+React的组件示例(class组件)
+```javascript
+class Counter extends React.Component{
+  state = {
+    count: 0
+  };
+  add = ()=> {
+    this.setState({
+      count: this.state.count + 1
+    })
+  };
+  render(){
+    return (
+      <div>
+        <p>{this.state.count}</p>
+        <button onClick={this.add}>add</button>
+      </div>
+    )
+  }
+}
+```
+Vue3的组件示例(optional) (渲染函数)
+```javascript
+createApp({
+  data () {
+    return {
+      count: 0
+    }
+  },
+  methods: {
+    add () {
+      this.count++
+    }
+  },
+  render (cxt) {
+    return [
+      h('div',{},[
+      h('p',{},ctx.count),
+      h('button',{onClick: ctx.add},'add')
+      ])
+    ]
+  }
+}).mount('#app')
+```
+
+Vue3的组件示例(composition) (渲染函数)
+```javascript
+createApp({
+  setup () {
+    const count = ref(0)
+    const add = ()=> {
+      count.value++
+     }
+    return {
+      count,
+      add
+    }
+  },
+  render (cxt) {
+    return [
+      h('div',{},[
+      h('p',{},ctx.count),
+      h('button',{onClick: ctx.add},'add')
+      ])
+    ]
+  }
+}).mount('#app')
+```
+可以看出 从实现的角度上来说，组件都有以下几个共同点:
+  - 都有 `instance` (实例) 以承载内部的状态，方法等
+  - 都有一个 `render` 函数
+  - 都通过 `render` 函数产出`VNode`
+  - 都有一套更新的策略，以重新执行 `render` 函数 
+  - 在此基础上附加各种能力，如生命周期，通信机制，slot，provide，inject等  
+
+
