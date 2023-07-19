@@ -15,7 +15,7 @@ cover: >-
 2. runtime 渲染系统
 3. reactive 响应系统
 
-## **1.Reactive的实现**
+## **Reactive的实现**
 在Vue2中实现响应式是使用Object.defineProperty来实现数据劫持如下
 ```javascript
 let number = 18
@@ -303,7 +303,9 @@ class ComputedRefImpl{
 }
 ```
 
-## **2.runtime 渲染系统**  
+
+
+## **runtime 渲染系统**  
 首先介绍一下什么是虚拟DOM
 
 虚拟DOM：
@@ -861,6 +863,212 @@ function isSameVNode(prevVNode, vnode) {
 }
 ```
 
+vnode.js
+```javascript
+//在return中新添加属性
+return {
+  types,
+  props,
+  children,
+  shapeFlag,
+  el:null,
+  anchor:null,
+  key: props && (props.key != null ? props.key : null),
+	component: null, //专门用于存储组件的实例
+}
+```
+
+**vue3中diff算法**  
+首先是重新完成render.js
+```javascript
+import { ShapeFlags } from "./vnode"
+import { patchProps } from "./patchProps"
+import { mountComponent } from "./component"
+export function render(vnode, container) {
+	const prevVNode = container._vnode
+	// first：判断n2是否存在
+	if (!vnode) {
+		if (prevVNode) {
+			unmount(prevVNode)
+		}
+	} else {
+		// n2存在
+		patch(prevVNode, vnode, container)
+	}
+  // 存prevVNode
+  container._vnode = vnode
+}
+// .... 
+// 简单的diff比较
+function patchUnkeyedChildren(c1, c2, container, anchor) {
+  const oldLength = c1.length
+  const newLength = c2.length
+  const commonLenght = Math.min(oldLength, newLength)
+  for(let i=0;i<commonlength;i++){
+    patch(c1[i],c2[i],container)
+  }
+  if(oldLength > newLength){
+    unmountChildren(c1.slice(commonLength))
+  } else {
+    mountChildren(c2.slice(commonLength),container,anchor)
+  }
+}
+// react中的diff算法原理
+function reactPathchKeyedChildren(c1,c2,container,anchor) {
+  const map = new Map()
+  c1.forEach((perv, j)=>{
+    map.set(perv.key,{perv,j})
+  })
+  let maxNewIndexSoFar = 0
+  for(let i=0;i<c2.length;i++) {
+    const next = c2[i]
+    const curAnchor = i-1<0 ? c1[0].el : c2[ i-1 ].el.nextSibling
+    if (map.has(next.key)) {
+      const { prev, j } = map.get(next.key)
+      patch(prev,next,container,anchor)
+      if (j < maxNewIndexSoFar) {
+        container.insertBefore(next.el, curAnchor)
+      } else {
+        maxNewIndexSoFar = j
+      }
+      map.delete(next.key)
+    } else {
+      patch(null,next,container,curAnchor)
+    }
+  }
+  map.forEach(({perv})=>{
+    unmount(perv)
+  })
+}
+
+// Vue3中的diff算法 双端 + 最长子序列算法
+function patchKeyedChildren(c1, c2, container, anchor) {
+  let i = 0
+  let e1 = c1.length - 1
+  let e2 = c2.length - 1
+  // 1.从左向右依次对比
+  while(i <= e1 && i<= e2 && c1[i].key === c2[i].key ) {
+    patch(c1[i], c2[i], container, anchor)
+    i++
+  }
+  // 2.从右向左一次对比
+  while (i <= e1 && i <= e2 && c1[e1].key === c2[e2].key) {
+		patch(c1[e1], c2[e1], container, anchor)
+		e1--
+		e2--
+	}
+  if (i > e1) {
+		// 3. 经过1,2 直接将旧结点比对完，则剩下的新结点直接mount
+		for (let j = i; j <= e2; j++) {
+			const nextPos = e2 + 1
+			const curAnchor = (c2[nextPos] && c2[nextPos].el) || anchor
+			path(null, c2[j], container, curAnchor)
+		}
+	} else if (i > e2) {
+		// 3. 经过1,2 直接将新结点比对完，则剩下的旧结点直接unmount
+		for (let j = 1; j <= e1; j++) {
+			unmount(c1[j])
+		}
+	} else {
+    // 4. 若不满足3 采用传统的diff算法 但是不真的移动和添加，只做标记和删除
+		const map = new Map()
+		c1.forEach((perv, j) => {
+			map.set(perv.key, { perv, j })
+		})
+		let maxNewIndexSoFar = 0
+		let move = false
+		const source = new Array(e2 - i + 1).fill(-1)
+		const toMounted = []
+		for (let k = 0; k < c2.length; k++) {
+			const next = c2[k]
+			if (map.has(next.key)) {
+				const { prev, j } = map.get(next.key)
+				patch(prev, next, container, anchor)
+				if (j < maxNewIndexSoFar) {
+					move = true
+				} else {
+					maxNewIndexSoFar = j
+				}
+				source[k] = j
+				map.delete(next.key)
+			} else {
+				toMounted.push(k + i)
+			}
+		}
+		map.forEach(({ perv }) => unmount(perv))
+		if (move) {
+			// 5.需要移动，则采用新的最长上升子序列算法
+			const seq = getSequence(source)
+			let j = seq.length - 1
+			for (let k = source.length - 1; k >= 0; k--) {
+				if (k === seq[j]) {
+					// 不用移动
+					j--
+				} else {
+					const pos = k + i
+					const nextPos = pos + 1
+					const curAnchor = (c2[nextPos] && c2[nextPos].el) || anchor
+					if (source[k] === -1) {
+						// mount
+						patch(null, c2[pos], container, curAnchor)
+					} else {
+						// 移动
+						container.insertBefore(c2[pos].el, curAnchor)
+					}
+				}
+			}
+		} else if (toMounted.length) {
+			// 6.不需要移动，但还有未添加的元素
+			for (let k = toMounted.length - 1; k >= 0; k--) {
+				const pos = toMounted[k]
+				const nextPos = pos + 1
+				const curAnchor = (c2[nextPos] && c2[nextPos].el) || anchor
+				patch(null, c2[pos], container, curAnchor)
+			}
+		}
+	}
+}
+
+// 求最长子序列
+function getSequence (nums) {
+  const result = []
+	const position = []
+	for (let i = 0; i < nums.length; i++) {
+		if (nums[i] === -1) {
+			continue
+		}
+		// result[result.length - 1]可能为undefined，此时nums[i] > undefined为false
+		if (nums[i] > result[result.length - 1]) {
+			result.push(nums[i])
+			position.push(result.length - 1)
+		} else {
+			let l = 0,
+				r = result.length - 1
+			while (l <= r) {
+				const mid = ~~((l + r) / 2)
+				if (nums[i] > result[mid]) {
+					l = mid + 1
+				} else if (nums[i] < result[mid]) {
+					r = mid - 1
+				} else {
+					l = mid
+					break
+				}
+			}
+			result[l] = nums[i]
+			position.push(l)
+		}
+	}
+	let cur = result.length - 1
+	// 这里复用了result，它本身已经没用了
+	for (let i = position.length - 1; i >= 0 && cur >= 0; i--) {
+		if (position[i] === cur) {
+			result[cur--] = i
+		}
+	}
+	return result
+}
+```  
 
 **组件的实现方法**
 > 从开发者的视角：组件分为状态组件和函数组件
@@ -942,3 +1150,178 @@ createApp({
   - 在此基础上附加各种能力，如生命周期，通信机制，slot，provide，inject等  
 
 
+
+## **编译步骤**
+
+**模板代码** --> `parse` --> **AST** --> `transform` --> **AST+codegenNode** --> `codegen` --> **渲染函数代码**
+
+parse: 原始的模板代码就是一段字符串，通过解析`parse` 转换为原始`AST`抽象语法树  
+transform: 对`AST`进行转换，转换为`codegenNode`, `codegenNode` 是`AST`到生成渲染函数代码的中间步骤，它由解析原始`AST`的语义而得来
+```html
+<div v-if="ok" />
+<div id="ok" />
+```
+没有什么区别，都是一个元素，带有一个不同的属性而已。然而`v-if`是带有特殊语义的，不能像一般的纯元素节点一样采用同样的代码生成方式。`transform`的作用就在于此，一方面解析原始`AST`的语义，另一方面要为生成代码做准备. transfrom 是整个vue compiler模块中最复杂的部分
+
+codegen: 即是 `code generate` 遍历 codegenNode 递归地生成最终的渲染函数的代码
+
+
+
+
+**parse实现**
+
+认识AST  
+```html
+<div id="foo" v-if="ok">hello {{name}}</div>
+```
+
+AST Node的类型  
+```javascript
+const NodeTypes = {
+  ROOT:'ROOT', // 根节点
+  ELEMENT:'ELEMENT', // 元素节点
+  TEXT:'TEXT', // 文本节点
+  SIMPLE_EXPRESSION:'SIMPLE_EXPRESSION', // 简单表达式
+  INTERPOLATION:'INTERPOLATION', // 插值表达式
+  ATTRIBUTE:'ATTRIBUTE', // 属性节点
+  DIRECTIVE:'DIRECTIVE', // 指令节点
+}
+
+const ElementTypes = {
+  ELEMENT: 'ELEMENT', // 普通元素
+  COMPONENT: 'COMPONENT', // 组件
+}
+```
+1. 根节点
+```javascript
+{
+  type: NodeTypes.ROOT,
+  children: TemplateChildNode[], // 子节点
+}
+```
+2. 纯文本节点
+```javascript
+type: NodeTypes.TEXT,
+content: string
+```
+3. 表达式节点
+```javascript
+{
+  type: NodeTypes.SIMPLE_EXPRESSION,
+  content: string, // 表达式内容
+  // 静态即content就是一段字符串,动态的content指的是一个变量，或一段js表达式
+  isStatic: boolean, // 是否是静态的
+}
+```
+
+4. 插值节点
+``` javascript
+{
+  type: NodeTypes.INTERPOLATION,
+  content: {
+    type: NodeTypes.SIMPLE_EXPRESSION,
+    content: string, // 表达式内容
+    isStatic: boolean, // 是否是静态的
+  }
+}
+```
+
+5. 元素节点
+```javascript
+{
+  type: NodeTypes.ELEMENT,
+  tag: string, // 标签名
+  tagType: ElementTypes, // 元素类型(组件还是原生元素)
+  props: Array<AttributeNode | DirectiveNode>, // 属性
+  directives: DirectiveNode[], // 指令数组
+  isSelfClosing: boolean, // 是否自闭合
+  children: TemplateChildNode[], // 子节点
+}
+```
+6. 属性节点
+```javascript
+{
+  type: NodeTypes.ATTRIBUTE,
+  name: string, // 属性名
+  value: undefined | {
+    type: NodeTypes.TEXT | , // 属性值类型
+    content: string, // 属性值
+  } // 纯文本节点
+}
+```
+7. 指令节点
+```javascript
+{
+  type: NodeTypes.DIRECTIVE,
+  name: string, // 指令名
+  exp: undefined | {
+    type: NodeTypes.SIMPLE_EXPRESSION, // 表达式类型
+    content: string, // 表达式内容
+    isStatic: boolean, // 是否是静态的
+  }, // 表达式节点
+  arg: undefined | {
+    type: NodeTypes.SIMPLE_EXPRESSION, // 表达式类型
+    content: string, // 表达式内容
+    isStatic: boolean, // 是否是静态的
+  }, // 表达式节点
+}
+``` 
+如 
+```html
+<div v-bind:class="myClass"></div>
+<!-- name:bind arg:class exp:myClass -->
+<div @click="handleClick"></div>
+<!-- name:on arg:click exp:handleClick -->
+```
+
+最终展示结果  
+`<div id="foo" v-if="ok">hello {{name}}</div>`
+
+```javascript
+{
+  "type": "ROOT",
+  "children": [
+    {
+      type: "ELEMENT",
+      tag: "div",
+      tagType: "ELEMENT",
+      props:[
+        {
+          type: "ATTRIBUTE",
+          name: "id",
+          value: {
+            type: "TEXT",
+            content: "foo"
+          }
+        }
+      ],
+      directives: [
+        {
+          type: "DIRECTIVE",
+          name: "if",
+          exp: {
+            type: "SIMPLE_EXPRESSION",
+            content: "ok",
+            isStatic: false
+          }
+        }
+      ],
+      isSelfClosing: false,
+      children: [
+        {
+          type: "TEXT",
+          content: "hello "
+        },
+        {
+          type: "INTERPOLATION",
+          content: {
+            type: "SIMPLE_EXPRESSION",
+            content: "name",
+            isStatic: false
+          }
+        }
+      ]
+    }
+  ]
+}
+```
