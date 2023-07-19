@@ -1149,6 +1149,139 @@ createApp({
   - 都有一套更新的策略，以重新执行 `render` 函数 
   - 在此基础上附加各种能力，如生命周期，通信机制，slot，provide，inject等  
 
+**component.js**
+```javascript
+import { reactive } from "../reactive/reactive"
+import { effect } from "../reactive/effect"
+import { patch } from "./render"
+import { normalizeVNode } from "./vnode"
+import { queueJob } from "./scheduler"
+function updateProps(instance, vnode) {
+	const { type: Component, props: vnodeProps } = vnode
+	const props = (instance.props = {})
+	const attrs = (instance.attrs = {})
+	for (const key in vnodeProps) {
+		if (Component.props?.includes(key)) {
+			props[key] = vnodeProps[key]
+		} else {
+			attrs[key] = vnodeProps[key]
+		}
+	}
+	// toThink: props源码是shallowReactive，确实需要吗?
+	// 需要。否则子组件修改props不会触发更新
+	instance.props = reactive(instance.props)
+}
+export function mountComponent(vnode, container, anchor) {
+	const { type: Component } = vnode
+	const instance = (vnode.component = {
+		props: {},
+		attrs: {},
+		setupState: null,
+		subTree: null,
+		ctx: null,
+		update: null,
+		isMounted: false,
+		next: null,
+	})
+	// setupComponent
+	updateProps(instance, vnode)
+	// 源码：instance.setupState = proxyRefs(setupResult)
+	instance.setupState = Component.setup?.(instance.props, {
+		attrs: instance.attrs,
+		slot: null,
+		emit: null,
+	})
+	instance.ctx = {
+		...instance.props,
+		...instance.setupState,
+	}
+	instance.update = effect(
+		() => {
+			if (!instance.isMounted) {
+				// mount
+				const subTree = (instance.subTree = normalizeVNode(
+					Component.render(instance.ctx)
+				))
+				fullThrough(instance, subTree)
+				patch(null, subTree, container, anchor)
+				instance.isMounted = true
+				vnode.el = subTree.el
+			} else {
+				if (instance.next) {
+					// 被动更新
+					vnode = instance.next
+					instance.next = null
+					updateProps(instance, vnode)
+					instance.ctx = {
+						...instance.props,
+						...instance.setupState,
+					}
+				}
+				const prev = instance.subTree
+				const subTree = (instance.subTree = normalizeVNode(
+					Component.render(instance.ctx)
+				))
+				fullThrough(instance, subTree)
+				patch(prev, subTree, container, anchor)
+				vnode.el = subTree.el
+			}
+		},
+		{ scheduler: queueJob }
+	)
+}
+
+function fullThrough(instance, subTree) {
+	if (Object.keys(instance.attrs).length) {
+		subTree.props = {
+			...subTree.props,
+			...instance.attrs,
+		}
+	}
+}
+
+```
+
+**scheduler.js** (调度机制) nextTick原理
+```javascript
+const queue = []
+let isFlushing = false
+const resolvedPromise = Promise.resolve()
+let currentFlushPromise = null
+
+export function nextTick(fn) {
+	return fn
+		? (currentFlushPromise || resolvedPromise).then(fn)
+		: currentFlushPromise || resolvedPromise
+}
+
+export function queueJob(job) {
+	// 如果队列中没有这个job，或者队列为空，就把job推入队列
+	if (!queue.includes(job) || !queue.length) {
+		queue.push(job)
+		queueFlush()
+	}
+}
+
+function queueFlush() {
+	if (!isFlushing) {
+		isFlushing = true
+		currentFlushPromise = resolvedPromise.then(flushJobs)
+	}
+}
+
+function flushJobs() {
+	try {
+		for (let i = 0; i < queue.length; i++) {
+			queue[i]()
+		}
+	} finally {
+		isFlushing = false
+		queue.length = 0
+		currentFlushPromise = null
+	}
+}
+
+```
 
 
 ## **编译步骤**
@@ -1324,4 +1457,71 @@ content: string
     }
   ]
 }
+```
+
+**ast.js**
+```javascript
+export const NodeTypes = {
+	ROOT: "ROOT", // 根节点
+	ELEMENT: "ELEMENT", // 元素节点
+	TEXT: "TEXT", // 文本节点
+	SIMPLE_EXPRESSION: "SIMPLE_EXPRESSION", // 简单表达式
+	INTERPOLATION: "INTERPOLATION", // 插值表达式
+	ATTRIBUTE: "ATTRIBUTE", // 属性节点
+	DIRECTIVE: "DIRECTIVE", // 指令节点
+}
+
+export const ElementTypes = {
+	ELEMENT: "ELEMENT", // 普通元素
+	COMPONENT: "COMPONENT", // 组件
+}
+
+export function createRoot(children) {
+	return {
+		type: NodeTypes.ROOT,
+		children: children,
+	}
+}
+```
+
+**parse.js**
+```javascript
+import { NodeTypes, ElementTypes, createRoot } from "./ast"
+
+export function parse(content) {
+	const context = createParserContext(content)
+	const children = parseChildren(context)
+	return createRoot(children)
+}
+function createParserContext(content) {
+	return {
+		options: {
+			delimiters: ["{{", "}}"], // 插值表达式的分隔符
+		},
+		source: content,
+	}
+}
+
+function parseChildren(context) {
+	const s = context.source
+	if (s.startsWith(context.options.delimiters[0])) {
+		// parseInterpolation
+	} else if (s[0] === "<") {
+		// parseElement
+	} else {
+		// parseText
+	}
+}
+
+function advanceBy(context, numberOfCharacters) {
+	context.source = context.source.slice(numberOfCharacters)
+}
+
+function advanceSpaces(context) {
+	const match = /^[\t\r\n\f ]+/.exec(context.source)
+	if (match) {
+		advanceBy(context, match[0].length)
+	}
+}
+
 ```
